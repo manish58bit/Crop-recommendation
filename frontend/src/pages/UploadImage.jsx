@@ -148,6 +148,7 @@ const UploadImage = () => {
                 currentLocation={user?.location}
                 showAddress={true}
                 showCoordinates={false}
+                showCitySearch={true}
                 buttonText="Detect Location"
                 className="justify-center"
               />

@@ -19,6 +19,7 @@ import api from '../api/api';
 import RecommendationCard from '../components/RecommendationCard';
 import CropList from '../components/CropList';
 import WeatherWidget from '../components/WeatherWidget';
+import LocationFetcher from '../components/LocationFetcher';
 import toast from 'react-hot-toast';
 
 const Dashboard = () => {
@@ -173,6 +174,15 @@ const Dashboard = () => {
       console.error('Location update error:', error);
       toast.error('Failed to update location');
     }
+  };
+
+  // Handle location update from LocationFetcher
+  const handleLocationUpdate = (locationData) => {
+    setLocationData({
+      latitude: locationData.latitude.toString(),
+      longitude: locationData.longitude.toString(),
+      address: locationData.address
+    });
   };
 
   // Check AI service status
@@ -693,22 +703,25 @@ const Dashboard = () => {
                 <div>
                   <label className="label">Location</label>
                   <div className="space-y-3">
-                    <button
-                      type="button"
-                      onClick={getCurrentLocation}
-                      className="btn-outline w-full py-2 text-sm"
-                    >
-                      <div className="flex items-center justify-center">
-                        <MapPin className="h-4 w-4 mr-2" />
-                        Use Current Location
-                      </div>
-                    </button>
+                    <LocationFetcher
+                      onLocationUpdate={handleLocationUpdate}
+                      currentLocation={{
+                        address: locationData.address,
+                        latitude: locationData.latitude,
+                        longitude: locationData.longitude
+                      }}
+                      showAddress={false}
+                      showCoordinates={false}
+                      showCitySearch={true}
+                      buttonText="Use Current Location"
+                      className="justify-center"
+                    />
                     
                     <input
                       name="address"
                       type="text"
                       className="input"
-                      placeholder="Enter your address"
+                      placeholder="Enter your address manually"
                       value={locationData.address}
                       onChange={handleLocationChange}
                     />

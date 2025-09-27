@@ -261,6 +261,7 @@ const Profile = () => {
                   currentLocation={user.location}
                   showAddress={false}
                   showCoordinates={false}
+                  showCitySearch={true}
                   buttonText="Detect Current Location"
                   disabled={!editing}
                   className="justify-start"
@@ -269,7 +270,7 @@ const Profile = () => {
             </div>
             {editing && (
               <p className="text-xs text-gray-500 mt-1">
-                Click "Detect Current Location" to automatically detect your current location
+                Use "Detect Current Location" for GPS location or "Search City" to find coordinates by city name
               </p>
             )}
           </div>

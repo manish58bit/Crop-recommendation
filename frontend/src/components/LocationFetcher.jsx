@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Navigation, RefreshCw } from 'lucide-react';
+import { MapPin, Navigation, RefreshCw, Search, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const LocationFetcher = ({ 
@@ -9,9 +9,13 @@ const LocationFetcher = ({
   showCoordinates = false,
   className = "",
   buttonText = "Detect Location",
-  disabled = false
+  disabled = false,
+  showCitySearch = true
 }) => {
   const [fetchingLocation, setFetchingLocation] = useState(false);
+  const [searchingCity, setSearchingCity] = useState(false);
+  const [cityName, setCityName] = useState('');
+  const [showCityInput, setShowCityInput] = useState(false);
 
   const fetchCurrentLocation = () => {
     if (!navigator.geolocation) {
@@ -66,8 +70,55 @@ const LocationFetcher = ({
     );
   };
 
+  const searchCityLocation = async () => {
+    if (!cityName.trim()) {
+      toast.error('Please enter a city name');
+      return;
+    }
+
+    setSearchingCity(true);
+    try {
+      // Use OpenWeather Geocoding API to get coordinates from city name
+      const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY || '53e6e347b72a8674d71706ac07d2fc06';
+      const response = await fetch(
+        `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(cityName.trim())}&limit=1&appid=${API_KEY}`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Geocoding API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.length === 0) {
+        toast.error('City not found. Please try a different city name.');
+        return;
+      }
+
+      const cityData = data[0];
+      const locationData = {
+        address: `${cityData.name}, ${cityData.state || ''}, ${cityData.country}`.replace(/,\s*,/g, ',').replace(/,$/, ''),
+        latitude: cityData.lat,
+        longitude: cityData.lon
+      };
+
+      if (onLocationUpdate) {
+        onLocationUpdate(locationData);
+      }
+
+      setCityName('');
+      setShowCityInput(false);
+      toast.success(`Location found: ${locationData.address}`);
+    } catch (error) {
+      console.error('City search error:', error);
+      toast.error('Failed to find city. Please try again.');
+    } finally {
+      setSearchingCity(false);
+    }
+  };
+
   return (
-    <div className={`flex items-center space-x-2 ${className}`}>
+    <div className={`space-y-2 ${className}`}>
       {showAddress && (
         <div className="flex items-center space-x-2">
           <MapPin className="h-4 w-4 text-gray-500" />
@@ -83,18 +134,66 @@ const LocationFetcher = ({
         </div>
       )}
       
-      <button
-        onClick={fetchCurrentLocation}
-        disabled={fetchingLocation || disabled}
-        className="flex items-center space-x-1 text-primary-600 hover:text-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-      >
-        {fetchingLocation ? (
-          <RefreshCw className="h-4 w-4 animate-spin" />
-        ) : (
-          <Navigation className="h-4 w-4" />
+      <div className="flex items-center space-x-2">
+        <button
+          onClick={fetchCurrentLocation}
+          disabled={fetchingLocation || disabled}
+          className="flex items-center space-x-1 text-primary-600 hover:text-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+        >
+          {fetchingLocation ? (
+            <RefreshCw className="h-4 w-4 animate-spin" />
+          ) : (
+            <Navigation className="h-4 w-4" />
+          )}
+          <span>{buttonText}</span>
+        </button>
+
+        {showCitySearch && (
+          <>
+            {!showCityInput ? (
+              <button
+                onClick={() => setShowCityInput(true)}
+                disabled={disabled}
+                className="flex items-center space-x-1 text-primary-600 hover:text-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+              >
+                <Search className="h-4 w-4" />
+                <span>Search City</span>
+              </button>
+            ) : (
+              <div className="flex items-center space-x-1">
+                <input
+                  type="text"
+                  value={cityName}
+                  onChange={(e) => setCityName(e.target.value)}
+                  placeholder="Enter city name..."
+                  className="px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  onKeyPress={(e) => e.key === 'Enter' && searchCityLocation()}
+                />
+                <button
+                  onClick={searchCityLocation}
+                  disabled={searchingCity || disabled}
+                  className="p-1 text-primary-600 hover:text-primary-700 disabled:opacity-50"
+                >
+                  {searchingCity ? (
+                    <RefreshCw className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Search className="h-4 w-4" />
+                  )}
+                </button>
+                <button
+                  onClick={() => {
+                    setShowCityInput(false);
+                    setCityName('');
+                  }}
+                  className="p-1 text-gray-500 hover:text-gray-700"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+          </>
         )}
-        <span>{buttonText}</span>
-      </button>
+      </div>
     </div>
   );
 };
