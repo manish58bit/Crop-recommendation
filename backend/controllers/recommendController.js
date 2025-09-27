@@ -1,5 +1,6 @@
 const axios = require('axios');
 const Recommendation = require('../models/Recommendation');
+const aiService = require('../services/aiService');
 
 // @desc    Get crop recommendations based on location and soil data
 // @route   POST /api/recommend
@@ -16,7 +17,15 @@ const getRecommendations = async (req, res) => {
 
     const userId = req.user.id;
 
-    // Prepare data for AI API
+    // Validate location is provided
+    if (!location || !location.latitude || !location.longitude || !location.address) {
+      return res.status(400).json({
+        success: false,
+        message: 'Location information is required for crop recommendations. Please provide latitude, longitude, and address.'
+      });
+    }
+
+    // Prepare data for AI service
     const aiRequestData = {
       latitude: location.latitude,
       longitude: location.longitude,
@@ -26,82 +35,9 @@ const getRecommendations = async (req, res) => {
       pastCrops
     };
 
-    // Call AI API for recommendations
-    let aiResponse;
-    try {
-      const aiApiUrl = `${process.env.AI_API_BASE_URL}/recommend`;
-      const response = await axios.post(aiApiUrl, aiRequestData, {
-        timeout: 30000 // 30 seconds timeout
-      });
-      aiResponse = response.data;
-    } catch (aiError) {
-      console.error('AI API Error:', aiError.message);
-      
-      // Fallback recommendations if AI API fails
-      aiResponse = {
-        crops: [
-          {
-            name: "Rice",
-            variety: "Basmati",
-            plantingSeason: "Kharif",
-            expectedYield: "4-5 tons/hectare",
-            marketPrice: 2500,
-            confidence: 0.7,
-            description: "Suitable for your soil type and climate",
-            benefits: ["High yield", "Good market price", "Drought resistant"]
-          },
-          {
-            name: "Wheat",
-            variety: "HD-2967",
-            plantingSeason: "Rabi",
-            expectedYield: "3-4 tons/hectare",
-            marketPrice: 2000,
-            confidence: 0.8,
-            description: "Excellent for your region",
-            benefits: ["High protein content", "Good storage", "High demand"]
-          },
-          {
-            name: "Maize",
-            variety: "Hybrid",
-            plantingSeason: "Kharif",
-            expectedYield: "5-6 tons/hectare",
-            marketPrice: 1800,
-            confidence: 0.6,
-            description: "Good for your soil conditions",
-            benefits: ["Fast growing", "Multiple uses", "Good yield"]
-          }
-        ],
-        fertilizers: [
-          {
-            name: "NPK 19:19:19",
-            type: "Complex",
-            quantity: "50 kg/acre",
-            applicationMethod: "Broadcasting",
-            timing: "Before planting",
-            benefits: "Balanced nutrition for all crops"
-          },
-          {
-            name: "Urea",
-            type: "Nitrogen",
-            quantity: "25 kg/acre",
-            applicationMethod: "Top dressing",
-            timing: "30 days after planting",
-            benefits: "Promotes vegetative growth"
-          }
-        ],
-        irrigation: {
-          frequency: irrigationFrequency,
-          method: "Drip irrigation recommended",
-          waterRequirement: "500-700 mm per season",
-          timing: "Early morning or evening",
-          tips: [
-            "Monitor soil moisture regularly",
-            "Avoid over-irrigation",
-            "Use mulch to retain moisture"
-          ]
-        }
-      };
-    }
+    // Get recommendations from AI service
+    const aiResult = await aiService.getCropRecommendations(aiRequestData);
+    const aiResponse = aiResult.data;
 
     // Get weather data
     let weatherData;
@@ -141,7 +77,12 @@ const getRecommendations = async (req, res) => {
         ...aiResponse,
         weather: weatherData
       },
-      aiResponse,
+      aiResponse: {
+        ...aiResponse,
+        source: aiResult.source,
+        success: aiResult.success,
+        error: aiResult.error
+      },
       status: 'completed'
     });
 
@@ -186,6 +127,14 @@ const uploadSoilImage = async (req, res) => {
 
     const userId = req.user.id;
     const { location, soilType, area, irrigationFrequency } = req.body;
+
+    // Validate location is provided
+    if (!location || !location.latitude || !location.longitude || !location.address) {
+      return res.status(400).json({
+        success: false,
+        message: 'Location information is required for soil image analysis. Please provide latitude, longitude, and address.'
+      });
+    }
 
     // Prepare image data for AI API
     const imageBuffer = req.file.buffer;

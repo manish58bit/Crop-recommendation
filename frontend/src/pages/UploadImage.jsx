@@ -57,8 +57,13 @@ const UploadImage = () => {
   };
 
   const handleUpload = async () => {
-    if (!uploadedFile || !user?.location) {
-      toast.error('Please upload an image and ensure your location is set');
+    if (!uploadedFile) {
+      toast.error('Please upload an image first');
+      return;
+    }
+
+    if (!user?.location || !user.location.latitude || !user.location.longitude) {
+      toast.error('Location is required for soil analysis. Please update your profile with your current location.');
       return;
     }
 

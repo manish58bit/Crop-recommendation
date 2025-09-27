@@ -63,11 +63,16 @@ const recommendationValidation = [
   
   body('location.latitude')
     .isFloat({ min: -90, max: 90 })
-    .withMessage('Invalid latitude'),
+    .withMessage('Valid latitude is required for recommendations'),
   
   body('location.longitude')
     .isFloat({ min: -180, max: 180 })
-    .withMessage('Invalid longitude')
+    .withMessage('Valid longitude is required for recommendations'),
+  
+  body('location.address')
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage('Valid address is required for recommendations')
 ];
 
 // Handle validation errors

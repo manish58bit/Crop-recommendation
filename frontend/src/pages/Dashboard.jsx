@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MapPin, 
@@ -15,23 +15,31 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { recommendAPI, handleApiError } from '../api/api';
+import api from '../api/api';
 import RecommendationCard from '../components/RecommendationCard';
 import CropList from '../components/CropList';
 import WeatherWidget from '../components/WeatherWidget';
 import toast from 'react-hot-toast';
 
 const Dashboard = () => {
-  const { user } = useAuth();
+  const { user, updateProfile } = useAuth();
   const [recommendations, setRecommendations] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selectedCrop, setSelectedCrop] = useState(null);
   const [showRecommendationForm, setShowRecommendationForm] = useState(false);
+  const [showLocationForm, setShowLocationForm] = useState(false);
+  const [locationData, setLocationData] = useState({
+    latitude: '',
+    longitude: '',
+    address: ''
+  });
   const [formData, setFormData] = useState({
     soilType: 'loamy',
     area: '',
     irrigationFrequency: 'weekly',
     pastCrops: []
   });
+  const [aiStatus, setAiStatus] = useState(null);
 
   const soilTypes = [
     { value: 'clay', label: 'Clay Soil' },
@@ -51,15 +59,20 @@ const Dashboard = () => {
   ];
 
   const getRecommendations = async () => {
-    if (!user?.location) {
-      toast.error('Location not available. Please update your profile.');
+    // Check if user has location in profile
+    if (!user?.location || !user.location.latitude || !user.location.longitude) {
+      toast.error('Location is required for recommendations. Please update your profile with your current location.');
       return;
     }
 
     setLoading(true);
     try {
       const data = {
-        location: user.location,
+        location: {
+          latitude: user.location.latitude,
+          longitude: user.location.longitude,
+          address: user.location.address || 'Current Location'
+        },
         soilType: formData.soilType,
         area: parseFloat(formData.area),
         irrigationFrequency: formData.irrigationFrequency,
@@ -85,6 +98,97 @@ const Dashboard = () => {
       [name]: value
     });
   };
+
+  const handleLocationChange = (e) => {
+    const { name, value } = e.target;
+    setLocationData({
+      ...locationData,
+      [name]: value
+    });
+  };
+
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      toast.error('Geolocation is not supported by this browser.');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        
+        try {
+          // Reverse geocoding to get address
+          const response = await fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+          );
+          const data = await response.json();
+          
+          setLocationData({
+            latitude: latitude.toString(),
+            longitude: longitude.toString(),
+            address: data.locality || `${latitude}, ${longitude}`,
+          });
+          
+          toast.success('Location detected successfully!');
+        } catch (error) {
+          console.error('Geocoding error:', error);
+          setLocationData({
+            latitude: latitude.toString(),
+            longitude: longitude.toString(),
+            address: `${latitude}, ${longitude}`,
+          });
+          toast.success('Location detected!');
+        }
+      },
+      (error) => {
+        console.error('Geolocation error:', error);
+        toast.error('Unable to get your location. Please enter manually.');
+      }
+    );
+  };
+
+  const updateLocation = async () => {
+    if (!locationData.latitude || !locationData.longitude || !locationData.address) {
+      toast.error('Please provide complete location information');
+      return;
+    }
+
+    try {
+      const result = await updateProfile({
+        location: {
+          latitude: parseFloat(locationData.latitude),
+          longitude: parseFloat(locationData.longitude),
+          address: locationData.address
+        }
+      });
+
+      if (result.success) {
+        setShowLocationForm(false);
+        toast.success('Location updated successfully!');
+        // Refresh user data
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Location update error:', error);
+      toast.error('Failed to update location');
+    }
+  };
+
+  // Check AI service status
+  const checkAIStatus = async () => {
+    try {
+      const response = await api.get('/ai/health');
+      setAiStatus(response.data.data);
+    } catch (error) {
+      setAiStatus({ connected: false, status: 'disconnected' });
+    }
+  };
+
+  // Check AI status on component mount
+  useEffect(() => {
+    checkAIStatus();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -158,10 +262,50 @@ const Dashboard = () => {
                 <p className="text-gray-600">
                   Get AI-powered crop recommendations for your farm
                 </p>
+                {/* Location Status */}
+                <div className="mt-3 flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="h-4 w-4 text-gray-500" />
+                    <span className="text-sm text-gray-600">
+                      Location: {user?.location?.address || 'Not set'}
+                    </span>
+                    {(!user?.location?.latitude || !user?.location?.longitude) && (
+                      <button
+                        onClick={() => setShowLocationForm(true)}
+                        className="text-primary-600 hover:text-primary-700 text-sm font-medium"
+                      >
+                        Update Location
+                      </button>
+                    )}
+                  </div>
+                  
+                  {/* AI Status */}
+                  <div className="flex items-center space-x-2">
+                    <div className={`h-2 w-2 rounded-full ${
+                      aiStatus?.connected ? 'bg-green-500' : 'bg-red-500'
+                    }`}></div>
+                    <span className="text-sm text-gray-600">
+                      AI: {aiStatus?.connected ? 'Connected' : 'Fallback Mode'}
+                    </span>
+                    <button
+                      onClick={checkAIStatus}
+                      className="text-primary-600 hover:text-primary-700 text-sm font-medium"
+                    >
+                      <RefreshCw className="h-3 w-3" />
+                    </button>
+                  </div>
+                </div>
               </div>
               <motion.button
                 className="btn-primary flex items-center space-x-2"
-                onClick={() => setShowRecommendationForm(true)}
+                onClick={() => {
+                  if (!user?.location?.latitude || !user?.location?.longitude) {
+                    setShowLocationForm(true);
+                    toast.error('Please set your location first to get recommendations');
+                  } else {
+                    setShowRecommendationForm(true);
+                  }
+                }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -513,6 +657,109 @@ const Dashboard = () => {
                   </button>
                 </div>
               </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Location Update Modal */}
+      <AnimatePresence>
+        {showLocationForm && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white rounded-xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-gray-900">
+                  Update Your Location
+                </h2>
+                <button
+                  onClick={() => setShowLocationForm(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="label">Location</label>
+                  <div className="space-y-3">
+                    <button
+                      type="button"
+                      onClick={getCurrentLocation}
+                      className="btn-outline w-full py-2 text-sm"
+                    >
+                      <div className="flex items-center justify-center">
+                        <MapPin className="h-4 w-4 mr-2" />
+                        Use Current Location
+                      </div>
+                    </button>
+                    
+                    <input
+                      name="address"
+                      type="text"
+                      className="input"
+                      placeholder="Enter your address"
+                      value={locationData.address}
+                      onChange={handleLocationChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="label">Latitude</label>
+                    <input
+                      name="latitude"
+                      type="number"
+                      step="any"
+                      className="input"
+                      placeholder="e.g., 28.6139"
+                      value={locationData.latitude}
+                      onChange={handleLocationChange}
+                    />
+                  </div>
+                  <div>
+                    <label className="label">Longitude</label>
+                    <input
+                      name="longitude"
+                      type="number"
+                      step="any"
+                      className="input"
+                      placeholder="e.g., 77.2090"
+                      value={locationData.longitude}
+                      onChange={handleLocationChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex space-x-3 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowLocationForm(false)}
+                    className="btn-outline flex-1"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={updateLocation}
+                    className="btn-primary flex-1 flex items-center justify-center"
+                  >
+                    <MapPin className="h-4 w-4 mr-2" />
+                    Update Location
+                  </button>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
