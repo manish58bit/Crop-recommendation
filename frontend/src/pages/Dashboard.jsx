@@ -1,0 +1,524 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  MapPin, 
+  Droplets, 
+  Sun, 
+  Wind, 
+  TrendingUp,
+  Leaf,
+  Sparkles,
+  RefreshCw,
+  CheckCircle,
+  Target,
+  X
+} from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { recommendAPI, handleApiError } from '../api/api';
+import RecommendationCard from '../components/RecommendationCard';
+import CropList from '../components/CropList';
+import WeatherWidget from '../components/WeatherWidget';
+import toast from 'react-hot-toast';
+
+const Dashboard = () => {
+  const { user } = useAuth();
+  const [recommendations, setRecommendations] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [selectedCrop, setSelectedCrop] = useState(null);
+  const [showRecommendationForm, setShowRecommendationForm] = useState(false);
+  const [formData, setFormData] = useState({
+    soilType: 'loamy',
+    area: '',
+    irrigationFrequency: 'weekly',
+    pastCrops: []
+  });
+
+  const soilTypes = [
+    { value: 'clay', label: 'Clay Soil' },
+    { value: 'sandy', label: 'Sandy Soil' },
+    { value: 'loamy', label: 'Loamy Soil' },
+    { value: 'silty', label: 'Silty Soil' },
+    { value: 'peaty', label: 'Peaty Soil' },
+    { value: 'chalky', label: 'Chalky Soil' },
+  ];
+
+  const irrigationFrequencies = [
+    { value: 'daily', label: 'Daily' },
+    { value: 'weekly', label: 'Weekly' },
+    { value: 'bi-weekly', label: 'Bi-weekly' },
+    { value: 'monthly', label: 'Monthly' },
+    { value: 'seasonal', label: 'Seasonal' },
+  ];
+
+  const getRecommendations = async () => {
+    if (!user?.location) {
+      toast.error('Location not available. Please update your profile.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const data = {
+        location: user.location,
+        soilType: formData.soilType,
+        area: parseFloat(formData.area),
+        irrigationFrequency: formData.irrigationFrequency,
+        pastCrops: formData.pastCrops
+      };
+
+      const response = await recommendAPI.getRecommendations(data);
+      setRecommendations(response.data.data.recommendation);
+      setShowRecommendationForm(false);
+      toast.success('Recommendations generated successfully!');
+    } catch (error) {
+      const errorMessage = handleApiError(error).message;
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
+  const stats = [
+    {
+      title: 'Total Recommendations',
+      value: recommendations?.recommendations?.crops?.length || 0,
+      icon: Target,
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-100'
+    },
+    {
+      title: 'Avg. Confidence',
+      value: recommendations?.recommendations?.crops?.length 
+        ? Math.round(recommendations.recommendations.crops.reduce((acc, crop) => acc + crop.confidence, 0) / recommendations.recommendations.crops.length * 100)
+        : 0,
+      suffix: '%',
+      icon: TrendingUp,
+      color: 'text-green-600',
+      bgColor: 'bg-green-100'
+    },
+    {
+      title: 'Soil Type',
+      value: recommendations?.soilType || 'Unknown',
+      icon: Leaf,
+      color: 'text-yellow-600',
+      bgColor: 'bg-yellow-100'
+    },
+    {
+      title: 'Farm Area',
+      value: recommendations?.area || 0,
+      suffix: ' acres',
+      icon: MapPin,
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-100'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen gradient-bg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Header */}
+          <motion.div className="mb-8" variants={itemVariants}>
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                  Welcome back, {user?.name}! 👋
+                </h1>
+                <p className="text-gray-600">
+                  Get AI-powered crop recommendations for your farm
+                </p>
+              </div>
+              <motion.button
+                className="btn-primary flex items-center space-x-2"
+                onClick={() => setShowRecommendationForm(true)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Sparkles className="h-5 w-5" />
+                <span>Get Recommendations</span>
+              </motion.button>
+            </div>
+          </motion.div>
+
+          {/* Stats Cards */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+            variants={itemVariants}
+          >
+            {stats.map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <motion.div
+                  key={stat.title}
+                  className="card p-6"
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600 mb-1">
+                        {stat.title}
+                      </p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {stat.value}{stat.suffix}
+                      </p>
+                    </div>
+                    <div className={`w-12 h-12 ${stat.bgColor} rounded-lg flex items-center justify-center`}>
+                      <Icon className={`h-6 w-6 ${stat.color}`} />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Left Column - Recommendations */}
+            <motion.div className="lg:col-span-2 space-y-8" variants={itemVariants}>
+              {!recommendations ? (
+                /* Welcome State */
+                <motion.div
+                  className="card p-8 text-center"
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="w-24 h-24 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Leaf className="h-12 w-12 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    Ready to get started?
+                  </h2>
+                  <p className="text-gray-600 mb-6 max-w-md mx-auto">
+                    Get personalized crop recommendations based on your location, soil type, 
+                    and farming preferences using our AI-powered system.
+                  </p>
+                  <motion.button
+                    className="btn-primary"
+                    onClick={() => setShowRecommendationForm(true)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Sparkles className="h-5 w-5 mr-2" />
+                    Get My Recommendations
+                  </motion.button>
+                </motion.div>
+              ) : (
+                /* Recommendations Display */
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-2xl font-bold text-gray-900">
+                      Your Crop Recommendations
+                    </h2>
+                    <motion.button
+                      className="btn-outline flex items-center space-x-2"
+                      onClick={() => setShowRecommendationForm(true)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <RefreshCw className="h-4 w-4" />
+                      <span>Update</span>
+                    </motion.button>
+                  </div>
+
+                  {/* Top 3 Crops */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {recommendations.recommendations.crops.slice(0, 3).map((crop, index) => (
+                      <RecommendationCard
+                        key={crop.name}
+                        recommendation={crop}
+                        index={index}
+                        onViewDetails={setSelectedCrop}
+                      />
+                    ))}
+                  </div>
+
+                  {/* All Crops List */}
+                  <CropList
+                    crops={recommendations.recommendations.crops}
+                    onCropSelect={setSelectedCrop}
+                    selectedCrop={selectedCrop}
+                  />
+                </div>
+              )}
+            </motion.div>
+
+            {/* Right Column - Weather & Details */}
+            <motion.div className="space-y-6" variants={itemVariants}>
+              {/* Weather Widget */}
+              <WeatherWidget location={user?.location} />
+
+              {/* Selected Crop Details */}
+              <AnimatePresence>
+                {selectedCrop && (
+                  <motion.div
+                    className="card p-6"
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 20, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        {selectedCrop.name} Details
+                      </h3>
+                      <button
+                        onClick={() => setSelectedCrop(null)}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-medium text-gray-900 mb-2">Description</h4>
+                        <p className="text-sm text-gray-600">{selectedCrop.description}</p>
+                      </div>
+
+                      {selectedCrop.benefits && selectedCrop.benefits.length > 0 && (
+                        <div>
+                          <h4 className="font-medium text-gray-900 mb-2">Benefits</h4>
+                          <ul className="space-y-1">
+                            {selectedCrop.benefits.map((benefit, index) => (
+                              <li key={index} className="flex items-center space-x-2 text-sm text-gray-600">
+                                <CheckCircle className="h-4 w-4 text-green-500" />
+                                <span>{benefit}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-xs text-gray-500">Expected Yield</p>
+                          <p className="text-sm font-medium">{selectedCrop.expectedYield}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">Market Price</p>
+                          <p className="text-sm font-medium">₹{selectedCrop.marketPrice}/quintal</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">Planting Season</p>
+                          <p className="text-sm font-medium">{selectedCrop.plantingSeason}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">Confidence</p>
+                          <p className="text-sm font-medium">{Math.round(selectedCrop.confidence * 100)}%</p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Fertilizer Recommendations */}
+              {recommendations?.recommendations?.fertilizers && (
+                <motion.div
+                  className="card p-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                    Fertilizer Recommendations
+                  </h3>
+                  <div className="space-y-3">
+                    {recommendations.recommendations.fertilizers.map((fertilizer, index) => (
+                      <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                        <h4 className="font-medium text-gray-900">{fertilizer.name}</h4>
+                        <p className="text-sm text-gray-600">{fertilizer.quantity}</p>
+                        <p className="text-xs text-gray-500 mt-1">{fertilizer.benefits}</p>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Irrigation Info */}
+              {recommendations?.recommendations?.irrigation && (
+                <motion.div
+                  className="card p-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                    Irrigation Guide
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3">
+                      <Droplets className="h-5 w-5 text-blue-600" />
+                      <div>
+                        <p className="text-sm font-medium">Frequency</p>
+                        <p className="text-xs text-gray-600">{recommendations.recommendations.irrigation.frequency}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <Sun className="h-5 w-5 text-yellow-600" />
+                      <div>
+                        <p className="text-sm font-medium">Method</p>
+                        <p className="text-xs text-gray-600">{recommendations.recommendations.irrigation.method}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <Wind className="h-5 w-5 text-gray-600" />
+                      <div>
+                        <p className="text-sm font-medium">Water Requirement</p>
+                        <p className="text-xs text-gray-600">{recommendations.recommendations.irrigation.waterRequirement}</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Recommendation Form Modal */}
+      <AnimatePresence>
+        {showRecommendationForm && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white rounded-xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-gray-900">
+                  Get Recommendations
+                </h2>
+                <button
+                  onClick={() => setShowRecommendationForm(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+
+              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); getRecommendations(); }}>
+                <div>
+                  <label className="label">Soil Type</label>
+                  <select
+                    name="soilType"
+                    value={formData.soilType}
+                    onChange={handleFormChange}
+                    className="input"
+                  >
+                    {soilTypes.map(type => (
+                      <option key={type.value} value={type.value}>
+                        {type.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="label">Farm Area (acres)</label>
+                  <input
+                    type="number"
+                    name="area"
+                    value={formData.area}
+                    onChange={handleFormChange}
+                    className="input"
+                    placeholder="Enter farm area"
+                    step="0.1"
+                    min="0.1"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="label">Irrigation Frequency</label>
+                  <select
+                    name="irrigationFrequency"
+                    value={formData.irrigationFrequency}
+                    onChange={handleFormChange}
+                    className="input"
+                  >
+                    {irrigationFrequencies.map(freq => (
+                      <option key={freq.value} value={freq.value}>
+                        {freq.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex space-x-3 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowRecommendationForm(false)}
+                    className="btn-outline flex-1"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="btn-primary flex-1 flex items-center justify-center"
+                  >
+                    {loading ? (
+                      <div className="loading-dots">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    ) : (
+                      <>
+                        <Sparkles className="h-4 w-4 mr-2" />
+                        Get Recommendations
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default Dashboard;
