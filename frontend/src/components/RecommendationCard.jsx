@@ -278,3 +278,5 @@ export const WeatherWidget = ({ weather }) => {
 };
 
 export default RecommendationCard;
+
+

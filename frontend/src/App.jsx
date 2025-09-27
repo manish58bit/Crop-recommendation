@@ -10,6 +10,8 @@ import Dashboard from './pages/Dashboard';
 import UploadImage from './pages/UploadImage';
 import History from './pages/History';
 import AdminPanel from './pages/AdminPanel';
+import Profile from './pages/Profile';
+import Settings from './pages/Settings';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -30,6 +32,46 @@ const ProtectedRoute = ({ children }) => {
       </div>
     );
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
@@ -118,6 +160,22 @@ const AppContent = () => {
               </ProtectedRoute>
             } 
           />
+          <Route 
+            path="/profile" 
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/settings" 
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            } 
+          />
 
           {/* Default Route */}
           <Route 
@@ -191,3 +249,5 @@ const App = () => {
 };
 
 export default App;
+
+

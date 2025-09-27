@@ -253,3 +253,5 @@ To add support for a new AI model:
 ---
 
 **Note**: The current implementation includes a robust fallback system, so your application will continue to work even if the AI model is temporarily unavailable.
+
+

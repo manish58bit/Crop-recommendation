@@ -10,7 +10,8 @@ import {
   Thermometer, 
   Eye,
   RefreshCw,
-  AlertCircle
+  AlertCircle,
+  MapPin
 } from 'lucide-react';
 
 const WeatherWidget = ({ location, className = '' }) => {
@@ -22,12 +23,14 @@ const WeatherWidget = ({ location, className = '' }) => {
   const getWeatherIcon = (condition) => {
     const conditionLower = condition?.toLowerCase() || '';
     
-    if (conditionLower.includes('rain') || conditionLower.includes('drizzle')) {
+    if (conditionLower.includes('rain') || conditionLower.includes('drizzle') || conditionLower.includes('shower')) {
       return CloudRain;
-    } else if (conditionLower.includes('snow')) {
+    } else if (conditionLower.includes('snow') || conditionLower.includes('blizzard')) {
       return CloudSnow;
-    } else if (conditionLower.includes('cloud')) {
+    } else if (conditionLower.includes('cloud') || conditionLower.includes('overcast') || conditionLower.includes('mist') || conditionLower.includes('fog')) {
       return Cloud;
+    } else if (conditionLower.includes('thunderstorm') || conditionLower.includes('storm')) {
+      return CloudRain; // Use rain icon for thunderstorms
     } else {
       return Sun;
     }
@@ -36,63 +39,102 @@ const WeatherWidget = ({ location, className = '' }) => {
   const getWeatherColor = (condition) => {
     const conditionLower = condition?.toLowerCase() || '';
     
-    if (conditionLower.includes('rain') || conditionLower.includes('drizzle')) {
+    if (conditionLower.includes('rain') || conditionLower.includes('drizzle') || conditionLower.includes('shower')) {
       return 'from-blue-400 to-blue-600';
-    } else if (conditionLower.includes('snow')) {
+    } else if (conditionLower.includes('snow') || conditionLower.includes('blizzard')) {
       return 'from-gray-300 to-gray-500';
-    } else if (conditionLower.includes('cloud')) {
+    } else if (conditionLower.includes('cloud') || conditionLower.includes('overcast') || conditionLower.includes('mist') || conditionLower.includes('fog')) {
       return 'from-gray-400 to-gray-600';
+    } else if (conditionLower.includes('thunderstorm') || conditionLower.includes('storm')) {
+      return 'from-purple-500 to-indigo-600';
     } else {
       return 'from-yellow-400 to-orange-500';
     }
   };
 
   const fetchWeather = useCallback(async () => {
-    if (!location?.latitude || !location?.longitude) return;
+    // Use provided location or fallback to Delhi coordinates for testing
+    const coords = location?.latitude && location?.longitude 
+      ? { lat: location.latitude, lon: location.longitude }
+      : { lat: 28.6139, lon: 77.2090 }; // Delhi coordinates as fallback
+    
+    if (!coords.lat || !coords.lon) {
+      console.log('WeatherWidget: No location data available', location);
+      return;
+    }
 
+    console.log('WeatherWidget: Fetching weather for coordinates', coords);
     setLoading(true);
     setError(null);
 
     try {
-      // Simulate API call - replace with actual weather API
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY || '53e6e347b72a8674d71706ac07d2fc06';
       
-      // Mock weather data - replace with actual API call
-      const mockWeather = {
+      // Ensure coordinates are numbers
+      const lat = parseFloat(coords.lat);
+      const lon = parseFloat(coords.lon);
+      
+      if (isNaN(lat) || isNaN(lon)) {
+        throw new Error('Invalid latitude or longitude values');
+      }
+      
+      console.log('WeatherWidget: Using coordinates', { lat, lon });
+      
+      // Fetch current weather
+      const currentWeatherResponse = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+      );
+      
+      if (!currentWeatherResponse.ok) {
+        throw new Error(`Weather API error: ${currentWeatherResponse.status}`);
+      }
+      
+      const currentWeatherData = await currentWeatherResponse.json();
+      console.log('WeatherWidget: Current weather data', currentWeatherData);
+      
+      // Fetch 5-day forecast
+      const forecastResponse = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+      );
+      
+      if (!forecastResponse.ok) {
+        throw new Error(`Forecast API error: ${forecastResponse.status}`);
+      }
+      
+      const forecastData = await forecastResponse.json();
+      console.log('WeatherWidget: Forecast data', forecastData);
+      
+      // Process current weather data
+      const processedWeather = {
         current: {
-          temperature: Math.round(Math.random() * 20 + 15), // 15-35°C
-          humidity: Math.round(Math.random() * 40 + 40), // 40-80%
-          condition: ['Clear sky', 'Partly cloudy', 'Cloudy', 'Light rain'][Math.floor(Math.random() * 4)],
-          windSpeed: Math.round(Math.random() * 15 + 5), // 5-20 km/h
-          pressure: Math.round(Math.random() * 50 + 1000), // 1000-1050 hPa
-          visibility: Math.round(Math.random() * 5 + 8), // 8-13 km
+          temperature: Math.round(currentWeatherData.main.temp),
+          humidity: currentWeatherData.main.humidity,
+          condition: currentWeatherData.weather[0].description,
+          windSpeed: Math.round(currentWeatherData.wind.speed * 3.6), // Convert m/s to km/h
+          pressure: currentWeatherData.main.pressure,
+          visibility: Math.round((currentWeatherData.visibility || 0) / 1000), // Convert m to km
+          feelsLike: Math.round(currentWeatherData.main.feels_like),
+          uvIndex: currentWeatherData.uvi || 0,
+          cloudiness: currentWeatherData.clouds.all,
         },
-        forecast: [
-          {
-            date: new Date(Date.now() + 24 * 60 * 60 * 1000),
-            temperature: Math.round(Math.random() * 20 + 15),
-            condition: ['Clear sky', 'Partly cloudy', 'Cloudy'][Math.floor(Math.random() * 3)],
-            precipitation: Math.round(Math.random() * 20),
-          },
-          {
-            date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-            temperature: Math.round(Math.random() * 20 + 15),
-            condition: ['Clear sky', 'Partly cloudy', 'Cloudy'][Math.floor(Math.random() * 3)],
-            precipitation: Math.round(Math.random() * 20),
-          },
-          {
-            date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-            temperature: Math.round(Math.random() * 20 + 15),
-            condition: ['Clear sky', 'Partly cloudy', 'Cloudy'][Math.floor(Math.random() * 3)],
-            precipitation: Math.round(Math.random() * 20),
-          },
-        ]
+        forecast: forecastData.list
+          .filter((item, index) => index % 8 === 0) // Get daily forecasts (every 24 hours)
+          .slice(0, 3) // Take next 3 days
+          .map(item => ({
+            date: new Date(item.dt * 1000),
+            temperature: Math.round(item.main.temp),
+            condition: item.weather[0].description,
+            precipitation: Math.round((item.pop || 0) * 100), // Convert probability to percentage
+            humidity: item.main.humidity,
+            windSpeed: Math.round(item.wind.speed * 3.6),
+          }))
       };
 
-      setWeather(mockWeather);
+      console.log('WeatherWidget: Processed weather data', processedWeather);
+      setWeather(processedWeather);
       setLastUpdated(new Date());
     } catch (err) {
-      setError('Failed to fetch weather data');
+      setError(`Failed to fetch weather data: ${err.message}`);
       console.error('Weather fetch error:', err);
     } finally {
       setLoading(false);
@@ -124,6 +166,27 @@ const WeatherWidget = ({ location, className = '' }) => {
     }
   };
 
+  if (!location?.latitude || !location?.longitude) {
+    return (
+      <motion.div
+        className={`card p-6 ${className}`}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+      >
+        <div className="flex items-center space-x-3 text-gray-500">
+          <MapPin className="h-5 w-5" />
+          <span className="text-sm font-medium">Location required for weather data</span>
+        </div>
+        <p className="text-xs text-gray-400 mt-2">
+          Please update your profile with your location to see weather information.
+        </p>
+        <div className="mt-2 text-xs text-gray-300">
+          Debug: Location data: {JSON.stringify(location)}
+        </div>
+      </motion.div>
+    );
+  }
+
   if (error) {
     return (
       <motion.div
@@ -134,6 +197,10 @@ const WeatherWidget = ({ location, className = '' }) => {
         <div className="flex items-center space-x-3 text-red-600">
           <AlertCircle className="h-5 w-5" />
           <span className="text-sm font-medium">Weather data unavailable</span>
+        </div>
+        <p className="text-xs text-gray-500 mt-1">{error}</p>
+        <div className="mt-2 text-xs text-gray-300">
+          Debug: Location data: {JSON.stringify(location)}
         </div>
         <button
           onClick={fetchWeather}
@@ -241,6 +308,9 @@ const WeatherWidget = ({ location, className = '' }) => {
                 <div>
                   <p className="text-xs text-gray-500">Temperature</p>
                   <p className="text-sm font-medium">{weather.current.temperature}°C</p>
+                  {weather.current.feelsLike && (
+                    <p className="text-xs text-gray-400">Feels like {weather.current.feelsLike}°C</p>
+                  )}
                 </div>
               </div>
 
@@ -267,6 +337,28 @@ const WeatherWidget = ({ location, className = '' }) => {
                   <p className="text-sm font-medium">{weather.current.visibility} km</p>
                 </div>
               </div>
+
+              {weather.current.pressure && (
+                <div className="flex items-center space-x-2">
+                  <div className="h-4 w-4 bg-gray-500 rounded-full flex items-center justify-center">
+                    <span className="text-xs text-white font-bold">P</span>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">Pressure</p>
+                    <p className="text-sm font-medium">{weather.current.pressure} hPa</p>
+                  </div>
+                </div>
+              )}
+
+              {weather.current.cloudiness !== undefined && (
+                <div className="flex items-center space-x-2">
+                  <Cloud className="h-4 w-4 text-gray-500" />
+                  <div>
+                    <p className="text-xs text-gray-500">Cloudiness</p>
+                    <p className="text-sm font-medium">{weather.current.cloudiness}%</p>
+                  </div>
+                </div>
+              )}
             </motion.div>
 
             {/* 3-Day Forecast */}
@@ -310,7 +402,20 @@ const WeatherWidget = ({ location, className = '' }) => {
               </motion.div>
             )}
           </motion.div>
-        ) : null}
+        ) : (
+          <motion.div
+            key="no-weather"
+            className="text-center py-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="text-gray-500 text-sm">No weather data available</div>
+            <div className="mt-2 text-xs text-gray-300">
+              Debug: Loading: {loading.toString()}, Weather: {weather ? 'Present' : 'Null'}, Error: {error || 'None'}
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </motion.div>
   );

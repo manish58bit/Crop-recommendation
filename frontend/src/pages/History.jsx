@@ -15,7 +15,6 @@ import {
   FileText,
   X
 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
 import { historyAPI, handleApiError } from '../api/api';
 import toast from 'react-hot-toast';
 

@@ -26,3 +26,5 @@ router.get('/config', getAIConfig);
 router.post('/test-recommendation', testRecommendation);
 
 module.exports = router;
+
+

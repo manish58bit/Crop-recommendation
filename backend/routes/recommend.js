@@ -57,3 +57,4 @@ router.post('/upload-image', protect, upload.single('soilImage'), uploadSoilImag
 router.get('/:id', protect, getRecommendationById);
 
 module.exports = router;
+

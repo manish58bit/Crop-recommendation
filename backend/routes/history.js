@@ -35,3 +35,4 @@ router.get('/:id', protect, getHistoryById);
 router.delete('/:id', protect, deleteHistoryItem);
 
 module.exports = router;
+

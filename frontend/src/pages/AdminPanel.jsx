@@ -23,7 +23,6 @@ const AdminPanel = () => {
   const [users, setUsers] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
   const [pagination, setPagination] = useState({
@@ -44,7 +43,6 @@ const AdminPanel = () => {
   };
 
   const fetchUsers = useCallback(async (page = 1) => {
-    setLoading(true);
     try {
       const response = await adminAPI.getAllUsers({
         page,
@@ -56,13 +54,10 @@ const AdminPanel = () => {
     } catch (error) {
       const errorMessage = handleApiError(error).message;
       toast.error(errorMessage);
-    } finally {
-      setLoading(false);
     }
   }, [pagination.itemsPerPage, searchTerm]);
 
   const fetchRecommendations = useCallback(async (page = 1) => {
-    setLoading(true);
     try {
       const response = await adminAPI.getAllRecommendations({
         page,
@@ -73,8 +68,6 @@ const AdminPanel = () => {
     } catch (error) {
       const errorMessage = handleApiError(error).message;
       toast.error(errorMessage);
-    } finally {
-      setLoading(false);
     }
   }, [pagination.itemsPerPage]);
 

@@ -109,3 +109,4 @@ recommendationSchema.index({ userId: 1, createdAt: -1 });
 recommendationSchema.index({ 'location.latitude': 1, 'location.longitude': 1 });
 
 module.exports = mongoose.model('Recommendation', recommendationSchema);
+

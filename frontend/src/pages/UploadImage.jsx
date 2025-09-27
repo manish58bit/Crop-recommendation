@@ -9,10 +9,13 @@ import {
   CheckCircle,
   Sparkles,
   Leaf,
-  RefreshCw
+  RefreshCw,
+  MapPin,
+  Navigation
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { recommendAPI, handleApiError } from '../api/api';
+import LocationFetcher from '../components/LocationFetcher';
 import toast from 'react-hot-toast';
 
 const UploadImage = () => {
@@ -54,6 +57,12 @@ const UploadImage = () => {
       ...formData,
       [name]: value
     });
+  };
+
+  // Handle location update from LocationFetcher
+  const handleLocationUpdate = (locationData) => {
+    // This would need to be implemented in the AuthContext to update user location
+    toast.success('Location detected! Please update your profile to save this location permanently.');
   };
 
   const handleUpload = async () => {
@@ -129,9 +138,19 @@ const UploadImage = () => {
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 Soil Image Analysis
               </h1>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-gray-600 max-w-2xl mx-auto mb-4">
                 Upload a photo of your soil to get AI-powered analysis and personalized crop recommendations
               </p>
+              
+              {/* Location Status */}
+              <LocationFetcher
+                onLocationUpdate={handleLocationUpdate}
+                currentLocation={user?.location}
+                showAddress={true}
+                showCoordinates={false}
+                buttonText="Detect Location"
+                className="justify-center"
+              />
             </div>
           </motion.div>
 

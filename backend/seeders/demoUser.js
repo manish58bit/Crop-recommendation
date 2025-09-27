@@ -78,3 +78,5 @@ const createDemoUser = async () => {
 
 // Run the seeder
 createDemoUser();
+
+
