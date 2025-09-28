@@ -2,7 +2,7 @@ const axios = require('axios');
 
 class AIService {
   constructor() {
-    this.baseURL = process.env.AI_API_BASE_URL || 'http://localhost:5000/ai';
+    this.baseURL = process.env.AI_API_BASE_URL || 'http://127.0.0.1:8000';
     this.timeout = 30000; // 30 seconds
   }
 
@@ -22,11 +22,12 @@ class AIService {
       });
 
       const response = await axios.post(`${this.baseURL}/recommend`, {
-        latitude: data.latitude,
-        longitude: data.longitude,
-        soilType: data.soilType,
+        lat: data.latitude,
+        lon: data.longitude,
         area: data.area,
-        irrigationFrequency: data.irrigationFrequency,
+        irrigation: data.irrigationFrequency,
+        district: data.district || 'unknown',
+        soil_type: data.soilType,
         pastCrops: data.pastCrops || [],
         timestamp: new Date().toISOString()
       }, {
@@ -37,9 +38,12 @@ class AIService {
         }
       });
 
+      // Transform the AI API response to match our expected format
+      const transformedData = this.transformAIResponse(response.data, data);
+      
       return {
         success: true,
-        data: response.data,
+        data: transformedData,
         source: 'ai_model'
       };
 
@@ -54,6 +58,106 @@ class AIService {
         error: error.message
       };
     }
+  }
+
+  /**
+   * Transform AI API response to match our expected format
+   * @param {Object} aiResponse - Response from AI API
+   * @param {Object} inputData - Original input data
+   * @returns {Object} Transformed response
+   */
+  transformAIResponse(aiResponse, inputData) {
+    const { recommendations } = aiResponse;
+    
+    // Transform crop recommendations to match the simplified schema
+    const crops = recommendations.map((rec) => {
+      return {
+        crop: rec.crop,
+        confidence: rec.confidence
+      };
+    });
+
+    return {
+      crops: crops,
+      source: 'ai_model',
+      soilType: inputData.soilType
+    };
+  }
+
+  /**
+   * Get detailed crop information based on crop name
+   * @param {string} cropName - Name of the crop
+   * @param {string} soilType - Type of soil
+   * @param {number} confidence - Confidence score
+   * @returns {Object} Detailed crop information
+   */
+  getCropDetails(cropName, soilType, confidence) {
+    const cropMap = {
+      rice: {
+        name: "Rice",
+        variety: "Pusa Basmati",
+        plantingSeason: "Kharif",
+        expectedYield: "5-6 tons/hectare",
+        marketPrice: 2800,
+        description: "Perfect for alluvial soil with rich nutrients",
+        benefits: ["High yield", "Premium quality", "Good market price", "Soil fertility"]
+      },
+      wheat: {
+        name: "Wheat",
+        variety: "HD-3086",
+        plantingSeason: "Rabi",
+        expectedYield: "4-5 tons/hectare",
+        marketPrice: 2200,
+        description: "Excellent for alluvial soil conditions",
+        benefits: ["High protein content", "Good storage", "High demand", "Soil improvement"]
+      },
+      groundnut: {
+        name: "Groundnut",
+        variety: "TMV-2",
+        plantingSeason: "Kharif",
+        expectedYield: "2-3 tons/hectare",
+        marketPrice: 4500,
+        description: "Perfect for sandy soil with good drainage",
+        benefits: ["High oil content", "Good market price", "Drought tolerant", "Soil enrichment"]
+      },
+      cotton: {
+        name: "Cotton",
+        variety: "BT Cotton",
+        plantingSeason: "Kharif",
+        expectedYield: "3-4 tons/hectare",
+        marketPrice: 6000,
+        description: "Well-suited for red soil conditions",
+        benefits: ["High value crop", "Good market demand", "Fiber quality", "Economic benefits"]
+      },
+      sugarcane: {
+        name: "Sugarcane",
+        variety: "Co-86032",
+        plantingSeason: "Kharif",
+        expectedYield: "80-100 tons/hectare",
+        marketPrice: 3000,
+        description: "Ideal for black soil with high water retention",
+        benefits: ["High yield", "Good market price", "Multiple uses", "Soil improvement"]
+      },
+      tomato: {
+        name: "Tomato",
+        variety: "Hybrid",
+        plantingSeason: "Rabi",
+        expectedYield: "20-25 tons/hectare",
+        marketPrice: 3000,
+        description: "Excellent for loamy soil with balanced nutrients",
+        benefits: ["High yield", "Good market demand", "Multiple harvests", "High nutrition"]
+      }
+    };
+
+    return cropMap[cropName.toLowerCase()] || {
+      name: cropName.charAt(0).toUpperCase() + cropName.slice(1),
+      variety: "Local Variety",
+      plantingSeason: "Kharif",
+      expectedYield: "2-3 tons/hectare",
+      marketPrice: 2000,
+      description: `Suitable for ${soilType} soil conditions`,
+      benefits: ["Good yield", "Market demand", "Soil improvement"]
+    };
   }
 
   /**
@@ -81,12 +185,11 @@ class AIService {
     );
 
     return {
-      crops: recommendations.slice(0, 5), // Top 5 recommendations
-      fertilizers: this.getFertilizerRecommendations(soilType),
-      irrigation: this.getIrrigationRecommendations(irrigationFrequency),
-      confidence: 0.75, // Fallback confidence
+      crops: recommendations.slice(0, 5).map(crop => ({
+        crop: crop.name.toLowerCase(),
+        confidence: crop.confidence.toString()
+      })),
       source: 'fallback_model',
-      region: region,
       soilType: soilType
     };
   }
@@ -586,27 +689,6 @@ class AIService {
     };
   }
 
-  /**
-   * Test AI service connection
-   */
-  async testConnection() {
-    try {
-      const response = await axios.get(`${this.baseURL}/health`, {
-        timeout: 5000
-      });
-      return {
-        success: true,
-        status: 'connected',
-        response: response.data
-      };
-    } catch (error) {
-      return {
-        success: false,
-        status: 'disconnected',
-        error: error.message
-      };
-    }
-  }
 }
 
 module.exports = new AIService();

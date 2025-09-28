@@ -6,9 +6,6 @@ import {
   Grid, 
   List, 
   Star, 
-  TrendingUp, 
-  DollarSign,
-  Calendar,
   Leaf,
   ChevronDown
 } from 'lucide-react';
@@ -23,25 +20,17 @@ const CropList = ({ crops = [], onCropSelect, selectedCrop }) => {
   // Filter and sort crops
   const filteredAndSortedCrops = crops
     .filter(crop => {
-      const matchesSearch = crop.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           crop.variety?.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = crop.crop?.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesFilter = filterBy === 'all' || 
-                           (filterBy === 'high-confidence' && crop.confidence >= 0.8) ||
-                           (filterBy === 'high-yield' && crop.expectedYield?.includes('5-6')) ||
-                           (filterBy === 'kharif' && crop.plantingSeason === 'Kharif') ||
-                           (filterBy === 'rabi' && crop.plantingSeason === 'Rabi');
+                           (filterBy === 'high-confidence' && parseFloat(crop.confidence) >= 0.8);
       return matchesSearch && matchesFilter;
     })
     .sort((a, b) => {
       switch (sortBy) {
         case 'confidence':
-          return b.confidence - a.confidence;
-        case 'yield':
-          return parseFloat(b.expectedYield?.split('-')[0] || 0) - parseFloat(a.expectedYield?.split('-')[0] || 0);
-        case 'price':
-          return b.marketPrice - a.marketPrice;
+          return parseFloat(b.confidence) - parseFloat(a.confidence);
         case 'name':
-          return a.name.localeCompare(b.name);
+          return a.crop?.localeCompare(b.crop) || 0;
         default:
           return 0;
       }
@@ -49,17 +38,12 @@ const CropList = ({ crops = [], onCropSelect, selectedCrop }) => {
 
   const sortOptions = [
     { value: 'confidence', label: 'Confidence', icon: Star },
-    { value: 'yield', label: 'Expected Yield', icon: TrendingUp },
-    { value: 'price', label: 'Market Price', icon: DollarSign },
     { value: 'name', label: 'Name', icon: Leaf },
   ];
 
   const filterOptions = [
     { value: 'all', label: 'All Crops' },
     { value: 'high-confidence', label: 'High Confidence (80%+)' },
-    { value: 'high-yield', label: 'High Yield' },
-    { value: 'kharif', label: 'Kharif Season' },
-    { value: 'rabi', label: 'Rabi Season' },
   ];
 
   const containerVariants = {
@@ -82,13 +66,14 @@ const CropList = ({ crops = [], onCropSelect, selectedCrop }) => {
   };
 
   const CropCard = ({ crop, index }) => {
-    const confidenceColor = crop.confidence >= 0.8 ? 'text-green-600 bg-green-100' : 
-                           crop.confidence >= 0.6 ? 'text-yellow-600 bg-yellow-100' : 'text-red-600 bg-red-100';
+    const confidence = parseFloat(crop.confidence);
+    const confidenceColor = confidence >= 0.8 ? 'text-green-600 bg-green-100' : 
+                           confidence >= 0.6 ? 'text-yellow-600 bg-yellow-100' : 'text-red-600 bg-red-100';
 
     return (
       <motion.div
         className={`card p-4 cursor-pointer transition-all duration-200 ${
-          selectedCrop?.name === crop.name 
+          selectedCrop?.crop === crop.crop 
             ? 'ring-2 ring-primary-500 bg-primary-50' 
             : 'hover:shadow-medium hover:-translate-y-1'
         }`}
@@ -103,50 +88,29 @@ const CropList = ({ crops = [], onCropSelect, selectedCrop }) => {
               <Leaf className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">{crop.name}</h3>
-              {crop.variety && (
-                <p className="text-sm text-gray-600">{crop.variety}</p>
-              )}
+              <h3 className="font-semibold text-gray-900 capitalize">{crop.crop}</h3>
             </div>
           </div>
           <span className={`px-2 py-1 rounded-full text-xs font-medium ${confidenceColor}`}>
-            {Math.round(crop.confidence * 100)}%
+            {Math.round(confidence * 100)}%
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 mb-3">
-          <div className="flex items-center space-x-2">
-            <TrendingUp className="h-4 w-4 text-green-600" />
-            <div>
-              <p className="text-xs text-gray-500">Yield</p>
-              <p className="text-sm font-medium">{crop.expectedYield}</p>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <DollarSign className="h-4 w-4 text-green-600" />
-            <div>
-              <p className="text-xs text-gray-500">Price</p>
-              <p className="text-sm font-medium">₹{crop.marketPrice}/q</p>
-            </div>
-          </div>
-        </div>
-
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Calendar className="h-4 w-4 text-blue-600" />
-            <span className="text-sm text-gray-600">{crop.plantingSeason}</span>
-          </div>
           <div className="flex items-center space-x-1">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
                 className={`h-3 w-3 ${
-                  i < Math.round(crop.confidence * 5) 
+                  i < Math.round(confidence * 5) 
                     ? 'text-yellow-400 fill-current' 
                     : 'text-gray-300'
                 }`}
               />
             ))}
+          </div>
+          <div className="text-sm text-gray-600">
+            Confidence: {Math.round(confidence * 100)}%
           </div>
         </div>
       </motion.div>
@@ -154,13 +118,14 @@ const CropList = ({ crops = [], onCropSelect, selectedCrop }) => {
   };
 
   const CropListItem = ({ crop, index }) => {
-    const confidenceColor = crop.confidence >= 0.8 ? 'text-green-600 bg-green-100' : 
-                           crop.confidence >= 0.6 ? 'text-yellow-600 bg-yellow-100' : 'text-red-600 bg-red-100';
+    const confidence = parseFloat(crop.confidence);
+    const confidenceColor = confidence >= 0.8 ? 'text-green-600 bg-green-100' : 
+                           confidence >= 0.6 ? 'text-yellow-600 bg-yellow-100' : 'text-red-600 bg-red-100';
 
     return (
       <motion.div
         className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-all duration-200 ${
-          selectedCrop?.name === crop.name 
+          selectedCrop?.crop === crop.crop 
             ? 'bg-primary-50 border-2 border-primary-500' 
             : 'hover:bg-gray-50 border border-gray-200'
         }`}
@@ -173,28 +138,17 @@ const CropList = ({ crops = [], onCropSelect, selectedCrop }) => {
             <Leaf className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900">{crop.name}</h3>
-            {crop.variety && (
-              <p className="text-sm text-gray-600">{crop.variety}</p>
-            )}
+            <h3 className="font-semibold text-gray-900 capitalize">{crop.crop}</h3>
           </div>
         </div>
 
         <div className="flex items-center space-x-6">
           <div className="text-center">
-            <p className="text-xs text-gray-500">Yield</p>
-            <p className="text-sm font-medium">{crop.expectedYield}</p>
-          </div>
-          <div className="text-center">
-            <p className="text-xs text-gray-500">Price</p>
-            <p className="text-sm font-medium">₹{crop.marketPrice}/q</p>
-          </div>
-          <div className="text-center">
-            <p className="text-xs text-gray-500">Season</p>
-            <p className="text-sm font-medium">{crop.plantingSeason}</p>
+            <p className="text-xs text-gray-500">Confidence</p>
+            <p className="text-sm font-medium">{Math.round(confidence * 100)}%</p>
           </div>
           <span className={`px-3 py-1 rounded-full text-sm font-medium ${confidenceColor}`}>
-            {Math.round(crop.confidence * 100)}%
+            {Math.round(confidence * 100)}%
           </span>
         </div>
       </motion.div>
@@ -323,9 +277,9 @@ const CropList = ({ crops = [], onCropSelect, selectedCrop }) => {
           }>
             {filteredAndSortedCrops.map((crop, index) => (
               viewMode === 'grid' ? (
-                <CropCard key={crop.name} crop={crop} index={index} />
+                <CropCard key={crop.crop} crop={crop} index={index} />
               ) : (
-                <CropListItem key={crop.name} crop={crop} index={index} />
+                <CropListItem key={crop.crop} crop={crop} index={index} />
               )
             ))}
           </div>

@@ -6,13 +6,15 @@ const aiService = require('../services/aiService');
 // @route   POST /api/recommend
 // @access  Private
 const getRecommendations = async (req, res) => {
+  console.log(req.body);
   try {
     const { 
       location, 
       soilType, 
       area, 
       irrigationFrequency, 
-      pastCrops = [] 
+      pastCrops = [],
+      district = 'unknown'
     } = req.body;
 
     const userId = req.user.id;
@@ -32,40 +34,30 @@ const getRecommendations = async (req, res) => {
       soilType,
       area,
       irrigationFrequency,
-      pastCrops
+      pastCrops,
+      district
     };
 
     // Get recommendations from AI service
+    console.log('Calling AI service with data:', aiRequestData);
     const aiResult = await aiService.getCropRecommendations(aiRequestData);
+    console.log('AI service result:', { success: aiResult.success, source: aiResult.source, hasData: !!aiResult.data });
+    
+    if (!aiResult.success) {
+      console.error('AI service failed:', aiResult.error);
+      return res.status(500).json({
+        success: false,
+        message: 'AI service unavailable. Using fallback recommendations.',
+        error: aiResult.error
+      });
+    }
+    
     const aiResponse = aiResult.data;
 
-    // Get weather data
-    let weatherData;
-    try {
-      const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.OPENWEATHER_API_KEY}&units=metric`;
-      const weatherResponse = await axios.get(weatherApiUrl);
-      
-      weatherData = {
-        current: {
-          temperature: weatherResponse.data.main.temp,
-          humidity: weatherResponse.data.main.humidity,
-          condition: weatherResponse.data.weather[0].description,
-          windSpeed: weatherResponse.data.wind.speed
-        }
-      };
-    } catch (weatherError) {
-      console.error('Weather API Error:', weatherError.message);
-      weatherData = {
-        current: {
-          temperature: 25,
-          humidity: 60,
-          condition: "Clear sky",
-          windSpeed: 5
-        }
-      };
-    }
-
     // Create recommendation record
+    console.log('Creating recommendation record...');
+    console.log('Recommendations data:', JSON.stringify(aiResponse, null, 2));
+    
     const recommendation = await Recommendation.create({
       userId,
       location,
@@ -73,10 +65,7 @@ const getRecommendations = async (req, res) => {
       area,
       irrigationFrequency,
       pastCrops,
-      recommendations: {
-        ...aiResponse,
-        weather: weatherData
-      },
+      recommendations: aiResponse,
       aiResponse: {
         ...aiResponse,
         source: aiResult.source,
@@ -85,8 +74,9 @@ const getRecommendations = async (req, res) => {
       },
       status: 'completed'
     });
+    console.log('Recommendation record created:', recommendation._id);
 
-    res.json({
+    const responseData = {
       success: true,
       message: 'Recommendations generated successfully',
       data: {
@@ -101,7 +91,10 @@ const getRecommendations = async (req, res) => {
           createdAt: recommendation.createdAt
         }
       }
-    });
+    };
+    
+    console.log('Sending response with', recommendation.recommendations.crops?.length || 0, 'crops');
+    res.json(responseData);
 
   } catch (error) {
     console.error('Recommendation error:', error);

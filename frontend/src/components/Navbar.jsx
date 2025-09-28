@@ -31,6 +31,7 @@ const Navbar = () => {
     { name: 'Dashboard', path: '/dashboard', icon: Home },
     { name: 'Upload Image', path: '/upload', icon: Camera },
     { name: 'History', path: '/history', icon: History },
+    { name: 'Test API', path: '/test-recommendation', icon: Settings },
   ];
 
   const userMenuItems = [

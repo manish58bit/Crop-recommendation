@@ -23,7 +23,7 @@ const recommendationSchema = new mongoose.Schema({
   soilType: {
     type: String,
     required: true,
-    enum: ['clay', 'sandy', 'loamy', 'silty', 'peaty', 'chalky']
+    enum: ['clay', 'sandy', 'loamy', 'silty', 'peaty', 'chalky', 'red', 'black', 'laterite', 'alluvial']
   },
   area: {
     type: Number,
@@ -33,7 +33,7 @@ const recommendationSchema = new mongoose.Schema({
   irrigationFrequency: {
     type: String,
     required: true,
-    enum: ['daily', 'weekly', 'bi-weekly', 'monthly', 'seasonal']
+    enum: ['0', '1', '2', '3', '4', '5', 'daily', 'weekly', 'bi-weekly', 'monthly', 'seasonal']
   },
   pastCrops: [{
     name: String,
@@ -43,48 +43,15 @@ const recommendationSchema = new mongoose.Schema({
   }],
   recommendations: {
     crops: [{
-      name: {
+      crop: {
         type: String,
         required: true
       },
-      variety: String,
-      plantingSeason: String,
-      expectedYield: String,
-      marketPrice: Number,
-      confidence: Number,
-      description: String,
-      benefits: [String]
-    }],
-    fertilizers: [{
-      name: String,
-      type: String,
-      quantity: String,
-      applicationMethod: String,
-      timing: String,
-      benefits: String
-    }],
-    irrigation: {
-      frequency: String,
-      method: String,
-      waterRequirement: String,
-      timing: String,
-      tips: [String]
-    },
-    weather: {
-      current: {
-        temperature: Number,
-        humidity: Number,
-        condition: String,
-        windSpeed: Number
-      },
-      forecast: [{
-        date: Date,
-        temperature: Number,
-        humidity: Number,
-        condition: String,
-        precipitation: Number
-      }]
-    }
+      confidence: {
+        type: String,
+        required: true
+      }
+    }]
   },
   aiResponse: {
     type: mongoose.Schema.Types.Mixed,

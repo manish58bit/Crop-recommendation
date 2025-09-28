@@ -50,7 +50,7 @@ const loginValidation = [
 
 const recommendationValidation = [
   body('soilType')
-    .isIn(['clay', 'sandy', 'loamy', 'silty', 'peaty', 'chalky'])
+    .isIn(['clay', 'sandy', 'loamy', 'silty', 'peaty', 'chalky', 'red', 'black', 'laterite', 'alluvial'])
     .withMessage('Invalid soil type'),
   
   body('area')

@@ -13,6 +13,7 @@ import AdminPanel from './pages/AdminPanel';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import GoogleCallback from './pages/GoogleCallback';
+import TestRecommendation from './pages/TestRecommendation';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -178,6 +179,14 @@ const AppContent = () => {
             element={
               <ProtectedRoute>
                 <Settings />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/test-recommendation" 
+            element={
+              <ProtectedRoute>
+                <TestRecommendation />
               </ProtectedRoute>
             } 
           />
