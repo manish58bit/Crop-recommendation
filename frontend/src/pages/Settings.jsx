@@ -149,36 +149,9 @@ const Settings = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Settings Content */}
           <div className="lg:col-span-2">
-            <SettingSection title="Notifications" icon={Bell}>
-              <div className="space-y-1">
-                <ToggleSwitch
-                  checked={settings.notifications.email}
-                  onChange={() => handleSettingChange('notifications', 'email', !settings.notifications.email)}
-                  label="Email Notifications"
-                  description="Receive notifications via email"
-                />
-                <ToggleSwitch
-                  checked={settings.notifications.push}
-                  onChange={() => handleSettingChange('notifications', 'push', !settings.notifications.push)}
-                  label="Push Notifications"
-                  description="Receive browser push notifications"
-                />
-                <ToggleSwitch
-                  checked={settings.notifications.recommendations}
-                  onChange={() => handleSettingChange('notifications', 'recommendations', !settings.notifications.recommendations)}
-                  label="Recommendation Alerts"
-                  description="Get notified about new crop recommendations"
-                />
-                <ToggleSwitch
-                  checked={settings.notifications.updates}
-                  onChange={() => handleSettingChange('notifications', 'updates', !settings.notifications.updates)}
-                  label="App Updates"
-                  description="Receive notifications about app updates"
-                />
-              </div>
-            </SettingSection>
+            
 
-            <SettingSection title="Privacy & Security" icon={Shield}>
+            {/* <SettingSection title="Privacy & Security" icon={Shield}>
               <div className="space-y-1">
                 <SelectField
                   value={settings.privacy.profileVisibility}
@@ -204,7 +177,7 @@ const Settings = () => {
                   description="Help improve the app by sharing usage analytics"
                 />
               </div>
-            </SettingSection>
+            </SettingSection> */}
 
             <SettingSection title="Appearance" icon={Palette}>
               <div className="space-y-1">
@@ -240,6 +213,35 @@ const Settings = () => {
                   ]}
                   label="Font Size"
                   description="Adjust the text size for better readability"
+                />
+              </div>
+            </SettingSection>
+
+            <SettingSection title="Notifications" icon={Bell}>
+              <div className="space-y-1">
+                <ToggleSwitch
+                  checked={settings.notifications.email}
+                  onChange={() => handleSettingChange('notifications', 'email', !settings.notifications.email)}
+                  label="Email Notifications"
+                  description="Receive notifications via email"
+                />
+                <ToggleSwitch
+                  checked={settings.notifications.push}
+                  onChange={() => handleSettingChange('notifications', 'push', !settings.notifications.push)}
+                  label="Push Notifications"
+                  description="Receive browser push notifications"
+                />
+                <ToggleSwitch
+                  checked={settings.notifications.recommendations}
+                  onChange={() => handleSettingChange('notifications', 'recommendations', !settings.notifications.recommendations)}
+                  label="Recommendation Alerts"
+                  description="Get notified about new crop recommendations"
+                />
+                <ToggleSwitch
+                  checked={settings.notifications.updates}
+                  onChange={() => handleSettingChange('notifications', 'updates', !settings.notifications.updates)}
+                  label="App Updates"
+                  description="Receive notifications about app updates"
                 />
               </div>
             </SettingSection>
