@@ -10,10 +10,27 @@ import {
   Check
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitch from '../components/LanguageSwitch';
+import ThemeToggle from '../components/ThemeToggle';
 import toast from 'react-hot-toast';
 
 const Settings = () => {
   const { user } = useAuth();
+  const { currentLanguage, changeLanguage } = useLanguage();
+  const { theme, changeTheme } = useTheme();
+  
+  // Safe translation hook
+  let t;
+  try {
+    const translationHook = useTranslation();
+    t = translationHook.t;
+  } catch (error) {
+    console.warn('Translation hook error:', error);
+    t = (key, fallback) => fallback || key;
+  }
   const [settings, setSettings] = useState({
     notifications: {
       email: true,
@@ -44,9 +61,18 @@ const Settings = () => {
   useEffect(() => {
     const savedSettings = localStorage.getItem('userSettings');
     if (savedSettings) {
-      setSettings(JSON.parse(savedSettings));
+      const parsedSettings = JSON.parse(savedSettings);
+      setSettings(parsedSettings);
+      // Update language context if it's different
+      if (parsedSettings.appearance?.language && parsedSettings.appearance.language !== currentLanguage) {
+        changeLanguage(parsedSettings.appearance.language);
+      }
+      // Update theme context if it's different
+      if (parsedSettings.appearance?.theme && parsedSettings.appearance.theme !== theme) {
+        changeTheme(parsedSettings.appearance.theme);
+      }
     }
-  }, []);
+  }, [currentLanguage, changeLanguage, theme, changeTheme]);
 
   // Save settings to localStorage
   const saveSettings = () => {
@@ -71,6 +97,16 @@ const Settings = () => {
         [key]: value
       }
     }));
+    
+    // If language is being changed, update the language context immediately
+    if (category === 'appearance' && key === 'language') {
+      changeLanguage(value);
+    }
+    
+    // If theme is being changed, update the theme context immediately
+    if (category === 'appearance' && key === 'theme') {
+      changeTheme(value);
+    }
   };
 
   const SettingSection = ({ title, icon: Icon, children }) => (
@@ -179,30 +215,20 @@ const Settings = () => {
               </div>
             </SettingSection> */}
 
-            <SettingSection title="Appearance" icon={Palette}>
+            <SettingSection title={t('appearance_title', 'Appearance')} icon={Palette}>
               <div className="space-y-1">
-                <SelectField
-                  value={settings.appearance.theme}
-                  onChange={(value) => handleSettingChange('appearance', 'theme', value)}
-                  options={[
-                    { value: 'light', label: 'Light' },
-                    { value: 'dark', label: 'Dark' },
-                    { value: 'auto', label: 'Auto' }
-                  ]}
-                  label="Theme"
-                  description="Choose your preferred color scheme"
-                />
-                <SelectField
-                  value={settings.appearance.language}
-                  onChange={(value) => handleSettingChange('appearance', 'language', value)}
-                  options={[
-                    { value: 'en', label: 'English' },
-                    { value: 'hi', label: 'Hindi' },
-                    { value: 'es', label: 'Spanish' }
-                  ]}
-                  label="Language"
-                  description="Select your preferred language"
-                />
+                <div className="py-3">
+                  <ThemeToggle showLabel={true} />
+                  <p className="text-xs text-gray-500 mt-1">
+                    {t('theme_description', 'Choose your preferred color scheme')}
+                  </p>
+                </div>
+                <div className="py-3">
+                  <LanguageSwitch showLabel={true} />
+                  <p className="text-xs text-gray-500 mt-1">
+                    {t('language_description', 'Select your preferred language')}
+                  </p>
+                </div>
                 <SelectField
                   value={settings.appearance.fontSize}
                   onChange={(value) => handleSettingChange('appearance', 'fontSize', value)}

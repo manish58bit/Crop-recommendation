@@ -20,6 +20,8 @@ import RecommendationCard from '../components/RecommendationCard';
 import CropList from '../components/CropList';
 import WeatherWidget from '../components/WeatherWidget';
 import LocationFetcher from '../components/LocationFetcher';
+import PriceDisplay from '../components/PriceDisplay';
+import CropPriceList from '../components/CropPriceList';
 import toast from 'react-hot-toast';
 
 const Dashboard = () => {
@@ -468,6 +470,13 @@ const Dashboard = () => {
                 )}
               </AnimatePresence>
 
+              {/* Price Information for Selected Crop */}
+              <AnimatePresence>
+                {selectedCrop && (
+                  <PriceDisplay cropName={selectedCrop.crop} />
+                )}
+              </AnimatePresence>
+
               {/* Fertilizer Recommendations */}
               {recommendations?.recommendations?.fertilizers && (
                 <motion.div
@@ -490,6 +499,9 @@ const Dashboard = () => {
                   </div>
                 </motion.div>
               )}
+
+              {/* All Crop Prices */}
+              <CropPriceList />
 
               {/* Irrigation Info */}
               {recommendations?.recommendations?.irrigation && (

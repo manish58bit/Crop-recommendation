@@ -14,21 +14,14 @@ import {
   Navigation
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { recommendAPI, handleApiError } from '../api/api';
-import LocationFetcher from '../components/LocationFetcher';
 import toast from 'react-hot-toast';
 
 const UploadImage = () => {
   const { user } = useAuth();
   const [uploadedFile, setUploadedFile] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [analysis, setAnalysis] = useState(null);
+  const [uploadedImages, setUploadedImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    soilType: 'loamy',
-    area: '',
-    irrigationFrequency: '2'
-  });
 
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -42,6 +35,29 @@ const UploadImage = () => {
     }
   }, []);
 
+  const handleSaveImage = () => {
+    if (uploadedFile && preview) {
+      const newImage = {
+        id: Date.now(),
+        name: uploadedFile.name,
+        size: uploadedFile.size,
+        type: uploadedFile.type,
+        preview: preview,
+        uploadedAt: new Date().toISOString()
+      };
+      
+      setUploadedImages(prev => [newImage, ...prev]);
+      setUploadedFile(null);
+      setPreview(null);
+      toast.success('Image saved successfully!');
+    }
+  };
+
+  const handleRemoveImage = (imageId) => {
+    setUploadedImages(prev => prev.filter(img => img.id !== imageId));
+    toast.success('Image removed successfully!');
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
@@ -51,55 +67,10 @@ const UploadImage = () => {
     maxSize: 5 * 1024 * 1024 // 5MB
   });
 
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  // Handle location update from LocationFetcher
-  const handleLocationUpdate = (locationData) => {
-    // This would need to be implemented in the AuthContext to update user location
-    toast.success('Location detected! Please update your profile to save this location permanently.');
-  };
-
-  const handleUpload = async () => {
-    if (!uploadedFile) {
-      toast.error('Please upload an image first');
-      return;
-    }
-
-    if (!user?.location || !user.location.latitude || !user.location.longitude) {
-      toast.error('Location is required for soil analysis. Please update your profile with your current location.');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('soilImage', uploadedFile);
-      formDataToSend.append('location', JSON.stringify(user.location));
-      formDataToSend.append('soilType', formData.soilType);
-      formDataToSend.append('area', formData.area);
-      formDataToSend.append('irrigationFrequency', formData.irrigationFrequency);
-
-      const response = await recommendAPI.uploadSoilImage(formDataToSend);
-      setAnalysis(response.data.data.recommendation);
-      toast.success('Image analysis completed successfully!');
-    } catch (error) {
-      const errorMessage = handleApiError(error).message;
-      toast.error(errorMessage);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const resetUpload = () => {
     setUploadedFile(null);
     setPreview(null);
-    setAnalysis(null);
   };
 
   const containerVariants = {
@@ -142,16 +113,6 @@ const UploadImage = () => {
                 Upload a photo of your soil to get AI-powered analysis and personalized crop recommendations
               </p>
               
-              {/* Location Status */}
-              <LocationFetcher
-                onLocationUpdate={handleLocationUpdate}
-                currentLocation={user?.location}
-                showAddress={true}
-                showCoordinates={false}
-                showCitySearch={true}
-                buttonText="Detect Location"
-                className="justify-center"
-              />
             </div>
           </motion.div>
 
@@ -223,9 +184,8 @@ const UploadImage = () => {
                     <label className="label">Soil Type</label>
                     <select
                       name="soilType"
-                      value={formData.soilType}
-                      onChange={handleFormChange}
                       className="input"
+                      defaultValue="loamy"
                     >
                       <option value="sandy">Sandy Soil</option>
                       <option value="red">Red Soil</option>
@@ -242,8 +202,6 @@ const UploadImage = () => {
                     <input
                       type="number"
                       name="area"
-                      value={formData.area}
-                      onChange={handleFormChange}
                       className="input"
                       placeholder="Enter farm area"
                       step="0.1"
@@ -255,9 +213,8 @@ const UploadImage = () => {
                     <label className="label">Irrigation Frequency</label>
                     <select
                       name="irrigationFrequency"
-                      value={formData.irrigationFrequency}
-                      onChange={handleFormChange}
                       className="input"
+                      defaultValue="2"
                     >
                       <option value="0">0 times per season (Rain-fed only)</option>
                       <option value="1">1 time per season</option>
@@ -270,168 +227,82 @@ const UploadImage = () => {
                 </div>
               </div>
 
-              {/* Upload Button */}
+              {/* Save Button */}
               <motion.button
                 className="btn-primary w-full py-3 text-base font-medium flex items-center justify-center"
-                onClick={handleUpload}
-                disabled={!uploadedFile || loading}
+                onClick={handleSaveImage}
+                disabled={!uploadedFile}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {loading ? (
-                  <div className="loading-dots">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
-                ) : (
-                  <>
-                    <Sparkles className="h-5 w-5 mr-2" />
-                    Analyze Soil Image
-                  </>
-                )}
+                <CheckCircle className="h-5 w-5 mr-2" />
+                Save Image
               </motion.button>
             </motion.div>
 
-            {/* Right Column - Results */}
+            {/* Right Column - Saved Images */}
             <motion.div className="space-y-6" variants={itemVariants}>
-              {!analysis ? (
+              {uploadedImages.length === 0 ? (
                 /* Placeholder */
                 <div className="card p-8 text-center">
                   <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <ImageIcon className="h-8 w-8 text-gray-400" />
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">
-                    Analysis Results
+                    No Images Saved Yet
                   </h3>
                   <p className="text-gray-600">
-                    Upload a soil image to see AI-powered analysis and recommendations
+                    Upload and save images to build your collection
                   </p>
                 </div>
               ) : (
-                /* Analysis Results */
-                <div className="space-y-6">
-                  {/* Analysis Summary */}
-                  <motion.div
-                    className="card p-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                        <CheckCircle className="h-6 w-6 text-green-600" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900">
-                          Analysis Complete
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          Confidence: {Math.round(analysis.imageAnalysis?.confidence * 100 || 0)}%
-                        </p>
-                      </div>
-                    </div>
-                    <p className="text-gray-700">
-                      {analysis.imageAnalysis?.analysis || 'Soil analysis completed successfully.'}
-                    </p>
-                  </motion.div>
+                /* Saved Images */
+                <motion.div
+                  className="card p-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      Saved Images ({uploadedImages.length})
+                    </h3>
+                  </div>
 
-                  {/* Recommended Crops */}
-                  {analysis.recommendations?.crops && (
-                    <motion.div
-                      className="card p-6"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Recommended Crops
-                      </h3>
-                      <div className="space-y-3">
-                        {analysis.recommendations.crops.map((crop, index) => (
-                          <motion.div
-                            key={crop.name}
-                            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.1 + index * 0.1 }}
+                  <div className="grid grid-cols-1 gap-4">
+                    {uploadedImages.map((image) => (
+                      <motion.div
+                        key={image.id}
+                        className="border border-gray-200 rounded-lg p-4"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="flex items-center space-x-4">
+                          <img
+                            src={image.preview}
+                            alt={image.name}
+                            className="w-16 h-16 object-cover rounded-lg"
+                          />
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 truncate">{image.name}</h4>
+                            <p className="text-sm text-gray-500">
+                              {(image.size / 1024 / 1024).toFixed(2)} MB
+                            </p>
+                            <p className="text-xs text-gray-400">
+                              {new Date(image.uploadedAt).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => handleRemoveImage(image.id)}
+                            className="text-red-500 hover:text-red-700 p-1"
                           >
-                            <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
-                                <Leaf className="h-4 w-4 text-white" />
-                              </div>
-                              <div>
-                                <h4 className="font-medium text-gray-900">{crop.name}</h4>
-                                <p className="text-sm text-gray-600">{crop.description}</p>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <p className="text-sm font-medium text-gray-900">
-                                {Math.round(crop.confidence * 100)}%
-                              </p>
-                              <p className="text-xs text-gray-500">Confidence</p>
-                            </div>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Fertilizer Recommendations */}
-                  {analysis.recommendations?.fertilizers && (
-                    <motion.div
-                      className="card p-6"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Fertilizer Recommendations
-                      </h3>
-                      <div className="space-y-3">
-                        {analysis.recommendations.fertilizers.map((fertilizer, index) => (
-                          <motion.div
-                            key={index}
-                            className="p-3 bg-blue-50 rounded-lg"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 + index * 0.1 }}
-                          >
-                            <h4 className="font-medium text-gray-900">{fertilizer.name}</h4>
-                            <p className="text-sm text-gray-600">{fertilizer.quantity}</p>
-                            <p className="text-xs text-gray-500 mt-1">{fertilizer.benefits}</p>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Action Buttons */}
-                  <motion.div
-                    className="flex space-x-3"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <button
-                      onClick={resetUpload}
-                      className="btn-outline flex-1"
-                    >
-                      <RefreshCw className="h-4 w-4 mr-2" />
-                      Analyze Another Image
-                    </button>
-                    <button
-                      onClick={() => {
-                        // Navigate to dashboard or save results
-                        toast.success('Results saved to your history!');
-                      }}
-                      className="btn-primary flex-1"
-                    >
-                      <CheckCircle className="h-4 w-4 mr-2" />
-                      Save Results
-                    </button>
-                  </motion.div>
-                </div>
+                            <X className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
               )}
             </motion.div>
           </div>

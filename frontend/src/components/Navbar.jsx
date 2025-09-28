@@ -13,6 +13,8 @@ import {
   Shield
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitch from './LanguageSwitch';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +23,26 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Safe translation hook
+  let t;
+  try {
+    const translationHook = useTranslation();
+    t = translationHook.t;
+  } catch (error) {
+    console.warn('Translation hook error:', error);
+    t = (key, fallback) => fallback || key;
+  }
+
+  // Fallback for translation function
+  const translate = (key, fallback) => {
+    try {
+      return t(key, fallback);
+    } catch (error) {
+      console.warn('Translation error:', error);
+      return fallback || key;
+    }
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -28,19 +50,18 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { name: 'Dashboard', path: '/dashboard', icon: Home },
-    { name: 'Upload Image', path: '/upload', icon: Camera },
-    { name: 'History', path: '/history', icon: History },
-    { name: 'Test API', path: '/test-recommendation', icon: Settings },
+    { name: translate('nav_dashboard', 'Dashboard'), path: '/dashboard', icon: Home },
+    { name: translate('nav_upload', 'Upload Image'), path: '/upload', icon: Camera },
+    { name: translate('nav_history', 'History'), path: '/history', icon: History },
   ];
 
   const userMenuItems = [
-    { name: 'Profile', path: '/profile', icon: User },
-    { name: 'Settings', path: '/settings', icon: Settings },
+    { name: translate('nav_profile', 'Profile'), path: '/profile', icon: User },
+    { name: translate('nav_settings', 'Settings'), path: '/settings', icon: Settings },
   ];
 
   if (user?.role === 'admin') {
-    userMenuItems.push({ name: 'Admin Panel', path: '/admin', icon: Shield });
+    userMenuItems.push({ name: translate('nav_admin', 'Admin Panel'), path: '/admin', icon: Shield });
   }
 
   const isActive = (path) => location.pathname === path;
@@ -97,6 +118,10 @@ const Navbar = () => {
           {/* User Menu */}
           {isAuthenticated ? (
             <div className="flex items-center space-x-4">
+              {/* Language Switch */}
+              <div className="hidden md:block">
+                <LanguageSwitch showLabel={false} className="w-32" />
+              </div>
               {/* User Avatar */}
               <div className="relative">
                 <motion.button
@@ -152,7 +177,7 @@ const Navbar = () => {
                         transition={{ duration: 0.2 }}
                       >
                         <LogOut className="h-4 w-4" />
-                        <span>Sign Out</span>
+                        <span>{translate('nav_signout', 'Sign Out')}</span>
                       </motion.button>
                     </motion.div>
                   )}
@@ -179,13 +204,13 @@ const Navbar = () => {
                 to="/login"
                 className="text-gray-600 hover:text-gray-900 font-medium"
               >
-                Sign In
+                {translate('nav_signin', 'Sign In')}
               </Link>
               <Link
                 to="/register"
                 className="btn-primary px-4 py-2 text-sm"
               >
-                Sign Up
+                {translate('nav_signup', 'Sign Up')}
               </Link>
             </div>
           )}
@@ -202,6 +227,16 @@ const Navbar = () => {
               transition={{ duration: 0.3 }}
             >
               <div className="space-y-2">
+                {/* Mobile Language Switch */}
+                <motion.div 
+                  className="px-4 py-2"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <LanguageSwitch showLabel={true} />
+                </motion.div>
+                <div className="border-t border-gray-100 my-2"></div>
                 {navItems.map((item, index) => {
                   const Icon = item.icon;
                   return (
