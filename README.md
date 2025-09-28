@@ -264,3 +264,4 @@ For support, email support@cropai.com or create an issue in the repository.
 **Built with ❤️ for farmers worldwide**
 
 
+
