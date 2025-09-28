@@ -75,7 +75,6 @@ const WeatherWidget = ({ location, className = '' }) => {
         throw new Error('Invalid latitude or longitude values');
       }
       
-      
       // Fetch current weather
       const currentWeatherResponse = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
@@ -151,50 +150,46 @@ const WeatherWidget = ({ location, className = '' }) => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3 }
-    }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
   };
-
-  if (!location?.latitude || !location?.longitude) {
-    return (
-      <motion.div
-        className={`card p-6 ${className}`}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-      >
-        <div className="flex items-center space-x-3 text-gray-500">
-          <MapPin className="h-5 w-5" />
-          <span className="text-sm font-medium">Location required for weather data</span>
-        </div>
-        <p className="text-xs text-gray-400 mt-2">
-          Please update your profile with your location to see weather information.
-        </p>
-      </motion.div>
-    );
-  }
 
   if (error) {
     return (
       <motion.div
         className={`card p-6 ${className}`}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
-        <div className="flex items-center space-x-3 text-red-600">
+        <div className="flex items-center space-x-2 text-red-600">
           <AlertCircle className="h-5 w-5" />
-          <span className="text-sm font-medium">Weather data unavailable</span>
+          <h3 className="text-lg font-semibold">Weather Error</h3>
         </div>
-        <p className="text-xs text-gray-500 mt-1">{error}</p>
+        <p className="text-sm text-gray-600 mt-2">{error}</p>
         <button
           onClick={fetchWeather}
           className="mt-3 text-sm text-primary-600 hover:text-primary-700"
         >
           Try again
         </button>
+      </motion.div>
+    );
+  }
+
+  if (!weather) {
+    return (
+      <motion.div
+        className={`card p-6 ${className}`}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="flex items-center space-x-2 text-gray-500">
+          <MapPin className="h-5 w-5" />
+          <h3 className="text-lg font-semibold">Weather Forecast</h3>
+        </div>
+        <div className="text-gray-500 text-sm mt-2">No weather data available</div>
       </motion.div>
     );
   }
@@ -234,17 +229,13 @@ const WeatherWidget = ({ location, className = '' }) => {
         {loading ? (
           <motion.div
             key="loading"
-            className="flex items-center justify-center py-8"
+            className="text-center py-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="loading-dots">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading weather data...</p>
           </motion.div>
         ) : weather ? (
           <motion.div
@@ -287,7 +278,7 @@ const WeatherWidget = ({ location, className = '' }) => {
 
             {/* Weather Details */}
             <motion.div
-              className="grid grid-cols-2 gap-4 mb-4"
+              className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg"
               variants={itemVariants}
             >
               <div className="flex items-center space-x-2">
