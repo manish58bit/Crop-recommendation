@@ -12,6 +12,7 @@ import History from './pages/History';
 import AdminPanel from './pages/AdminPanel';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
+import GoogleCallback from './pages/GoogleCallback';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -125,6 +126,10 @@ const AppContent = () => {
                 <Register />
               </PublicRoute>
             } 
+          />
+          <Route 
+            path="/auth/google/callback" 
+            element={<GoogleCallback />} 
           />
 
           {/* Protected Routes */}

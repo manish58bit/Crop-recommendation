@@ -20,15 +20,33 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: [true, 'Please provide a phone number'],
+    required: function() {
+      return !this.googleId; // Only required if not using Google OAuth
+    },
     unique: true,
+    sparse: true, // Allow multiple null values
     match: [/^[0-9]{10}$/, 'Please provide a valid 10-digit phone number']
   },
   password: {
     type: String,
-    required: [true, 'Please provide a password'],
+    required: function() {
+      return !this.googleId; // Only required if not using Google OAuth
+    },
     minlength: [6, 'Password must be at least 6 characters'],
     select: false
+  },
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true // Allow multiple null values
+  },
+  profilePicture: {
+    type: String,
+    default: ''
+  },
+  emailVerified: {
+    type: Boolean,
+    default: false
   },
   location: {
     latitude: {
@@ -46,8 +64,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['farmer', 'admin'],
-    default: 'farmer'
+    enum: ['user', 'farmer', 'admin'],
+    default: 'user'
   },
   isActive: {
     type: Boolean,
@@ -61,9 +79,9 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Encrypt password before saving
+// Encrypt password before saving (only if password exists)
 userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) {
+  if (!this.isModified('password') || !this.password) {
     next();
   }
   

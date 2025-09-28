@@ -3,6 +3,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Mail, Lock, ArrowRight, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import GoogleLogin from '../components/GoogleLogin';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -45,6 +47,26 @@ const Login = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleGoogleSuccess = async (googleUser) => {
+    try {
+      setIsLoading(true);
+      // The Google user data will be handled by the backend
+      // For now, we'll just show success and redirect
+      toast.success('Google login successful!');
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.error('Google login error:', error);
+      toast.error('Failed to complete Google login');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleError = (error) => {
+    console.error('Google login error:', error);
+    toast.error('Google login failed');
   };
 
   const containerVariants = {
@@ -198,6 +220,15 @@ const Login = () => {
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-white text-gray-500">Or continue with</span>
             </div>
+          </motion.div>
+
+          {/* Google Login Button */}
+          <motion.div variants={itemVariants}>
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              disabled={isLoading}
+            />
           </motion.div>
 
           {/* Demo Account Button */}

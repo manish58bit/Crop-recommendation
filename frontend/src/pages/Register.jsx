@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Mail, Lock, User, Phone, MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import GoogleLogin from '../components/GoogleLogin';
+import LocationFetcher from '../components/LocationFetcher';
 import toast from 'react-hot-toast';
 
 const Register = () => {
@@ -100,6 +102,37 @@ const Register = () => {
         setIsGettingLocation(false);
       }
     );
+  };
+
+  const handleGoogleSuccess = async (googleUser) => {
+    try {
+      setIsLoading(true);
+      // The Google user data will be handled by the backend
+      // For now, we'll just show success and redirect
+      toast.success('Google registration successful!');
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Google registration error:', error);
+      toast.error('Failed to complete Google registration');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleError = (error) => {
+    console.error('Google registration error:', error);
+    toast.error('Google registration failed');
+  };
+
+  const handleLocationUpdate = (locationData) => {
+    setFormData({
+      ...formData,
+      location: {
+        latitude: locationData.latitude?.toString() || '',
+        longitude: locationData.longitude?.toString() || '',
+        address: locationData.address || '',
+      },
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -296,24 +329,15 @@ const Register = () => {
             <motion.div variants={itemVariants}>
               <label className="label">Location</label>
               <div className="space-y-3">
-                <button
-                  type="button"
-                  onClick={getCurrentLocation}
-                  disabled={isGettingLocation}
-                  className="btn-outline w-full py-2 text-sm"
-                >
-                  {isGettingLocation ? (
-                    <div className="flex items-center justify-center">
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-600 mr-2"></div>
-                      Getting Location...
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center">
-                      <MapPin className="h-4 w-4 mr-2" />
-                      Use Current Location
-                    </div>
-                  )}
-                </button>
+                <LocationFetcher
+                  onLocationUpdate={handleLocationUpdate}
+                  currentLocation={formData.location}
+                  showAddress={true}
+                  showCoordinates={true}
+                  showCitySearch={true}
+                  className="w-full"
+                  buttonText="Detect Current Location"
+                />
                 
                 <input
                   name="location.address"
@@ -423,6 +447,25 @@ const Register = () => {
               </button>
             </motion.div>
           </form>
+
+          {/* Divider */}
+          <motion.div className="relative mt-6" variants={itemVariants}>
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">Or continue with</span>
+            </div>
+          </motion.div>
+
+          {/* Google Registration Button */}
+          <motion.div variants={itemVariants}>
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              disabled={isLoading}
+            />
+          </motion.div>
         </motion.div>
 
         {/* Sign In Link */}

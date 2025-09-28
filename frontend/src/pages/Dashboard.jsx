@@ -37,26 +37,28 @@ const Dashboard = () => {
   const [formData, setFormData] = useState({
     soilType: 'loamy',
     area: '',
-    irrigationFrequency: 'weekly',
+    irrigationFrequency: '2',
     pastCrops: []
   });
   const [aiStatus, setAiStatus] = useState(null);
 
   const soilTypes = [
-    { value: 'clay', label: 'Clay Soil' },
     { value: 'sandy', label: 'Sandy Soil' },
+    { value: 'red', label: 'Red Soil' },
+    { value: 'black', label: 'Black Soil' },
     { value: 'loamy', label: 'Loamy Soil' },
-    { value: 'silty', label: 'Silty Soil' },
-    { value: 'peaty', label: 'Peaty Soil' },
+    { value: 'laterite', label: 'Laterite Soil' },
+    { value: 'alluvial', label: 'Alluvial Soil' },
     { value: 'chalky', label: 'Chalky Soil' },
   ];
 
   const irrigationFrequencies = [
-    { value: 'daily', label: 'Daily' },
-    { value: 'weekly', label: 'Weekly' },
-    { value: 'bi-weekly', label: 'Bi-weekly' },
-    { value: 'monthly', label: 'Monthly' },
-    { value: 'seasonal', label: 'Seasonal' },
+    { value: '0', label: '0 times per season (Rain-fed only)' },
+    { value: '1', label: '1 time per season' },
+    { value: '2', label: '2 times per season' },
+    { value: '3', label: '3 times per season' },
+    { value: '4', label: '4 times per season' },
+    { value: '5', label: '5 times per season' },
   ];
 
   const getRecommendations = async () => {

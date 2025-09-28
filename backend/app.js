@@ -12,6 +12,7 @@ const historyRoutes = require('./routes/history');
 const adminRoutes = require('./routes/admin');
 const aiRoutes = require('./routes/ai');
 const profileRoutes = require('./routes/profile');
+const googleAuthRoutes = require('./routes/googleAuth');
 
 const app = express();
 
@@ -61,6 +62,7 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/api/auth', authRoutes);
+app.use('/api/auth/google', googleAuthRoutes);
 app.use('/api/recommend', recommendRoutes);
 app.use('/api/history', historyRoutes);
 app.use('/api/admin', adminRoutes);

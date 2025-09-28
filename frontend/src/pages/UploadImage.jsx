@@ -27,7 +27,7 @@ const UploadImage = () => {
   const [formData, setFormData] = useState({
     soilType: 'loamy',
     area: '',
-    irrigationFrequency: 'weekly'
+    irrigationFrequency: '2'
   });
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -227,11 +227,12 @@ const UploadImage = () => {
                       onChange={handleFormChange}
                       className="input"
                     >
-                      <option value="clay">Clay Soil</option>
                       <option value="sandy">Sandy Soil</option>
+                      <option value="red">Red Soil</option>
+                      <option value="black">Black Soil</option>
                       <option value="loamy">Loamy Soil</option>
-                      <option value="silty">Silty Soil</option>
-                      <option value="peaty">Peaty Soil</option>
+                      <option value="laterite">Laterite Soil</option>
+                      <option value="alluvial">Alluvial Soil</option>
                       <option value="chalky">Chalky Soil</option>
                     </select>
                   </div>
@@ -258,11 +259,12 @@ const UploadImage = () => {
                       onChange={handleFormChange}
                       className="input"
                     >
-                      <option value="daily">Daily</option>
-                      <option value="weekly">Weekly</option>
-                      <option value="bi-weekly">Bi-weekly</option>
-                      <option value="monthly">Monthly</option>
-                      <option value="seasonal">Seasonal</option>
+                      <option value="0">0 times per season (Rain-fed only)</option>
+                      <option value="1">1 time per season</option>
+                      <option value="2">2 times per season</option>
+                      <option value="3">3 times per season</option>
+                      <option value="4">4 times per season</option>
+                      <option value="5">5 times per season</option>
                     </select>
                   </div>
                 </div>

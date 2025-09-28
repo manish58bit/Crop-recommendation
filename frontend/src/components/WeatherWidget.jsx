@@ -59,11 +59,8 @@ const WeatherWidget = ({ location, className = '' }) => {
       : { lat: 28.6139, lon: 77.2090 }; // Delhi coordinates as fallback
     
     if (!coords.lat || !coords.lon) {
-      console.log('WeatherWidget: No location data available', location);
       return;
     }
-
-    console.log('WeatherWidget: Fetching weather for coordinates', coords);
     setLoading(true);
     setError(null);
 
@@ -78,7 +75,6 @@ const WeatherWidget = ({ location, className = '' }) => {
         throw new Error('Invalid latitude or longitude values');
       }
       
-      console.log('WeatherWidget: Using coordinates', { lat, lon });
       
       // Fetch current weather
       const currentWeatherResponse = await fetch(
@@ -90,7 +86,6 @@ const WeatherWidget = ({ location, className = '' }) => {
       }
       
       const currentWeatherData = await currentWeatherResponse.json();
-      console.log('WeatherWidget: Current weather data', currentWeatherData);
       
       // Fetch 5-day forecast
       const forecastResponse = await fetch(
@@ -102,35 +97,33 @@ const WeatherWidget = ({ location, className = '' }) => {
       }
       
       const forecastData = await forecastResponse.json();
-      console.log('WeatherWidget: Forecast data', forecastData);
       
-      // Process current weather data
+      // Process current weather data with proper error handling
       const processedWeather = {
         current: {
-          temperature: Math.round(currentWeatherData.main.temp),
-          humidity: currentWeatherData.main.humidity,
-          condition: currentWeatherData.weather[0].description,
-          windSpeed: Math.round(currentWeatherData.wind.speed * 3.6), // Convert m/s to km/h
-          pressure: currentWeatherData.main.pressure,
+          temperature: Math.round(currentWeatherData.main?.temp || 0),
+          humidity: currentWeatherData.main?.humidity || 0,
+          condition: currentWeatherData.weather?.[0]?.description || 'Unknown',
+          windSpeed: Math.round((currentWeatherData.wind?.speed || 0) * 3.6), // Convert m/s to km/h
+          pressure: currentWeatherData.main?.pressure || 0,
           visibility: Math.round((currentWeatherData.visibility || 0) / 1000), // Convert m to km
-          feelsLike: Math.round(currentWeatherData.main.feels_like),
+          feelsLike: Math.round(currentWeatherData.main?.feels_like || 0),
           uvIndex: currentWeatherData.uvi || 0,
-          cloudiness: currentWeatherData.clouds.all,
+          cloudiness: currentWeatherData.clouds?.all || 0,
         },
         forecast: forecastData.list
-          .filter((item, index) => index % 8 === 0) // Get daily forecasts (every 24 hours)
-          .slice(0, 3) // Take next 3 days
-          .map(item => ({
+          ?.filter((item, index) => index % 8 === 0) // Get daily forecasts (every 24 hours)
+          ?.slice(0, 3) // Take next 3 days
+          ?.map(item => ({
             date: new Date(item.dt * 1000),
-            temperature: Math.round(item.main.temp),
-            condition: item.weather[0].description,
+            temperature: Math.round(item.main?.temp || 0),
+            condition: item.weather?.[0]?.description || 'Unknown',
             precipitation: Math.round((item.pop || 0) * 100), // Convert probability to percentage
-            humidity: item.main.humidity,
-            windSpeed: Math.round(item.wind.speed * 3.6),
-          }))
+            humidity: item.main?.humidity || 0,
+            windSpeed: Math.round((item.wind?.speed || 0) * 3.6),
+          })) || []
       };
 
-      console.log('WeatherWidget: Processed weather data', processedWeather);
       setWeather(processedWeather);
       setLastUpdated(new Date());
     } catch (err) {
@@ -180,9 +173,6 @@ const WeatherWidget = ({ location, className = '' }) => {
         <p className="text-xs text-gray-400 mt-2">
           Please update your profile with your location to see weather information.
         </p>
-        <div className="mt-2 text-xs text-gray-300">
-          Debug: Location data: {JSON.stringify(location)}
-        </div>
       </motion.div>
     );
   }
@@ -199,9 +189,6 @@ const WeatherWidget = ({ location, className = '' }) => {
           <span className="text-sm font-medium">Weather data unavailable</span>
         </div>
         <p className="text-xs text-gray-500 mt-1">{error}</p>
-        <div className="mt-2 text-xs text-gray-300">
-          Debug: Location data: {JSON.stringify(location)}
-        </div>
         <button
           onClick={fetchWeather}
           className="mt-3 text-sm text-primary-600 hover:text-primary-700"
@@ -282,17 +269,17 @@ const WeatherWidget = ({ location, className = '' }) => {
                     </span>
                   </div>
                   <div className="text-3xl font-bold">
-                    {weather.current.temperature}°C
+                    {weather.current.temperature || 0}°C
                   </div>
                 </div>
                 <div className="text-right text-sm">
                   <div className="flex items-center space-x-1 mb-1">
                     <Droplets className="h-4 w-4" />
-                    <span>{weather.current.humidity}%</span>
+                    <span>{weather.current.humidity || 0}%</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <Wind className="h-4 w-4" />
-                    <span>{weather.current.windSpeed} km/h</span>
+                    <span>{weather.current.windSpeed || 0} km/h</span>
                   </div>
                 </div>
               </div>
@@ -307,8 +294,8 @@ const WeatherWidget = ({ location, className = '' }) => {
                 <Thermometer className="h-4 w-4 text-red-500" />
                 <div>
                   <p className="text-xs text-gray-500">Temperature</p>
-                  <p className="text-sm font-medium">{weather.current.temperature}°C</p>
-                  {weather.current.feelsLike && (
+                  <p className="text-sm font-medium">{weather.current.temperature || 0}°C</p>
+                  {weather.current.feelsLike && weather.current.feelsLike !== 0 && (
                     <p className="text-xs text-gray-400">Feels like {weather.current.feelsLike}°C</p>
                   )}
                 </div>
@@ -318,7 +305,7 @@ const WeatherWidget = ({ location, className = '' }) => {
                 <Droplets className="h-4 w-4 text-blue-500" />
                 <div>
                   <p className="text-xs text-gray-500">Humidity</p>
-                  <p className="text-sm font-medium">{weather.current.humidity}%</p>
+                  <p className="text-sm font-medium">{weather.current.humidity || 0}%</p>
                 </div>
               </div>
 
@@ -326,7 +313,7 @@ const WeatherWidget = ({ location, className = '' }) => {
                 <Wind className="h-4 w-4 text-gray-500" />
                 <div>
                   <p className="text-xs text-gray-500">Wind Speed</p>
-                  <p className="text-sm font-medium">{weather.current.windSpeed} km/h</p>
+                  <p className="text-sm font-medium">{weather.current.windSpeed || 0} km/h</p>
                 </div>
               </div>
 
@@ -334,11 +321,11 @@ const WeatherWidget = ({ location, className = '' }) => {
                 <Eye className="h-4 w-4 text-gray-500" />
                 <div>
                   <p className="text-xs text-gray-500">Visibility</p>
-                  <p className="text-sm font-medium">{weather.current.visibility} km</p>
+                  <p className="text-sm font-medium">{weather.current.visibility || 0} km</p>
                 </div>
               </div>
 
-              {weather.current.pressure && (
+              {weather.current.pressure && weather.current.pressure > 0 && (
                 <div className="flex items-center space-x-2">
                   <div className="h-4 w-4 bg-gray-500 rounded-full flex items-center justify-center">
                     <span className="text-xs text-white font-bold">P</span>
@@ -350,7 +337,7 @@ const WeatherWidget = ({ location, className = '' }) => {
                 </div>
               )}
 
-              {weather.current.cloudiness !== undefined && (
+              {weather.current.cloudiness !== undefined && weather.current.cloudiness > 0 && (
                 <div className="flex items-center space-x-2">
                   <Cloud className="h-4 w-4 text-gray-500" />
                   <div>
@@ -362,7 +349,7 @@ const WeatherWidget = ({ location, className = '' }) => {
             </motion.div>
 
             {/* 3-Day Forecast */}
-            {weather.forecast && (
+            {weather.forecast && weather.forecast.length > 0 ? (
               <motion.div variants={itemVariants}>
                 <h4 className="text-sm font-medium text-gray-700 mb-3">3-Day Forecast</h4>
                 <div className="space-y-2">
@@ -379,15 +366,15 @@ const WeatherWidget = ({ location, className = '' }) => {
                         <div className="flex items-center space-x-3">
                           <WeatherIcon className="h-4 w-4 text-gray-600" />
                           <span className="text-sm text-gray-700">
-                            {day.date.toLocaleDateString('en-US', { weekday: 'short' })}
+                            {day.date?.toLocaleDateString('en-US', { weekday: 'short' }) || 'N/A'}
                           </span>
                         </div>
                         <div className="flex items-center space-x-4">
                           <span className="text-sm text-gray-600 capitalize">
-                            {day.condition}
+                            {day.condition || 'Unknown'}
                           </span>
                           <span className="text-sm font-medium">
-                            {day.temperature}°C
+                            {day.temperature || 0}°C
                           </span>
                           {day.precipitation > 0 && (
                             <span className="text-xs text-blue-600">
@@ -398,6 +385,13 @@ const WeatherWidget = ({ location, className = '' }) => {
                       </motion.div>
                     );
                   })}
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div variants={itemVariants}>
+                <h4 className="text-sm font-medium text-gray-700 mb-3">3-Day Forecast</h4>
+                <div className="text-center py-4 text-gray-500 text-sm">
+                  Forecast data not available
                 </div>
               </motion.div>
             )}
@@ -411,9 +405,6 @@ const WeatherWidget = ({ location, className = '' }) => {
             exit={{ opacity: 0 }}
           >
             <div className="text-gray-500 text-sm">No weather data available</div>
-            <div className="mt-2 text-xs text-gray-300">
-              Debug: Loading: {loading.toString()}, Weather: {weather ? 'Present' : 'Null'}, Error: {error || 'None'}
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -58,7 +58,7 @@ const recommendationValidation = [
     .withMessage('Area must be at least 0.1 acres'),
   
   body('irrigationFrequency')
-    .isIn(['daily', 'weekly', 'bi-weekly', 'monthly', 'seasonal'])
+    .isIn(['0', '1', '2', '3', '4', '5'])
     .withMessage('Invalid irrigation frequency'),
   
   body('location.latitude')

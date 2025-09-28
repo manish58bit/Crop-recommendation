@@ -115,7 +115,7 @@ class AIService {
    */
   getSoilSpecificRecommendations(soilType) {
     const soilCrops = {
-      clay: [
+      red: [
         {
           name: "Rice",
           variety: "Basmati",
@@ -123,18 +123,18 @@ class AIService {
           expectedYield: "4-5 tons/hectare",
           marketPrice: 2500,
           confidence: 0.85,
-          description: "Excellent for clay soil with good water retention",
+          description: "Excellent for red soil with good water retention",
           benefits: ["High yield", "Good market price", "Drought resistant", "Soil improvement"]
         },
         {
-          name: "Wheat",
-          variety: "HD-2967",
-          plantingSeason: "Rabi",
+          name: "Cotton",
+          variety: "BT Cotton",
+          plantingSeason: "Kharif",
           expectedYield: "3-4 tons/hectare",
-          marketPrice: 2000,
+          marketPrice: 6000,
           confidence: 0.80,
-          description: "Well-suited for clay soil conditions",
-          benefits: ["High protein content", "Good storage", "High demand", "Soil structure improvement"]
+          description: "Well-suited for red soil conditions",
+          benefits: ["High value crop", "Good market demand", "Fiber quality", "Economic benefits"]
         }
       ],
       sandy: [
@@ -159,6 +159,28 @@ class AIService {
           benefits: ["Fast growing", "Multiple uses", "Good yield", "Versatile crop"]
         }
       ],
+      black: [
+        {
+          name: "Sugarcane",
+          variety: "Co-86032",
+          plantingSeason: "Kharif",
+          expectedYield: "80-100 tons/hectare",
+          marketPrice: 3000,
+          confidence: 0.90,
+          description: "Ideal for black soil with high water retention",
+          benefits: ["High yield", "Good market price", "Multiple uses", "Soil improvement"]
+        },
+        {
+          name: "Wheat",
+          variety: "HD-2967",
+          plantingSeason: "Rabi",
+          expectedYield: "4-5 tons/hectare",
+          marketPrice: 2000,
+          confidence: 0.85,
+          description: "Excellent for black soil conditions",
+          benefits: ["High protein content", "Good storage", "High demand", "Soil structure improvement"]
+        }
+      ],
       loamy: [
         {
           name: "Tomato",
@@ -181,28 +203,48 @@ class AIService {
           benefits: ["High sugar content", "Good market price", "Long-term crop", "Soil improvement"]
         }
       ],
-      silty: [
+      laterite: [
         {
-          name: "Potato",
-          variety: "Kufri Jyoti",
-          plantingSeason: "Rabi",
-          expectedYield: "25-30 tons/hectare",
-          marketPrice: 1200,
+          name: "Cashew",
+          variety: "Vengurla-4",
+          plantingSeason: "Kharif",
+          expectedYield: "8-10 tons/hectare",
+          marketPrice: 12000,
           confidence: 0.80,
-          description: "Well-suited for silty soil conditions",
-          benefits: ["High yield", "Good storage", "High demand", "Soil aeration"]
+          description: "Suitable for laterite soil with good drainage",
+          benefits: ["High value crop", "Drought tolerant", "Long-term investment", "Good market price"]
+        },
+        {
+          name: "Mango",
+          variety: "Alphonso",
+          plantingSeason: "Kharif",
+          expectedYield: "15-20 tons/hectare",
+          marketPrice: 8000,
+          confidence: 0.75,
+          description: "Good for laterite soil conditions",
+          benefits: ["High value fruit", "Export quality", "Long-term crop", "Good market demand"]
         }
       ],
-      peaty: [
+      alluvial: [
         {
           name: "Rice",
-          variety: "Swarna",
+          variety: "Pusa Basmati",
           plantingSeason: "Kharif",
+          expectedYield: "5-6 tons/hectare",
+          marketPrice: 2800,
+          confidence: 0.90,
+          description: "Perfect for alluvial soil with rich nutrients",
+          benefits: ["High yield", "Premium quality", "Good market price", "Soil fertility"]
+        },
+        {
+          name: "Wheat",
+          variety: "HD-3086",
+          plantingSeason: "Rabi",
           expectedYield: "4-5 tons/hectare",
-          marketPrice: 2500,
+          marketPrice: 2200,
           confidence: 0.85,
-          description: "Excellent for peaty soil with high organic matter",
-          benefits: ["High yield", "Good market price", "Organic farming", "Soil conservation"]
+          description: "Excellent for alluvial soil conditions",
+          benefits: ["High protein content", "Good storage", "High demand", "Soil improvement"]
         }
       ],
       chalky: [
@@ -215,6 +257,16 @@ class AIService {
           confidence: 0.75,
           description: "Suitable for chalky soil with proper pH management",
           benefits: ["Drought tolerant", "Good for livestock", "Soil improvement", "Low maintenance"]
+        },
+        {
+          name: "Mustard",
+          variety: "Pusa Bold",
+          plantingSeason: "Rabi",
+          expectedYield: "2-3 tons/hectare",
+          marketPrice: 4000,
+          confidence: 0.75,
+          description: "Suitable for chalky soil with proper management",
+          benefits: ["Oil crop", "Good market price", "Soil improvement", "Drought tolerant"]
         }
       ]
     };
@@ -298,14 +350,14 @@ class AIService {
    */
   getFertilizerRecommendations(soilType) {
     const fertilizerMap = {
-      clay: [
+      red: [
         {
           name: "NPK 19:19:19",
           type: "Complex",
           quantity: "50 kg/acre",
           applicationMethod: "Broadcasting",
           timing: "Before planting",
-          benefits: "Balanced nutrition for clay soil"
+          benefits: "Balanced nutrition for red soil"
         },
         {
           name: "Gypsum",
@@ -334,6 +386,24 @@ class AIService {
           benefits: "Promotes vegetative growth"
         }
       ],
+      black: [
+        {
+          name: "NPK 20:20:20",
+          type: "Complex",
+          quantity: "45 kg/acre",
+          applicationMethod: "Broadcasting",
+          timing: "Before planting",
+          benefits: "Balanced nutrition for black soil"
+        },
+        {
+          name: "Farm Yard Manure",
+          type: "Organic",
+          quantity: "3 tons/acre",
+          applicationMethod: "Mixing with soil",
+          timing: "Before planting",
+          benefits: "Enhances soil fertility and water retention"
+        }
+      ],
       loamy: [
         {
           name: "NPK 20:20:20",
@@ -351,6 +421,60 @@ class AIService {
           timing: "Before planting",
           benefits: "Enhances soil fertility and structure"
         }
+      ],
+      laterite: [
+        {
+          name: "NPK 12:32:16",
+          type: "Complex",
+          quantity: "35 kg/acre",
+          applicationMethod: "Broadcasting",
+          timing: "Before planting",
+          benefits: "Suitable for laterite soil with low fertility"
+        },
+        {
+          name: "Lime",
+          type: "Soil Conditioner",
+          quantity: "150 kg/acre",
+          applicationMethod: "Mixing with soil",
+          timing: "Before planting",
+          benefits: "Neutralizes soil acidity"
+        }
+      ],
+      alluvial: [
+        {
+          name: "NPK 19:19:19",
+          type: "Complex",
+          quantity: "50 kg/acre",
+          applicationMethod: "Broadcasting",
+          timing: "Before planting",
+          benefits: "Balanced nutrition for alluvial soil"
+        },
+        {
+          name: "Green Manure",
+          type: "Organic",
+          quantity: "2 tons/acre",
+          applicationMethod: "Mixing with soil",
+          timing: "Before planting",
+          benefits: "Improves soil structure and fertility"
+        }
+      ],
+      chalky: [
+        {
+          name: "NPK 15:15:15",
+          type: "Complex",
+          quantity: "30 kg/acre",
+          applicationMethod: "Broadcasting",
+          timing: "Before planting",
+          benefits: "Suitable for chalky soil conditions"
+        },
+        {
+          name: "Sulfur",
+          type: "Soil Conditioner",
+          quantity: "100 kg/acre",
+          applicationMethod: "Mixing with soil",
+          timing: "Before planting",
+          benefits: "Lowers soil pH for better nutrient availability"
+        }
       ]
     };
 
@@ -361,70 +485,105 @@ class AIService {
    * Get irrigation recommendations
    */
   getIrrigationRecommendations(frequency) {
-    const irrigationMap = {
-      daily: {
-        frequency: "Daily",
-        method: "Drip irrigation recommended",
-        waterRequirement: "2-3 liters per plant per day",
-        timing: "Early morning",
-        tips: [
-          "Monitor soil moisture regularly",
-          "Use mulch to retain moisture",
-          "Avoid over-irrigation",
-          "Check for water stress signs"
-        ]
-      },
-      weekly: {
-        frequency: "Weekly",
-        method: "Sprinkler or flood irrigation",
-        waterRequirement: "15-20 mm per week",
-        timing: "Early morning or evening",
-        tips: [
-          "Deep watering once a week",
-          "Use soil moisture sensors",
-          "Adjust based on weather",
-          "Monitor plant health"
-        ]
-      },
-      'bi-weekly': {
-        frequency: "Bi-weekly",
-        method: "Flood irrigation",
-        waterRequirement: "25-30 mm every two weeks",
-        timing: "Early morning",
-        tips: [
-          "Ensure deep root penetration",
-          "Use water conservation techniques",
-          "Monitor soil moisture",
-          "Adjust for seasonal changes"
-        ]
-      },
-      monthly: {
-        frequency: "Monthly",
-        method: "Flood irrigation",
-        waterRequirement: "50-60 mm per month",
-        timing: "Early morning",
-        tips: [
-          "Deep watering for drought tolerance",
-          "Use mulching",
-          "Monitor weather patterns",
-          "Consider drought-resistant varieties"
-        ]
-      },
-      seasonal: {
-        frequency: "Seasonal",
-        method: "Rain-fed with supplementary irrigation",
-        waterRequirement: "200-300 mm per season",
-        timing: "Based on rainfall",
-        tips: [
-          "Rely on natural rainfall",
-          "Supplementary irrigation during dry spells",
-          "Use drought-resistant crops",
-          "Implement water conservation"
-        ]
-      }
-    };
+    const freq = parseInt(frequency) || 2;
+    
+    // Determine irrigation category based on frequency per season (0-5 range)
+    let category, method, waterRequirement, timing, tips;
+    
+    if (freq === 0) {
+      // Rain-fed only (0 times per season)
+      category = "Rain-fed Only";
+      method = "Natural rainfall only";
+      waterRequirement = "0 mm irrigation (rely on rainfall)";
+      timing = "Based on natural rainfall patterns";
+      tips = [
+        "Rely entirely on natural rainfall",
+        "Choose drought-resistant crop varieties",
+        "Use water conservation techniques",
+        "Monitor weather patterns closely",
+        "Plan planting around rainy seasons",
+        "Use mulching to retain soil moisture",
+        "Consider crop rotation with drought-tolerant crops"
+      ];
+    } else if (freq === 1) {
+      // Very low frequency (1 time per season)
+      category = "Very Low Frequency";
+      method = "Flood irrigation or basin irrigation";
+      waterRequirement = "100-150 mm per session";
+      timing = "Early morning, during critical growth stage";
+      tips = [
+        "Rely primarily on natural rainfall",
+        "Use water conservation techniques",
+        "Choose drought-resistant crop varieties",
+        "Time irrigation for critical growth stage",
+        "Use deep watering for root development",
+        "Monitor soil moisture throughout season"
+      ];
+    } else if (freq === 2) {
+      // Low frequency (2 times per season)
+      category = "Low Frequency";
+      method = "Flood irrigation or furrow irrigation";
+      waterRequirement = "80-120 mm per session";
+      timing = "Early morning or evening";
+      tips = [
+        "Deep watering for root development",
+        "Use organic mulch to retain moisture",
+        "Monitor weather patterns",
+        "Irrigate during critical growth stages",
+        "Check soil moisture before each irrigation",
+        "Plan irrigation around rainfall events"
+      ];
+    } else if (freq === 3) {
+      // Medium-low frequency (3 times per season)
+      category = "Medium-Low Frequency";
+      method = "Flood irrigation or furrow irrigation";
+      waterRequirement = "60-90 mm per session";
+      timing = "Early morning or evening";
+      tips = [
+        "Regular irrigation schedule",
+        "Use soil moisture monitoring",
+        "Adjust based on weather conditions",
+        "Deep watering for root development",
+        "Use efficient irrigation methods",
+        "Monitor plant health regularly"
+      ];
+    } else if (freq === 4) {
+      // Medium frequency (4 times per season)
+      category = "Medium Frequency";
+      method = "Sprinkler or furrow irrigation";
+      waterRequirement = "40-70 mm per session";
+      timing = "Early morning or evening";
+      tips = [
+        "Regular irrigation schedule",
+        "Use soil moisture sensors",
+        "Adjust based on weather conditions",
+        "Monitor plant health regularly",
+        "Use efficient irrigation methods",
+        "Plan irrigation around crop growth stages"
+      ];
+    } else {
+      // High frequency (5 times per season)
+      category = "High Frequency";
+      method = "Sprinkler or drip irrigation";
+      waterRequirement = "30-50 mm per session";
+      timing = "Early morning";
+      tips = [
+        "Frequent irrigation schedule",
+        "Use drip irrigation for efficiency",
+        "Monitor soil moisture regularly",
+        "Avoid over-irrigation",
+        "Use mulch to retain moisture",
+        "Consider automated irrigation systems"
+      ];
+    }
 
-    return irrigationMap[frequency] || irrigationMap.weekly;
+    return {
+      frequency: `${freq} times per season (${category})`,
+      method: method,
+      waterRequirement: waterRequirement,
+      timing: timing,
+      tips: tips
+    };
   }
 
   /**

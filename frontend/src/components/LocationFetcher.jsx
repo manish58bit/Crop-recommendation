@@ -130,7 +130,7 @@ const LocationFetcher = ({
       
       {showCoordinates && currentLocation && (
         <div className="text-xs text-gray-500">
-          {currentLocation.latitude?.toFixed(4)}, {currentLocation.longitude?.toFixed(4)}
+          {Number(currentLocation.latitude || 0).toFixed(4)}, {Number(currentLocation.longitude || 0).toFixed(4)}
         </div>
       )}
       

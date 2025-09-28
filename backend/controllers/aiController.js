@@ -43,8 +43,8 @@ const getAIConfig = async (req, res) => {
           weatherIntegration: true,
           fallbackMode: true
         },
-        supportedSoilTypes: ['clay', 'sandy', 'loamy', 'silty', 'peaty', 'chalky'],
-        supportedIrrigationFrequencies: ['daily', 'weekly', 'bi-weekly', 'monthly', 'seasonal']
+        supportedSoilTypes: ['sandy', 'red', 'black', 'loamy', 'laterite', 'alluvial', 'chalky'],
+        supportedIrrigationFrequencies: ['0', '1', '2', '3', '4', '5']
       }
     });
   } catch (error) {
@@ -67,7 +67,7 @@ const testRecommendation = async (req, res) => {
       longitude: 77.2090,
       soilType: 'loamy',
       area: 1.0,
-      irrigationFrequency: 'weekly',
+      irrigationFrequency: '2',
       pastCrops: []
     };
 
