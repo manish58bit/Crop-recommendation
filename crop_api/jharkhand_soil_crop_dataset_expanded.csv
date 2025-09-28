@@ -1,0 +1,481 @@
+plot_id,district,soil_type,irrigation_frequency_per_season,area_acre,possible_crops,latitude,longitude,soil_pH,N_kg_per_ha,P_kg_per_ha,K_kg_per_ha,avg_rainfall_mm,most_preferable_crop,market_price_inr_per_quintal
+RAN0001,Ranchi,Sandy,1,3.58,"pulses,cotton,groundnut,millets",23.4389,85.299,6.02,342,54,56,903,pulses,5000
+RAN0002,Ranchi,Red / lateritic,1,1.96,"pulses,millets,maize,groundnut",23.3104,85.366,5.54,197,74,106,1084,pulses,5000
+RAN0003,Ranchi,Black / regur,1,3.35,"maize,wheat,cotton,soybean",23.3465,85.3201,7.78,254,68,259,972,maize,1700
+RAN0004,Ranchi,Lateritic,1,2.63,"cashew,groundnut,millets,pulses",23.2764,85.252,5.53,136,24,103,1389,cashew,9000
+RAN0005,Ranchi,Loam,3,3.59,"maize,pulses,wheat,rice",23.3682,85.2624,6.4,252,73,67,923,rice,2200
+RAN0006,Ranchi,Loam,1,0.42,"maize,rice,wheat,pulses",23.4071,85.3502,6.51,167,24,86,1183,maize,1700
+RAN0007,Ranchi,Lateritic,1,4.49,"millets,pulses,groundnut,cashew",23.3671,85.359,5.39,288,61,278,1244,millets,2500
+RAN0008,Ranchi,Alluvial,4,2.01,"sugarcane,maize,wheat,rice",23.4415,85.3182,7.1,327,56,169,1266,rice,2200
+RAN0009,Ranchi,Black / regur,3,0.73,"rice,soybean,cotton,wheat",23.3701,85.2394,8.43,263,54,294,905,rice,2200
+RAN0010,Ranchi,Red / lateritic,0,2.07,"maize,groundnut,pulses,millets",23.3202,85.3658,6.1,341,62,113,1215,maize,1700
+RAN0011,Ranchi,Loam,3,3.3,"wheat,pulses,rice,maize",23.2788,85.379,6.23,394,36,222,1205,rice,2200
+RAN0012,Ranchi,Alluvial,3,2.94,"wheat,rice,maize,sugarcane",23.2715,85.4086,7.77,340,38,90,1142,rice,2200
+RAN0013,Ranchi,Red / lateritic,1,0.99,"maize,groundnut,millets,pulses",23.416,85.3761,5.77,237,31,205,1169,maize,1700
+RAN0014,Ranchi,Lateritic,0,7.14,"pulses,millets,groundnut,cashew",23.2575,85.2598,4.99,107,38,280,1486,pulses,5000
+RAN0015,Ranchi,Alluvial,3,4.97,"sugarcane,maize,wheat,rice",23.4007,85.3026,7.39,376,69,134,906,rice,2200
+RAN0016,Ranchi,Alluvial,2,2.81,"rice,maize,sugarcane,wheat",23.4072,85.3838,6.67,218,39,119,1175,wheat,2100
+RAN0017,Ranchi,Red / lateritic,1,0.28,"groundnut,maize,pulses,millets",23.308,85.3662,5.6,141,25,171,1371,groundnut,5500
+RAN0018,Ranchi,Alluvial,2,4.38,"rice,maize,wheat,sugarcane",23.4145,85.4202,6.96,350,66,244,992,wheat,2100
+RAN0019,Ranchi,Sandy,2,4.26,"groundnut,pulses,millets,cotton",23.3718,85.2921,6.34,212,40,154,954,groundnut,5500
+RAN0020,Ranchi,Black / regur,1,9.02,"soybean,cotton,wheat,maize",23.319,85.3406,6.95,178,44,154,948,soybean,4000
+EAS0021,East Singhbhum,Loam,1,1.97,"rice,maize,wheat,pulses",22.8258,86.2728,6.66,290,33,90,1165,rice,2200
+EAS0022,East Singhbhum,Sandy,2,3.99,"cotton,pulses,millets,groundnut",22.7415,86.247,6.98,337,78,170,1366,cotton,6000
+EAS0023,East Singhbhum,Lateritic,1,3.17,"millets,groundnut,cashew,pulses",22.8564,86.2158,5.07,397,29,74,1515,millets,2500
+EAS0024,East Singhbhum,Loam,2,3.99,"maize,rice,wheat,pulses",22.7703,86.1961,6.57,323,31,144,1085,wheat,2100
+EAS0025,East Singhbhum,Loam,3,0.66,"rice,pulses,wheat,maize",22.7695,86.2118,6.33,202,49,50,1393,rice,2200
+EAS0026,East Singhbhum,Lateritic,2,3.59,"pulses,cashew,millets,groundnut",22.8028,86.238,5.93,357,57,241,1431,pulses,5000
+EAS0027,East Singhbhum,Sandy,1,9.53,"groundnut,pulses,millets,cotton",22.7077,86.286,5.93,129,30,256,1138,groundnut,5500
+EAS0028,East Singhbhum,Red / lateritic,0,2.89,"groundnut,millets,pulses,maize",22.8085,86.276,5.43,119,37,227,1394,groundnut,5500
+EAS0029,East Singhbhum,Loam,2,4.88,"rice,wheat,pulses,maize",22.7612,86.2105,7.31,215,80,61,1131,wheat,2100
+EAS0030,East Singhbhum,Alluvial,3,1.3,"wheat,rice,maize,sugarcane",22.7275,86.2375,7.79,336,46,226,957,rice,2200
+EAS0031,East Singhbhum,Alluvial,2,0.73,"wheat,maize,rice,sugarcane",22.7895,86.1832,7.52,376,30,148,1249,wheat,2100
+EAS0032,East Singhbhum,Lateritic,1,4.45,"groundnut,pulses,cashew,millets",22.8351,86.1814,5.5,251,49,50,1440,groundnut,5500
+EAS0033,East Singhbhum,Red / lateritic,1,4.18,"millets,pulses,maize,groundnut",22.689,86.1628,5.17,264,20,77,1302,millets,2500
+EAS0034,East Singhbhum,Red / lateritic,2,0.22,"groundnut,pulses,maize,millets",22.8724,86.2173,5.03,276,63,160,1581,groundnut,5500
+EAS0035,East Singhbhum,Lateritic,0,3.35,"pulses,groundnut,cashew,millets",22.8765,86.2205,5.93,384,77,247,1487,pulses,5000
+EAS0036,East Singhbhum,Lateritic,2,9.92,"groundnut,cashew,pulses,millets",22.8162,86.219,5.45,151,49,246,1073,groundnut,5500
+EAS0037,East Singhbhum,Alluvial,3,4.47,"sugarcane,maize,rice,wheat",22.7052,86.1662,6.92,265,79,59,1389,rice,2200
+EAS0038,East Singhbhum,Alluvial,3,4.52,"wheat,rice,maize,sugarcane",22.743,86.164,6.68,185,70,201,1012,rice,2200
+EAS0039,East Singhbhum,Loam,3,2.37,"maize,pulses,rice,wheat",22.7369,86.2561,6.34,323,32,236,1162,rice,2200
+EAS0040,East Singhbhum,Sandy,0,0.88,"millets,groundnut,pulses,cotton",22.8544,86.1818,6.84,339,76,122,1160,millets,2500
+WES0041,West Singhbhum,Lateritic,0,3.01,"pulses,cashew,groundnut,millets",22.4864,85.8095,5.14,373,36,54,1182,pulses,5000
+WES0042,West Singhbhum,Loam,2,0.28,"pulses,maize,wheat,rice",22.6176,85.9166,6.71,137,58,149,976,wheat,2100
+WES0043,West Singhbhum,Sandy,1,0.82,"pulses,groundnut,cotton,millets",22.6289,85.8355,6.12,341,24,200,1086,pulses,5000
+WES0044,West Singhbhum,Sandy,1,0.21,"millets,groundnut,pulses,cotton",22.5671,85.9022,6.8,255,43,78,1134,millets,2500
+WES0045,West Singhbhum,Red / lateritic,2,2.53,"maize,millets,pulses,groundnut",22.4638,85.851,5.81,215,40,221,1306,maize,1700
+WES0046,West Singhbhum,Alluvial,3,2.99,"wheat,maize,rice,sugarcane",22.4516,85.76,7.46,281,59,103,1109,rice,2200
+WES0047,West Singhbhum,Red / lateritic,1,0.92,"pulses,maize,millets,groundnut",22.4789,85.8607,6.03,339,66,216,1043,pulses,5000
+WES0048,West Singhbhum,Black / regur,1,9.91,"cotton,maize,wheat,soybean",22.5272,85.7323,8.11,167,49,256,1088,cotton,6000
+WES0049,West Singhbhum,Black / regur,1,2.6,"cotton,soybean,wheat,maize",22.5604,85.7763,8.1,132,66,161,1205,cotton,6000
+WES0050,West Singhbhum,Loam,1,4.06,"pulses,maize,wheat,rice",22.4871,85.7881,7.14,310,38,147,1331,pulses,5000
+WES0051,West Singhbhum,Alluvial,2,1.33,"wheat,maize,rice,sugarcane",22.6041,85.8013,7.75,176,54,248,951,wheat,2100
+WES0052,West Singhbhum,Black / regur,2,3.51,"cotton,wheat,maize,soybean",22.6058,85.7292,7.78,126,68,125,1238,wheat,2100
+WES0053,West Singhbhum,Alluvial,4,2.77,"wheat,sugarcane,maize,rice",22.6357,85.7407,6.95,275,44,123,1305,rice,2200
+WES0054,West Singhbhum,Loam,2,2.4,"maize,rice,pulses,wheat",22.5546,85.7521,7.3,207,32,175,1251,wheat,2100
+WES0055,West Singhbhum,Alluvial,3,8.69,"wheat,sugarcane,rice,maize",22.549,85.7424,6.79,327,77,213,963,rice,2200
+WES0056,West Singhbhum,Sandy,2,4.49,"groundnut,cotton,millets,pulses",22.549,85.9017,6.17,324,69,156,1339,groundnut,5500
+WES0057,West Singhbhum,Black / regur,1,4.69,"cotton,maize,wheat,soybean",22.4526,85.7556,6.63,400,39,210,1169,cotton,6000
+WES0058,West Singhbhum,Black / regur,2,7.33,"cotton,maize,soybean,wheat",22.4975,85.8767,7.42,113,52,220,1147,wheat,2100
+WES0059,West Singhbhum,Red / lateritic,2,3.08,"maize,millets,groundnut,pulses",22.4646,85.886,5.31,136,26,175,1571,maize,1700
+WES0060,West Singhbhum,Black / regur,3,2.53,"rice,wheat,cotton,maize",22.4792,85.7683,8.07,287,60,235,1302,rice,2200
+DHA0061,Dhanbad,Alluvial,2,1.75,"wheat,sugarcane,rice,maize",23.8878,86.4807,7.81,211,53,264,1393,wheat,2100
+DHA0062,Dhanbad,Sandy,0,3.59,"pulses,cotton,groundnut,millets",23.7375,86.3879,6.09,211,28,120,1185,pulses,5000
+DHA0063,Dhanbad,Loam,3,2.14,"rice,pulses,wheat,maize",23.7598,86.4476,6.49,194,44,158,920,rice,2200
+DHA0064,Dhanbad,Loam,2,5.63,"rice,wheat,pulses,maize",23.7487,86.4269,6.96,352,60,123,1104,wheat,2100
+DHA0065,Dhanbad,Alluvial,2,0.82,"sugarcane,rice,wheat,maize",23.7683,86.4994,6.63,335,58,267,912,wheat,2100
+DHA0066,Dhanbad,Lateritic,0,2.28,"groundnut,millets,pulses,cashew",23.778,86.4291,4.5,338,60,141,1386,groundnut,5500
+DHA0067,Dhanbad,Lateritic,1,3.8,"millets,groundnut,cashew,pulses",23.817,86.4409,5.08,321,53,278,1324,millets,2500
+DHA0068,Dhanbad,Sandy,0,4.38,"millets,pulses,cotton,groundnut",23.8889,86.3969,6.85,377,49,177,1391,millets,2500
+DHA0069,Dhanbad,Lateritic,1,3.53,"groundnut,cashew,millets,pulses",23.7819,86.3206,5.66,242,37,246,1422,groundnut,5500
+DHA0070,Dhanbad,Loam,1,2.3,"wheat,maize,pulses,rice",23.8348,86.3795,6.09,392,21,140,987,wheat,2100
+DHA0071,Dhanbad,Lateritic,0,4.02,"millets,cashew,pulses,groundnut",23.756,86.4512,5.06,199,66,263,1316,millets,2500
+DHA0072,Dhanbad,Loam,1,5.7,"wheat,pulses,rice,maize",23.8599,86.4963,7.15,284,68,268,1358,wheat,2100
+DHA0073,Dhanbad,Lateritic,0,0.96,"groundnut,pulses,cashew,millets",23.8057,86.3962,4.62,324,53,102,1008,groundnut,5500
+DHA0074,Dhanbad,Sandy,1,3.49,"groundnut,millets,cotton,pulses",23.8217,86.4797,5.85,181,46,261,1123,groundnut,5500
+DHA0075,Dhanbad,Red / lateritic,1,1.61,"groundnut,maize,millets,pulses",23.8087,86.3988,5.48,197,37,87,1040,groundnut,5500
+DHA0076,Dhanbad,Sandy,1,3.35,"cotton,groundnut,pulses,millets",23.719,86.4334,6.25,278,55,262,1274,cotton,6000
+DHA0077,Dhanbad,Lateritic,2,0.96,"pulses,cashew,groundnut,millets",23.7956,86.4231,5.31,397,63,255,1200,pulses,5000
+DHA0078,Dhanbad,Red / lateritic,2,1.0,"millets,groundnut,pulses,maize",23.831,86.3466,6.34,101,49,139,1205,millets,2500
+DHA0079,Dhanbad,Sandy,2,2.75,"millets,pulses,cotton,groundnut",23.8572,86.4459,6.69,252,48,126,1132,millets,2500
+DHA0080,Dhanbad,Sandy,1,2.09,"pulses,groundnut,millets,cotton",23.8027,86.4451,5.68,149,67,221,1366,pulses,5000
+BOK0081,Bokaro,Red / lateritic,1,4.99,"maize,millets,pulses,groundnut",23.6964,85.9792,5.41,121,60,73,1361,maize,1700
+BOK0082,Bokaro,Lateritic,0,4.18,"cashew,pulses,groundnut,millets",23.6839,86.0532,5.14,292,35,62,1089,cashew,9000
+BOK0083,Bokaro,Black / regur,1,2.42,"wheat,maize,soybean,cotton",23.683,85.9868,6.61,270,66,127,1301,wheat,2100
+BOK0084,Bokaro,Red / lateritic,0,5.2,"groundnut,maize,pulses,millets",23.8676,86.0286,5.15,261,69,81,1073,groundnut,5500
+BOK0085,Bokaro,Red / lateritic,1,0.77,"groundnut,pulses,millets,maize",23.6745,86.0635,5.11,225,80,208,1228,groundnut,5500
+BOK0086,Bokaro,Black / regur,1,3.97,"maize,soybean,wheat,cotton",23.7962,86.0502,6.6,179,49,112,985,maize,1700
+BOK0087,Bokaro,Alluvial,3,4.67,"sugarcane,wheat,maize,rice",23.7203,85.8911,6.79,351,39,269,1242,rice,2200
+BOK0088,Bokaro,Red / lateritic,0,4.94,"millets,maize,groundnut,pulses",23.7984,86.0131,5.79,197,35,100,1413,millets,2500
+BOK0089,Bokaro,Red / lateritic,1,0.55,"groundnut,maize,millets,pulses",23.6888,85.9358,5.47,353,76,73,1104,groundnut,5500
+BOK0090,Bokaro,Loam,2,4.35,"wheat,rice,pulses,maize",23.8139,86.0066,6.31,336,32,263,1104,wheat,2100
+BOK0091,Bokaro,Alluvial,2,3.37,"sugarcane,wheat,maize,rice",23.8543,86.0389,6.71,320,77,288,1150,wheat,2100
+BOK0092,Bokaro,Sandy,2,2.17,"pulses,cotton,groundnut,millets",23.7812,86.0336,6.59,363,29,114,962,pulses,5000
+BOK0093,Bokaro,Alluvial,2,9.06,"wheat,sugarcane,maize,rice",23.7987,86.021,7.75,333,55,168,1168,wheat,2100
+BOK0094,Bokaro,Red / lateritic,2,0.33,"millets,maize,groundnut,pulses",23.8501,85.9803,5.99,382,40,208,1564,millets,2500
+BOK0095,Bokaro,Alluvial,2,1.95,"rice,sugarcane,maize,wheat",23.8115,86.0235,7.4,233,63,207,977,wheat,2100
+BOK0096,Bokaro,Lateritic,0,2.99,"millets,cashew,groundnut,pulses",23.7405,86.0624,4.71,122,42,268,1276,millets,2500
+BOK0097,Bokaro,Black / regur,1,2.56,"cotton,wheat,maize,soybean",23.8476,85.9315,8.35,298,25,224,1166,cotton,6000
+BOK0098,Bokaro,Alluvial,3,3.26,"maize,rice,wheat,sugarcane",23.7512,85.9994,6.85,306,56,140,1297,rice,2200
+BOK0099,Bokaro,Sandy,1,0.6,"millets,pulses,groundnut,cotton",23.6701,86.0568,6.74,336,75,249,1172,millets,2500
+BOK0100,Bokaro,Red / lateritic,1,4.09,"groundnut,maize,pulses,millets",23.8112,85.9858,6.03,124,70,87,1017,groundnut,5500
+GIR0101,Giridih,Loam,2,1.84,"rice,wheat,pulses,maize",24.0974,86.3494,7.19,235,35,228,1368,wheat,2100
+GIR0102,Giridih,Loam,2,2.94,"pulses,maize,wheat,rice",24.1197,86.3306,6.63,210,44,219,1256,wheat,2100
+GIR0103,Giridih,Alluvial,4,4.47,"wheat,sugarcane,rice,maize",24.1118,86.3145,6.53,204,57,57,1396,rice,2200
+GIR0104,Giridih,Red / lateritic,1,1.44,"millets,groundnut,maize,pulses",24.1533,86.322,5.26,269,23,132,1278,millets,2500
+GIR0105,Giridih,Sandy,0,1.65,"cotton,groundnut,pulses,millets",24.1607,86.3656,6.27,349,53,188,1132,cotton,6000
+GIR0106,Giridih,Sandy,1,6.83,"cotton,groundnut,millets,pulses",24.1632,86.2613,5.68,182,78,290,1147,cotton,6000
+GIR0107,Giridih,Alluvial,4,2.86,"sugarcane,wheat,rice,maize",24.0892,86.2315,7.42,347,31,181,1186,rice,2200
+GIR0108,Giridih,Red / lateritic,0,3.06,"millets,maize,pulses,groundnut",24.1495,86.2449,5.78,166,20,240,1383,millets,2500
+GIR0109,Giridih,Loam,3,4.22,"wheat,pulses,rice,maize",24.1527,86.2919,6.21,228,31,145,1007,rice,2200
+GIR0110,Giridih,Sandy,0,4.49,"cotton,groundnut,millets,pulses",24.2146,86.3468,6.8,368,50,128,1311,cotton,6000
+GIR0111,Giridih,Loam,3,3.49,"rice,maize,wheat,pulses",24.229,86.3512,6.24,390,31,153,1032,rice,2200
+GIR0112,Giridih,Black / regur,2,6.24,"wheat,soybean,maize,cotton",24.1705,86.2346,6.54,112,48,117,1182,wheat,2100
+GIR0113,Giridih,Sandy,0,2.06,"groundnut,pulses,millets,cotton",24.1975,86.3248,5.62,234,80,131,1295,groundnut,5500
+GIR0114,Giridih,Sandy,0,2.64,"millets,groundnut,cotton,pulses",24.1854,86.2748,5.51,120,43,240,933,millets,2500
+GIR0115,Giridih,Lateritic,0,1.24,"cashew,groundnut,millets,pulses",24.1972,86.2391,4.86,205,71,198,1172,cashew,9000
+GIR0116,Giridih,Lateritic,1,3.11,"millets,pulses,cashew,groundnut",24.1918,86.2908,5.67,107,29,149,1516,millets,2500
+GIR0117,Giridih,Sandy,1,1.99,"cotton,groundnut,millets,pulses",24.163,86.2607,6.15,332,59,283,1221,cotton,6000
+GIR0118,Giridih,Sandy,0,2.07,"pulses,cotton,groundnut,millets",24.1322,86.325,6.67,160,40,234,1270,pulses,5000
+GIR0119,Giridih,Lateritic,0,4.54,"pulses,cashew,millets,groundnut",24.1102,86.3883,4.57,362,30,256,1155,pulses,5000
+GIR0120,Giridih,Loam,3,0.55,"rice,maize,wheat,pulses",24.1402,86.2672,6.65,159,45,145,1097,rice,2200
+HAZ0121,Hazaribagh,Loam,3,3.92,"wheat,rice,pulses,maize",23.9798,85.2737,7.03,400,26,208,1116,rice,2200
+HAZ0122,Hazaribagh,Sandy,1,1.51,"millets,cotton,groundnut,pulses",23.9423,85.3919,6.77,120,61,140,1179,millets,2500
+HAZ0123,Hazaribagh,Alluvial,4,4.52,"wheat,maize,rice,sugarcane",23.8892,85.4203,7.45,324,50,222,1198,rice,2200
+HAZ0124,Hazaribagh,Loam,1,2.97,"wheat,maize,rice,pulses",23.8867,85.4225,6.67,252,77,183,1021,wheat,2100
+HAZ0125,Hazaribagh,Alluvial,3,3.31,"sugarcane,rice,maize,wheat",23.8989,85.3321,6.69,242,44,132,1102,rice,2200
+HAZ0126,Hazaribagh,Alluvial,3,4.8,"wheat,sugarcane,rice,maize",23.9467,85.2769,6.9,361,25,283,1010,rice,2200
+HAZ0127,Hazaribagh,Lateritic,1,4.21,"cashew,millets,pulses,groundnut",24.0008,85.3831,5.54,289,73,292,1022,cashew,9000
+HAZ0128,Hazaribagh,Loam,3,1.29,"pulses,maize,rice,wheat",23.8863,85.4334,7.3,232,34,113,1396,rice,2200
+HAZ0129,Hazaribagh,Sandy,0,4.11,"pulses,cotton,millets,groundnut",24.0134,85.2553,6.85,235,40,67,1000,pulses,5000
+HAZ0130,Hazaribagh,Lateritic,2,1.38,"groundnut,pulses,cashew,millets",23.9998,85.2729,5.2,241,51,143,1382,groundnut,5500
+HAZ0131,Hazaribagh,Sandy,1,7.09,"millets,cotton,pulses,groundnut",23.9646,85.2899,6.74,393,73,200,1348,millets,2500
+HAZ0132,Hazaribagh,Lateritic,2,3.33,"pulses,cashew,millets,groundnut",23.8892,85.3148,4.52,208,47,90,1538,pulses,5000
+HAZ0133,Hazaribagh,Black / regur,1,1.18,"soybean,wheat,maize,cotton",24.0034,85.2561,8.24,196,66,223,1017,soybean,4000
+HAZ0134,Hazaribagh,Black / regur,1,0.97,"wheat,cotton,maize,soybean",23.9134,85.4132,6.87,145,59,126,1025,wheat,2100
+HAZ0135,Hazaribagh,Red / lateritic,1,1.37,"groundnut,pulses,maize,millets",23.8999,85.3537,5.54,400,69,173,1414,groundnut,5500
+HAZ0136,Hazaribagh,Lateritic,0,2.01,"groundnut,cashew,pulses,millets",24.0538,85.3371,4.86,250,59,93,1451,groundnut,5500
+HAZ0137,Hazaribagh,Sandy,0,0.73,"groundnut,cotton,pulses,millets",24.0399,85.3964,5.51,357,47,275,1143,groundnut,5500
+HAZ0138,Hazaribagh,Black / regur,3,2.55,"cotton,soybean,rice,maize",24.0276,85.3605,7.91,231,59,225,1062,rice,2200
+HAZ0139,Hazaribagh,Loam,1,3.98,"wheat,maize,pulses,rice",23.8998,85.4415,6.52,221,30,82,1238,wheat,2100
+HAZ0140,Hazaribagh,Red / lateritic,1,0.84,"maize,pulses,millets,groundnut",23.9602,85.2823,6.46,322,80,250,1544,maize,1700
+RAM0141,Ramgarh,Sandy,0,0.22,"groundnut,pulses,millets,cotton",23.6659,85.5609,6.37,229,41,110,1267,groundnut,5500
+RAM0142,Ramgarh,Black / regur,2,3.39,"maize,cotton,soybean,wheat",23.6584,85.4284,7.85,384,33,252,1273,wheat,2100
+RAM0143,Ramgarh,Alluvial,4,0.54,"rice,maize,sugarcane,wheat",23.5893,85.5354,6.69,140,47,278,1243,rice,2200
+RAM0144,Ramgarh,Loam,2,3.41,"maize,rice,pulses,wheat",23.6682,85.5271,6.23,284,44,96,900,wheat,2100
+RAM0145,Ramgarh,Alluvial,3,4.42,"sugarcane,wheat,rice,maize",23.7048,85.4754,7.76,233,23,60,1147,rice,2200
+RAM0146,Ramgarh,Alluvial,3,0.51,"rice,maize,wheat,sugarcane",23.6059,85.5802,6.85,381,71,195,994,rice,2200
+RAM0147,Ramgarh,Black / regur,1,1.71,"soybean,maize,cotton,wheat",23.5317,85.5217,6.51,240,56,170,994,soybean,4000
+RAM0148,Ramgarh,Alluvial,2,2.12,"wheat,sugarcane,rice,maize",23.5622,85.5235,6.58,238,20,112,963,wheat,2100
+RAM0149,Ramgarh,Alluvial,4,8.89,"sugarcane,rice,wheat,maize",23.5863,85.6137,7.2,375,55,266,1367,rice,2200
+RAM0150,Ramgarh,Sandy,2,1.48,"millets,pulses,cotton,groundnut",23.6505,85.5604,6.28,118,50,157,919,millets,2500
+RAM0151,Ramgarh,Loam,3,3.14,"maize,rice,pulses,wheat",23.6267,85.5028,6.02,394,47,280,1329,rice,2200
+RAM0152,Ramgarh,Lateritic,1,3.44,"pulses,groundnut,millets,cashew",23.5669,85.5651,5.07,352,78,209,1159,pulses,5000
+RAM0153,Ramgarh,Lateritic,1,1.49,"pulses,cashew,groundnut,millets",23.5977,85.5899,5.17,164,69,154,1226,pulses,5000
+RAM0154,Ramgarh,Alluvial,2,2.78,"wheat,sugarcane,rice,maize",23.5618,85.5635,7.37,281,43,218,1201,wheat,2100
+RAM0155,Ramgarh,Sandy,0,3.68,"groundnut,pulses,cotton,millets",23.5756,85.4689,5.96,196,70,54,1016,groundnut,5500
+RAM0156,Ramgarh,Lateritic,1,4.95,"cashew,pulses,groundnut,millets",23.6826,85.5648,4.79,150,74,200,1514,cashew,9000
+RAM0157,Ramgarh,Red / lateritic,0,3.88,"millets,maize,pulses,groundnut",23.7128,85.5836,5.79,109,64,207,1546,millets,2500
+RAM0158,Ramgarh,Loam,2,3.94,"pulses,wheat,rice,maize",23.5424,85.4399,6.31,187,67,103,1101,wheat,2100
+RAM0159,Ramgarh,Lateritic,0,1.11,"millets,groundnut,pulses,cashew",23.68,85.5016,5.35,125,46,175,1194,millets,2500
+RAM0160,Ramgarh,Black / regur,3,1.63,"rice,cotton,maize,wheat",23.6549,85.5506,7.09,228,46,197,1042,rice,2200
+JAM0161,Jamtara,Alluvial,4,3.83,"wheat,maize,sugarcane,rice",23.956,86.876,7.62,387,33,108,1337,rice,2200
+JAM0162,Jamtara,Sandy,1,1.93,"millets,groundnut,pulses,cotton",23.8806,86.757,6.96,278,56,135,1270,millets,2500
+JAM0163,Jamtara,Black / regur,3,7.71,"wheat,cotton,maize,rice",23.997,86.7875,8.16,182,39,206,1381,rice,2200
+JAM0164,Jamtara,Sandy,1,3.58,"cotton,groundnut,millets,pulses",24.0067,86.7551,5.69,180,32,163,1171,cotton,6000
+JAM0165,Jamtara,Lateritic,1,0.62,"cashew,groundnut,pulses,millets",24.0499,86.8594,5.17,210,63,108,1397,cashew,9000
+JAM0166,Jamtara,Black / regur,3,4.87,"soybean,rice,maize,cotton",23.8926,86.7459,7.33,212,65,139,963,rice,2200
+JAM0167,Jamtara,Sandy,1,1.3,"pulses,groundnut,cotton,millets",23.8758,86.7258,5.68,304,61,196,1281,pulses,5000
+JAM0168,Jamtara,Black / regur,2,2.95,"soybean,wheat,cotton,maize",23.9147,86.7462,7.97,187,36,236,933,wheat,2100
+JAM0169,Jamtara,Sandy,0,0.49,"groundnut,cotton,millets,pulses",23.9287,86.8272,5.51,350,54,125,1071,groundnut,5500
+JAM0170,Jamtara,Loam,3,3.11,"wheat,maize,pulses,rice",23.9116,86.8056,6.49,287,23,172,1387,rice,2200
+JAM0171,Jamtara,Black / regur,3,2.19,"soybean,wheat,cotton,rice",23.9313,86.747,7.1,246,66,286,941,rice,2200
+JAM0172,Jamtara,Lateritic,2,4.35,"pulses,cashew,groundnut,millets",23.9943,86.7676,5.33,369,53,139,1017,pulses,5000
+JAM0173,Jamtara,Loam,2,8.8,"maize,wheat,pulses,rice",23.8747,86.8483,6.76,100,22,248,1249,wheat,2100
+JAM0174,Jamtara,Sandy,0,0.51,"cotton,millets,pulses,groundnut",23.9567,86.8454,5.64,319,31,283,1329,cotton,6000
+JAM0175,Jamtara,Lateritic,0,4.56,"groundnut,pulses,millets,cashew",24.033,86.797,5.48,176,40,195,1128,groundnut,5500
+JAM0176,Jamtara,Lateritic,1,0.26,"cashew,millets,pulses,groundnut",23.9593,86.7233,4.98,210,80,278,1312,cashew,9000
+JAM0177,Jamtara,Sandy,1,4.31,"pulses,millets,groundnut,cotton",24.005,86.8592,5.79,152,32,124,1030,pulses,5000
+JAM0178,Jamtara,Alluvial,2,3.02,"sugarcane,rice,wheat,maize",24.015,86.7838,7.23,128,35,271,903,wheat,2100
+JAM0179,Jamtara,Lateritic,1,1.0,"groundnut,millets,pulses,cashew",24.0108,86.7316,4.72,241,32,53,1409,groundnut,5500
+JAM0180,Jamtara,Black / regur,1,4.19,"wheat,soybean,maize,cotton",23.8614,86.8441,7.81,122,55,150,1297,wheat,2100
+DEO0181,Deoghar,Alluvial,3,1.82,"wheat,sugarcane,maize,rice",24.4921,86.6711,7.5,396,62,256,1034,rice,2200
+DEO0182,Deoghar,Sandy,0,0.72,"cotton,pulses,millets,groundnut",24.5261,86.7553,5.78,336,54,84,976,cotton,6000
+DEO0183,Deoghar,Lateritic,2,0.65,"groundnut,pulses,cashew,millets",24.4598,86.7323,4.75,187,30,251,1112,groundnut,5500
+DEO0184,Deoghar,Sandy,2,2.43,"millets,cotton,groundnut,pulses",24.5483,86.6317,5.76,261,71,81,1312,millets,2500
+DEO0185,Deoghar,Sandy,0,1.58,"millets,cotton,pulses,groundnut",24.565,86.7997,5.62,352,71,204,1259,millets,2500
+DEO0186,Deoghar,Lateritic,2,1.81,"pulses,cashew,groundnut,millets",24.5337,86.7418,5.01,354,41,186,1155,pulses,5000
+DEO0187,Deoghar,Lateritic,2,1.02,"groundnut,pulses,cashew,millets",24.54,86.7117,5.81,257,58,126,1200,groundnut,5500
+DEO0188,Deoghar,Red / lateritic,1,3.59,"millets,maize,groundnut,pulses",24.4938,86.7688,6.41,388,79,175,1226,millets,2500
+DEO0189,Deoghar,Loam,2,4.13,"pulses,rice,wheat,maize",24.4827,86.7657,6.31,250,76,177,919,wheat,2100
+DEO0190,Deoghar,Red / lateritic,0,4.51,"millets,maize,pulses,groundnut",24.559,86.6109,6.02,241,33,252,1328,millets,2500
+DEO0191,Deoghar,Red / lateritic,2,0.46,"groundnut,millets,maize,pulses",24.5499,86.7265,6.0,172,56,186,1122,groundnut,5500
+DEO0192,Deoghar,Loam,1,0.24,"rice,pulses,maize,wheat",24.5649,86.7812,6.41,264,74,52,1359,rice,2200
+DEO0193,Deoghar,Alluvial,3,1.1,"rice,sugarcane,maize,wheat",24.453,86.7935,6.81,348,54,114,1228,rice,2200
+DEO0194,Deoghar,Red / lateritic,2,2.22,"groundnut,maize,pulses,millets",24.5569,86.7402,6.08,299,50,81,1084,groundnut,5500
+DEO0195,Deoghar,Sandy,0,0.95,"cotton,millets,pulses,groundnut",24.5375,86.718,6.85,128,41,181,1166,cotton,6000
+DEO0196,Deoghar,Black / regur,3,3.86,"maize,cotton,wheat,rice",24.5755,86.6919,6.53,130,29,146,1146,rice,2200
+DEO0197,Deoghar,Black / regur,2,1.85,"cotton,maize,wheat,soybean",24.5449,86.6386,7.64,380,62,168,1113,wheat,2100
+DEO0198,Deoghar,Sandy,2,4.2,"groundnut,cotton,millets,pulses",24.5617,86.7899,6.23,213,30,260,1010,groundnut,5500
+DEO0199,Deoghar,Alluvial,3,0.63,"rice,wheat,sugarcane,maize",24.5285,86.6939,6.89,278,62,203,1256,rice,2200
+DEO0200,Deoghar,Lateritic,2,3.35,"millets,groundnut,pulses,cashew",24.4632,86.6677,4.99,265,50,299,1383,millets,2500
+DUM0201,Dumka,Alluvial,3,4.65,"wheat,rice,maize,sugarcane",24.1875,87.2531,7.04,283,76,70,1378,rice,2200
+DUM0202,Dumka,Loam,3,4.24,"wheat,maize,rice,pulses",24.3266,87.1649,6.19,248,79,94,1383,rice,2200
+DUM0203,Dumka,Lateritic,1,0.68,"millets,cashew,pulses,groundnut",24.2293,87.1865,5.07,332,33,146,1332,millets,2500
+DUM0204,Dumka,Loam,1,4.64,"rice,pulses,maize,wheat",24.1824,87.2934,6.74,308,43,172,1160,rice,2200
+DUM0205,Dumka,Black / regur,1,1.68,"cotton,soybean,wheat,maize",24.2203,87.2899,7.25,225,27,69,1291,cotton,6000
+DUM0206,Dumka,Loam,2,3.57,"wheat,pulses,rice,maize",24.1886,87.161,7.02,392,31,141,1268,wheat,2100
+DUM0207,Dumka,Sandy,2,2.74,"millets,cotton,groundnut,pulses",24.2591,87.2734,5.55,225,31,117,1070,millets,2500
+DUM0208,Dumka,Alluvial,4,9.97,"rice,wheat,maize,sugarcane",24.3439,87.2533,7.39,141,68,102,1224,rice,2200
+DUM0209,Dumka,Sandy,2,0.88,"cotton,millets,groundnut,pulses",24.2077,87.1703,6.49,384,33,210,1063,cotton,6000
+DUM0210,Dumka,Red / lateritic,2,3.31,"groundnut,pulses,millets,maize",24.2727,87.2817,5.8,197,33,208,1231,groundnut,5500
+DUM0211,Dumka,Red / lateritic,0,1.81,"millets,pulses,groundnut,maize",24.3688,87.2275,5.95,322,77,240,1322,millets,2500
+DUM0212,Dumka,Sandy,2,2.33,"groundnut,millets,pulses,cotton",24.2487,87.3345,6.93,166,59,158,1131,groundnut,5500
+DUM0213,Dumka,Black / regur,2,4.85,"soybean,wheat,cotton,maize",24.276,87.2759,7.51,334,64,271,1052,wheat,2100
+DUM0214,Dumka,Loam,3,1.01,"wheat,rice,pulses,maize",24.3095,87.3495,6.81,382,65,199,1321,rice,2200
+DUM0215,Dumka,Red / lateritic,0,3.76,"groundnut,millets,maize,pulses",24.2436,87.257,5.3,251,38,198,1331,groundnut,5500
+DUM0216,Dumka,Sandy,1,3.7,"pulses,groundnut,millets,cotton",24.3404,87.3205,5.66,325,49,147,1306,pulses,5000
+DUM0217,Dumka,Lateritic,2,0.25,"pulses,cashew,groundnut,millets",24.2022,87.2023,5.02,311,73,98,1013,pulses,5000
+DUM0218,Dumka,Alluvial,2,0.92,"wheat,maize,sugarcane,rice",24.2537,87.3125,7.24,143,70,246,1046,wheat,2100
+DUM0219,Dumka,Black / regur,2,0.46,"maize,soybean,wheat,cotton",24.273,87.1597,8.42,129,78,190,1176,wheat,2100
+DUM0220,Dumka,Loam,3,4.75,"wheat,maize,rice,pulses",24.3283,87.2257,6.71,147,42,85,940,rice,2200
+PAK0221,Pakur,Red / lateritic,1,4.04,"millets,pulses,groundnut,maize",24.5771,87.9407,5.75,306,77,123,1186,millets,2500
+PAK0222,Pakur,Lateritic,1,3.38,"cashew,millets,pulses,groundnut",24.5688,87.8152,5.81,338,63,215,1194,cashew,9000
+PAK0223,Pakur,Red / lateritic,1,4.95,"maize,pulses,millets,groundnut",24.651,87.8677,5.69,186,24,277,1465,maize,1700
+PAK0224,Pakur,Alluvial,2,9.56,"rice,wheat,sugarcane,maize",24.7165,87.7755,7.01,318,68,225,1280,wheat,2100
+PAK0225,Pakur,Loam,2,2.75,"pulses,wheat,maize,rice",24.5615,87.7863,7.2,227,75,200,1337,wheat,2100
+PAK0226,Pakur,Alluvial,3,0.77,"sugarcane,wheat,rice,maize",24.6133,87.9077,6.77,135,60,240,1064,rice,2200
+PAK0227,Pakur,Alluvial,4,1.95,"maize,rice,wheat,sugarcane",24.6129,87.9281,6.9,118,66,192,981,rice,2200
+PAK0228,Pakur,Black / regur,2,1.85,"wheat,cotton,soybean,maize",24.652,87.7982,6.64,109,72,81,1117,wheat,2100
+PAK0229,Pakur,Alluvial,4,0.81,"sugarcane,rice,maize,wheat",24.5325,87.8272,6.64,114,73,206,1378,rice,2200
+PAK0230,Pakur,Sandy,1,2.04,"groundnut,cotton,millets,pulses",24.6728,87.8574,6.7,149,57,146,1257,groundnut,5500
+PAK0231,Pakur,Sandy,2,4.92,"millets,groundnut,cotton,pulses",24.6873,87.9155,6.62,220,58,222,1090,millets,2500
+PAK0232,Pakur,Sandy,1,3.32,"cotton,pulses,groundnut,millets",24.721,87.7607,6.97,260,23,50,1096,cotton,6000
+PAK0233,Pakur,Loam,3,1.31,"pulses,wheat,rice,maize",24.7022,87.9147,7.45,385,40,160,974,rice,2200
+PAK0234,Pakur,Red / lateritic,1,2.51,"millets,pulses,maize,groundnut",24.7113,87.843,5.17,232,56,111,1446,millets,2500
+PAK0235,Pakur,Red / lateritic,2,3.22,"pulses,millets,groundnut,maize",24.5831,87.8294,5.06,104,55,236,1116,pulses,5000
+PAK0236,Pakur,Black / regur,3,4.9,"wheat,maize,cotton,rice",24.7086,87.9241,7.85,316,52,202,1382,rice,2200
+PAK0237,Pakur,Lateritic,1,0.98,"groundnut,pulses,millets,cashew",24.7092,87.8264,5.94,330,42,181,1321,groundnut,5500
+PAK0238,Pakur,Loam,3,2.8,"maize,wheat,rice,pulses",24.7061,87.931,6.68,121,80,240,1043,rice,2200
+PAK0239,Pakur,Red / lateritic,0,3.69,"maize,pulses,groundnut,millets",24.608,87.9267,5.47,340,68,239,1317,maize,1700
+PAK0240,Pakur,Red / lateritic,0,2.58,"maize,groundnut,millets,pulses",24.532,87.9348,5.73,173,32,274,1396,maize,1700
+GOD0241,Godda,Sandy,2,9.34,"pulses,cotton,millets,groundnut",24.9117,87.2818,6.78,133,50,285,1392,pulses,5000
+GOD0242,Godda,Sandy,0,4.65,"millets,pulses,groundnut,cotton",24.8551,87.2097,6.78,205,56,210,1398,millets,2500
+GOD0243,Godda,Alluvial,4,8.86,"wheat,maize,sugarcane,rice",24.904,87.2237,7.42,190,40,297,1194,rice,2200
+GOD0244,Godda,Loam,2,6.04,"pulses,rice,wheat,maize",24.8019,87.3085,6.83,354,27,90,1245,wheat,2100
+GOD0245,Godda,Sandy,0,3.63,"pulses,millets,groundnut,cotton",24.8124,87.1784,6.27,201,43,227,1198,pulses,5000
+GOD0246,Godda,Lateritic,2,4.86,"millets,pulses,groundnut,cashew",24.7557,87.2057,4.91,371,37,260,1560,millets,2500
+GOD0247,Godda,Loam,3,0.74,"maize,rice,wheat,pulses",24.8074,87.3071,6.85,286,68,72,1309,rice,2200
+GOD0248,Godda,Black / regur,1,3.14,"soybean,cotton,maize,wheat",24.9197,87.2368,7.36,286,76,227,1227,soybean,4000
+GOD0249,Godda,Loam,1,1.17,"wheat,pulses,rice,maize",24.7414,87.1261,6.14,293,77,199,1272,wheat,2100
+GOD0250,Godda,Sandy,2,1.29,"pulses,cotton,millets,groundnut",24.8986,87.292,6.91,155,58,118,1303,pulses,5000
+GOD0251,Godda,Sandy,2,0.53,"pulses,groundnut,millets,cotton",24.9254,87.2571,6.91,299,40,146,1354,pulses,5000
+GOD0252,Godda,Sandy,1,4.33,"groundnut,millets,cotton,pulses",24.769,87.2033,6.12,258,70,178,1119,groundnut,5500
+GOD0253,Godda,Lateritic,2,3.79,"pulses,cashew,millets,groundnut",24.9166,87.3051,5.77,205,78,268,1560,pulses,5000
+GOD0254,Godda,Red / lateritic,0,3.55,"groundnut,pulses,maize,millets",24.793,87.2791,5.53,369,39,274,1056,groundnut,5500
+GOD0255,Godda,Red / lateritic,1,1.87,"millets,maize,groundnut,pulses",24.8643,87.2336,5.73,110,37,178,1480,millets,2500
+GOD0256,Godda,Red / lateritic,1,3.97,"pulses,groundnut,maize,millets",24.8826,87.3055,5.36,305,45,222,1505,pulses,5000
+GOD0257,Godda,Alluvial,4,0.72,"sugarcane,rice,wheat,maize",24.854,87.1271,7.08,218,20,300,903,rice,2200
+GOD0258,Godda,Lateritic,0,3.62,"millets,groundnut,cashew,pulses",24.8847,87.2655,5.27,228,34,113,1514,millets,2500
+GOD0259,Godda,Sandy,0,9.41,"groundnut,pulses,cotton,millets",24.7624,87.1566,6.3,252,47,231,1037,groundnut,5500
+GOD0260,Godda,Loam,3,1.91,"pulses,rice,wheat,maize",24.8147,87.141,6.89,145,73,227,1174,rice,2200
+SAH0261,Sahebganj,Black / regur,3,1.87,"soybean,rice,maize,cotton",25.3132,87.7123,7.66,375,37,245,1174,rice,2200
+SAH0262,Sahebganj,Sandy,2,3.46,"millets,pulses,groundnut,cotton",25.1814,87.724,6.74,122,43,121,1322,millets,2500
+SAH0263,Sahebganj,Alluvial,2,1.66,"wheat,sugarcane,rice,maize",25.1619,87.5841,7.9,141,79,261,1196,wheat,2100
+SAH0264,Sahebganj,Sandy,1,1.59,"groundnut,pulses,millets,cotton",25.2235,87.6372,6.61,304,62,196,1068,groundnut,5500
+SAH0265,Sahebganj,Loam,3,2.97,"rice,pulses,maize,wheat",25.3364,87.7132,6.12,393,74,186,947,rice,2200
+SAH0266,Sahebganj,Red / lateritic,0,1.04,"millets,pulses,groundnut,maize",25.2183,87.5652,5.94,313,26,70,1143,millets,2500
+SAH0267,Sahebganj,Alluvial,4,3.81,"sugarcane,rice,maize,wheat",25.3427,87.6898,6.68,303,34,181,1024,rice,2200
+SAH0268,Sahebganj,Loam,3,5.46,"maize,wheat,pulses,rice",25.341,87.6903,6.98,113,59,268,947,rice,2200
+SAH0269,Sahebganj,Loam,2,0.31,"wheat,maize,rice,pulses",25.1762,87.7162,6.78,251,54,100,1102,wheat,2100
+SAH0270,Sahebganj,Lateritic,1,3.6,"groundnut,millets,cashew,pulses",25.2752,87.609,5.59,390,45,146,1196,groundnut,5500
+SAH0271,Sahebganj,Loam,3,0.27,"rice,maize,pulses,wheat",25.2478,87.5903,7.18,258,75,58,980,rice,2200
+SAH0272,Sahebganj,Alluvial,2,3.59,"maize,rice,sugarcane,wheat",25.1867,87.6845,7.77,120,70,91,1231,wheat,2100
+SAH0273,Sahebganj,Black / regur,2,2.0,"soybean,maize,cotton,wheat",25.2306,87.7236,7.85,272,53,114,1218,wheat,2100
+SAH0274,Sahebganj,Red / lateritic,2,2.4,"groundnut,millets,pulses,maize",25.3486,87.7092,5.8,231,53,142,1252,groundnut,5500
+SAH0275,Sahebganj,Lateritic,2,4.1,"cashew,pulses,millets,groundnut",25.1708,87.5809,4.64,349,62,60,1275,cashew,9000
+SAH0276,Sahebganj,Sandy,2,3.66,"pulses,millets,cotton,groundnut",25.1993,87.6277,6.89,321,30,175,952,pulses,5000
+SAH0277,Sahebganj,Lateritic,2,3.52,"groundnut,millets,pulses,cashew",25.186,87.6639,4.85,230,63,281,1556,groundnut,5500
+SAH0278,Sahebganj,Alluvial,4,1.74,"maize,wheat,sugarcane,rice",25.3025,87.7324,7.76,371,36,163,982,rice,2200
+SAH0279,Sahebganj,Alluvial,4,8.42,"maize,wheat,sugarcane,rice",25.3111,87.5871,6.57,198,76,169,1314,rice,2200
+SAH0280,Sahebganj,Alluvial,3,2.05,"wheat,maize,rice,sugarcane",25.1889,87.6694,7.93,193,63,251,989,rice,2200
+LOH0281,Lohardaga,Black / regur,3,4.98,"rice,wheat,soybean,maize",23.4886,84.5828,7.12,210,24,80,1310,rice,2200
+LOH0282,Lohardaga,Red / lateritic,0,3.3,"groundnut,millets,pulses,maize",23.3605,84.5972,6.21,206,76,111,1416,groundnut,5500
+LOH0283,Lohardaga,Lateritic,2,4.43,"millets,cashew,pulses,groundnut",23.37,84.5869,5.05,141,45,123,1309,millets,2500
+LOH0284,Lohardaga,Lateritic,0,3.06,"millets,groundnut,cashew,pulses",23.4257,84.698,4.51,366,54,215,1438,millets,2500
+LOH0285,Lohardaga,Loam,1,3.83,"wheat,maize,rice,pulses",23.4291,84.6542,6.3,218,37,250,1075,wheat,2100
+LOH0286,Lohardaga,Red / lateritic,1,4.2,"maize,pulses,groundnut,millets",23.4818,84.5962,5.75,304,79,284,1099,maize,1700
+LOH0287,Lohardaga,Black / regur,2,3.7,"soybean,cotton,maize,wheat",23.4187,84.7498,8.4,361,31,63,912,wheat,2100
+LOH0288,Lohardaga,Sandy,1,3.01,"cotton,millets,pulses,groundnut",23.443,84.7084,5.62,204,79,193,1246,cotton,6000
+LOH0289,Lohardaga,Alluvial,3,0.51,"rice,sugarcane,wheat,maize",23.4984,84.7733,7.08,138,41,240,974,rice,2200
+LOH0290,Lohardaga,Sandy,2,3.96,"groundnut,cotton,pulses,millets",23.3875,84.5828,6.54,233,39,174,1364,groundnut,5500
+LOH0291,Lohardaga,Loam,1,2.54,"wheat,maize,pulses,rice",23.4439,84.759,7.25,165,40,281,999,wheat,2100
+LOH0292,Lohardaga,Black / regur,1,2.81,"soybean,cotton,maize,wheat",23.3352,84.5914,8.39,316,33,185,1095,soybean,4000
+LOH0293,Lohardaga,Alluvial,2,4.92,"sugarcane,wheat,rice,maize",23.4947,84.6483,7.3,130,77,238,1343,wheat,2100
+LOH0294,Lohardaga,Lateritic,2,8.89,"pulses,millets,cashew,groundnut",23.414,84.7582,5.41,289,31,184,1509,pulses,5000
+LOH0295,Lohardaga,Loam,2,3.0,"wheat,pulses,maize,rice",23.3986,84.7394,6.25,249,46,258,1271,wheat,2100
+LOH0296,Lohardaga,Lateritic,2,2.38,"cashew,millets,pulses,groundnut",23.3774,84.7038,5.16,213,20,142,1550,cashew,9000
+LOH0297,Lohardaga,Red / lateritic,1,1.6,"pulses,maize,millets,groundnut",23.4075,84.6991,6.42,143,47,268,1019,pulses,5000
+LOH0298,Lohardaga,Red / lateritic,2,3.34,"pulses,millets,groundnut,maize",23.4297,84.7425,5.36,129,71,214,1098,pulses,5000
+LOH0299,Lohardaga,Loam,1,4.59,"rice,pulses,wheat,maize",23.4109,84.6911,6.89,113,33,237,936,rice,2200
+LOH0300,Lohardaga,Sandy,2,4.81,"millets,pulses,cotton,groundnut",23.3691,84.7118,6.13,258,23,155,1119,millets,2500
+GUM0301,Gumla,Black / regur,2,3.06,"wheat,maize,cotton,soybean",23.0091,84.5546,7.58,236,80,244,1316,wheat,2100
+GUM0302,Gumla,Red / lateritic,2,2.43,"groundnut,maize,millets,pulses",23.0985,84.5609,5.95,390,33,277,1045,groundnut,5500
+GUM0303,Gumla,Lateritic,0,4.93,"cashew,pulses,millets,groundnut",23.0867,84.4858,5.69,280,61,177,1274,cashew,9000
+GUM0304,Gumla,Red / lateritic,0,2.16,"pulses,groundnut,maize,millets",22.9732,84.5359,5.66,346,69,199,1337,pulses,5000
+GUM0305,Gumla,Alluvial,3,3.29,"rice,wheat,maize,sugarcane",23.0102,84.4615,6.78,270,50,122,974,rice,2200
+GUM0306,Gumla,Lateritic,1,0.48,"cashew,groundnut,pulses,millets",22.9976,84.6497,5.56,384,37,193,1045,cashew,9000
+GUM0307,Gumla,Loam,2,7.62,"wheat,pulses,rice,maize",22.9761,84.482,6.4,167,30,166,1320,wheat,2100
+GUM0308,Gumla,Black / regur,3,1.98,"wheat,maize,rice,soybean",22.9893,84.5522,8.41,312,41,182,1034,rice,2200
+GUM0309,Gumla,Sandy,0,7.89,"millets,cotton,groundnut,pulses",22.9789,84.6234,6.39,350,33,198,904,millets,2500
+GUM0310,Gumla,Sandy,1,3.84,"pulses,cotton,millets,groundnut",23.1199,84.5884,6.13,301,63,79,973,pulses,5000
+GUM0311,Gumla,Alluvial,4,0.29,"rice,wheat,maize,sugarcane",23.0539,84.4682,7.66,378,59,297,1171,rice,2200
+GUM0312,Gumla,Lateritic,1,0.94,"cashew,pulses,millets,groundnut",22.9929,84.6247,5.21,289,67,200,1461,cashew,9000
+GUM0313,Gumla,Black / regur,3,2.12,"soybean,wheat,cotton,rice",23.0372,84.4735,7.37,293,44,238,962,rice,2200
+GUM0314,Gumla,Black / regur,1,4.14,"cotton,wheat,soybean,maize",22.9899,84.5474,7.43,395,68,182,1234,cotton,6000
+GUM0315,Gumla,Black / regur,2,1.47,"soybean,maize,cotton,wheat",23.1291,84.6457,6.56,151,46,183,1114,wheat,2100
+GUM0316,Gumla,Lateritic,0,3.38,"cashew,groundnut,pulses,millets",23.0338,84.4589,5.43,152,62,242,1583,cashew,9000
+GUM0317,Gumla,Alluvial,4,1.09,"wheat,sugarcane,maize,rice",22.9899,84.6397,7.0,219,28,111,1132,rice,2200
+GUM0318,Gumla,Sandy,0,0.28,"pulses,millets,cotton,groundnut",23.0835,84.6459,6.14,122,60,187,1349,pulses,5000
+GUM0319,Gumla,Red / lateritic,0,0.53,"pulses,maize,millets,groundnut",23.1396,84.5809,6.19,139,64,289,1039,pulses,5000
+GUM0320,Gumla,Black / regur,2,8.38,"cotton,maize,soybean,wheat",22.9745,84.6364,7.46,288,73,248,1244,wheat,2100
+SIM0321,Simdega,Lateritic,0,0.68,"cashew,pulses,groundnut,millets",22.6359,84.4174,4.58,284,35,208,1148,cashew,9000
+SIM0322,Simdega,Alluvial,3,1.03,"wheat,maize,rice,sugarcane",22.7079,84.5931,7.3,154,60,73,1336,rice,2200
+SIM0323,Simdega,Lateritic,1,2.15,"millets,pulses,cashew,groundnut",22.5403,84.4322,5.73,267,42,236,1456,millets,2500
+SIM0324,Simdega,Sandy,1,0.46,"millets,groundnut,pulses,cotton",22.6938,84.4361,6.1,159,37,53,1019,millets,2500
+SIM0325,Simdega,Sandy,0,1.39,"pulses,groundnut,cotton,millets",22.55,84.5283,6.29,339,41,181,937,pulses,5000
+SIM0326,Simdega,Black / regur,2,6.78,"soybean,cotton,wheat,maize",22.6336,84.4664,7.22,156,48,80,1097,wheat,2100
+SIM0327,Simdega,Sandy,0,1.72,"groundnut,pulses,millets,cotton",22.5372,84.4455,5.56,315,78,82,1344,groundnut,5500
+SIM0328,Simdega,Lateritic,2,0.58,"pulses,cashew,millets,groundnut",22.6572,84.5474,5.75,226,45,219,1510,pulses,5000
+SIM0329,Simdega,Lateritic,2,2.43,"millets,cashew,groundnut,pulses",22.6242,84.5468,5.77,144,31,280,1057,millets,2500
+SIM0330,Simdega,Lateritic,1,1.35,"millets,groundnut,pulses,cashew",22.5532,84.4059,5.36,356,28,288,1360,millets,2500
+SIM0331,Simdega,Alluvial,3,2.16,"rice,maize,wheat,sugarcane",22.615,84.4574,7.05,276,32,237,911,rice,2200
+SIM0332,Simdega,Sandy,0,2.91,"pulses,groundnut,millets,cotton",22.6902,84.5122,6.93,332,73,50,939,pulses,5000
+SIM0333,Simdega,Black / regur,1,2.04,"wheat,soybean,cotton,maize",22.6132,84.5595,8.34,215,51,253,1183,wheat,2100
+SIM0334,Simdega,Red / lateritic,0,3.59,"millets,pulses,groundnut,maize",22.7074,84.4596,5.98,370,28,270,1512,millets,2500
+SIM0335,Simdega,Red / lateritic,1,4.74,"millets,pulses,maize,groundnut",22.6197,84.4087,5.9,234,45,101,1598,millets,2500
+SIM0336,Simdega,Red / lateritic,2,1.0,"groundnut,maize,millets,pulses",22.6177,84.5755,6.18,281,29,199,1113,groundnut,5500
+SIM0337,Simdega,Lateritic,2,3.55,"millets,groundnut,cashew,pulses",22.5637,84.4735,4.91,166,66,55,1558,millets,2500
+SIM0338,Simdega,Alluvial,2,1.01,"rice,maize,sugarcane,wheat",22.6008,84.4442,7.88,377,58,235,1382,wheat,2100
+SIM0339,Simdega,Alluvial,4,1.27,"rice,wheat,maize,sugarcane",22.5441,84.4754,7.0,191,59,99,1226,rice,2200
+SIM0340,Simdega,Lateritic,0,3.57,"groundnut,cashew,millets,pulses",22.606,84.5219,5.51,113,26,227,1062,groundnut,5500
+KHU0341,Khunti,Sandy,2,2.62,"cotton,groundnut,pulses,millets",22.9875,85.2499,6.53,322,69,179,1347,cotton,6000
+KHU0342,Khunti,Alluvial,4,3.65,"rice,wheat,maize,sugarcane",23.1401,85.2832,6.73,269,47,294,1376,rice,2200
+KHU0343,Khunti,Red / lateritic,0,1.43,"millets,maize,pulses,groundnut",23.0782,85.3375,6.32,173,38,118,1560,millets,2500
+KHU0344,Khunti,Lateritic,1,1.65,"pulses,cashew,groundnut,millets",23.035,85.3078,4.52,305,57,161,1511,pulses,5000
+KHU0345,Khunti,Sandy,0,7.43,"groundnut,cotton,pulses,millets",23.1108,85.2962,6.82,132,79,299,1210,groundnut,5500
+KHU0346,Khunti,Loam,3,4.36,"maize,pulses,rice,wheat",23.1,85.3114,6.8,127,65,159,1122,rice,2200
+KHU0347,Khunti,Black / regur,1,4.4,"soybean,wheat,cotton,maize",23.0339,85.3738,7.83,391,34,137,1140,soybean,4000
+KHU0348,Khunti,Lateritic,1,2.08,"groundnut,cashew,pulses,millets",23.0253,85.2907,5.2,399,22,58,1190,groundnut,5500
+KHU0349,Khunti,Loam,3,1.81,"maize,wheat,rice,pulses",23.0028,85.3172,7.04,138,55,65,928,rice,2200
+KHU0350,Khunti,Alluvial,3,7.29,"wheat,sugarcane,rice,maize",23.0332,85.337,7.54,399,60,170,1205,rice,2200
+KHU0351,Khunti,Loam,1,0.58,"wheat,rice,pulses,maize",23.0462,85.2344,7.39,251,65,164,1361,wheat,2100
+KHU0352,Khunti,Sandy,2,1.77,"millets,groundnut,cotton,pulses",23.0166,85.3391,6.09,342,45,59,1092,millets,2500
+KHU0353,Khunti,Lateritic,2,3.89,"groundnut,pulses,millets,cashew",23.009,85.2631,5.46,116,69,251,1094,groundnut,5500
+KHU0354,Khunti,Sandy,2,4.02,"groundnut,cotton,pulses,millets",23.0526,85.334,6.78,399,61,270,1011,groundnut,5500
+KHU0355,Khunti,Lateritic,0,4.3,"millets,cashew,groundnut,pulses",23.0182,85.3122,4.69,202,47,204,1129,millets,2500
+KHU0356,Khunti,Alluvial,4,4.43,"sugarcane,rice,wheat,maize",23.0035,85.242,7.13,201,49,286,1304,rice,2200
+KHU0357,Khunti,Sandy,2,0.59,"pulses,groundnut,cotton,millets",23.0168,85.3169,6.18,331,77,275,1387,pulses,5000
+KHU0358,Khunti,Sandy,1,0.41,"pulses,millets,groundnut,cotton",23.0829,85.2396,6.81,375,34,282,1245,pulses,5000
+KHU0359,Khunti,Alluvial,2,4.32,"sugarcane,wheat,maize,rice",23.0925,85.3558,7.44,157,79,133,1016,wheat,2100
+KHU0360,Khunti,Sandy,1,9.72,"cotton,pulses,groundnut,millets",23.0063,85.369,6.96,342,74,204,1089,cotton,6000
+LAT0361,Latehar,Lateritic,0,4.36,"groundnut,millets,pulses,cashew",23.7297,84.4104,4.89,257,23,200,1147,groundnut,5500
+LAT0362,Latehar,Red / lateritic,0,0.39,"maize,millets,pulses,groundnut",23.8271,84.5931,5.21,105,22,106,1152,maize,1700
+LAT0363,Latehar,Red / lateritic,2,2.03,"pulses,groundnut,millets,maize",23.6876,84.5369,5.58,295,39,75,1205,pulses,5000
+LAT0364,Latehar,Loam,1,3.78,"rice,wheat,maize,pulses",23.806,84.5009,6.37,169,65,284,1340,rice,2200
+LAT0365,Latehar,Loam,1,4.69,"wheat,rice,maize,pulses",23.6875,84.5785,6.81,364,41,243,1011,wheat,2100
+LAT0366,Latehar,Lateritic,0,2.89,"millets,groundnut,cashew,pulses",23.7374,84.5001,4.53,351,47,102,1180,millets,2500
+LAT0367,Latehar,Red / lateritic,1,2.83,"pulses,maize,millets,groundnut",23.674,84.4513,5.38,247,49,134,1269,pulses,5000
+LAT0368,Latehar,Black / regur,1,2.63,"cotton,maize,wheat,soybean",23.7809,84.5193,7.77,370,24,116,1333,cotton,6000
+LAT0369,Latehar,Black / regur,3,8.21,"soybean,cotton,maize,rice",23.6648,84.4973,7.97,147,59,171,901,rice,2200
+LAT0370,Latehar,Red / lateritic,0,9.8,"groundnut,millets,pulses,maize",23.6612,84.4574,5.62,373,63,165,1194,groundnut,5500
+LAT0371,Latehar,Loam,2,1.01,"wheat,rice,pulses,maize",23.7346,84.5655,6.92,363,76,120,1121,wheat,2100
+LAT0372,Latehar,Red / lateritic,0,2.98,"groundnut,millets,maize,pulses",23.7856,84.4033,5.19,116,57,141,1103,groundnut,5500
+LAT0373,Latehar,Lateritic,0,4.81,"millets,cashew,pulses,groundnut",23.7965,84.5808,4.76,109,73,129,1175,millets,2500
+LAT0374,Latehar,Lateritic,2,4.58,"millets,cashew,groundnut,pulses",23.7427,84.4311,4.9,324,68,220,1417,millets,2500
+LAT0375,Latehar,Black / regur,2,8.73,"maize,wheat,cotton,soybean",23.6523,84.425,7.69,156,53,255,1160,wheat,2100
+LAT0376,Latehar,Sandy,2,2.55,"cotton,millets,groundnut,pulses",23.6763,84.509,6.54,240,21,289,1202,cotton,6000
+LAT0377,Latehar,Sandy,0,0.33,"pulses,millets,groundnut,cotton",23.6892,84.5916,6.99,294,48,106,1091,pulses,5000
+LAT0378,Latehar,Black / regur,3,1.31,"cotton,maize,rice,wheat",23.7499,84.4197,6.72,368,76,145,1299,rice,2200
+LAT0379,Latehar,Red / lateritic,0,0.61,"maize,millets,pulses,groundnut",23.7683,84.4044,6.04,369,55,287,1431,maize,1700
+LAT0380,Latehar,Red / lateritic,1,2.51,"maize,millets,pulses,groundnut",23.809,84.418,5.13,344,25,271,1217,maize,1700
+PAL0381,Palamu,Sandy,1,3.98,"pulses,groundnut,millets,cotton",24.0662,84.202,5.58,182,25,254,1283,pulses,5000
+PAL0382,Palamu,Sandy,0,4.71,"pulses,groundnut,cotton,millets",23.9915,84.1097,6.87,150,64,106,1400,pulses,5000
+PAL0383,Palamu,Loam,2,2.07,"wheat,pulses,maize,rice",24.0186,84.1572,7.49,254,79,189,965,wheat,2100
+PAL0384,Palamu,Sandy,2,2.67,"pulses,groundnut,cotton,millets",24.0848,84.157,5.99,361,46,193,1062,pulses,5000
+PAL0385,Palamu,Sandy,2,4.24,"groundnut,millets,pulses,cotton",24.1626,84.0767,6.27,357,76,246,1357,groundnut,5500
+PAL0386,Palamu,Lateritic,2,4.27,"millets,cashew,pulses,groundnut",24.0745,84.1622,5.32,293,26,187,1346,millets,2500
+PAL0387,Palamu,Black / regur,2,2.72,"maize,cotton,wheat,soybean",24.1031,84.1814,7.16,213,28,185,1382,wheat,2100
+PAL0388,Palamu,Red / lateritic,0,3.94,"millets,pulses,groundnut,maize",24.1474,84.112,5.77,110,50,70,1447,millets,2500
+PAL0389,Palamu,Red / lateritic,0,3.4,"groundnut,maize,pulses,millets",24.1681,84.1481,6.38,107,29,188,1521,groundnut,5500
+PAL0390,Palamu,Red / lateritic,0,3.38,"groundnut,maize,millets,pulses",24.0487,84.1963,6.3,245,78,290,1042,groundnut,5500
+PAL0391,Palamu,Alluvial,4,0.74,"wheat,rice,sugarcane,maize",24.0376,84.042,7.47,149,54,136,964,rice,2200
+PAL0392,Palamu,Loam,3,2.35,"wheat,rice,pulses,maize",23.9808,84.1909,6.36,123,77,241,980,rice,2200
+PAL0393,Palamu,Sandy,0,1.82,"pulses,millets,cotton,groundnut",24.0858,84.096,6.92,368,57,254,977,pulses,5000
+PAL0394,Palamu,Loam,1,3.97,"rice,maize,wheat,pulses",24.1324,84.1737,7.28,200,39,192,1054,rice,2200
+PAL0395,Palamu,Alluvial,2,6.88,"sugarcane,rice,maize,wheat",24.1704,84.0479,7.92,125,27,138,922,wheat,2100
+PAL0396,Palamu,Black / regur,2,3.04,"soybean,cotton,wheat,maize",24.1096,84.0341,7.41,334,65,173,1294,wheat,2100
+PAL0397,Palamu,Red / lateritic,0,4.76,"pulses,millets,maize,groundnut",24.0281,84.0678,6.48,266,40,152,1248,pulses,5000
+PAL0398,Palamu,Lateritic,0,9.09,"pulses,groundnut,cashew,millets",24.1619,84.0847,5.48,197,22,57,1047,pulses,5000
+PAL0399,Palamu,Red / lateritic,1,5.25,"pulses,groundnut,millets,maize",24.1441,84.0394,5.72,220,41,251,1390,pulses,5000
+PAL0400,Palamu,Red / lateritic,0,2.6,"millets,pulses,groundnut,maize",24.0638,84.0947,5.37,133,21,265,1149,millets,2500
+GAR0401,Garhwa,Loam,3,3.06,"wheat,rice,pulses,maize",24.2297,83.8893,6.93,364,46,137,1085,rice,2200
+GAR0402,Garhwa,Sandy,0,2.85,"millets,cotton,pulses,groundnut",24.2002,83.7375,6.45,154,47,64,1269,millets,2500
+GAR0403,Garhwa,Black / regur,2,4.78,"cotton,wheat,soybean,maize",24.112,83.7656,6.84,159,33,89,1131,wheat,2100
+GAR0404,Garhwa,Sandy,1,0.49,"groundnut,pulses,cotton,millets",24.1122,83.8932,5.75,115,53,128,950,groundnut,5500
+GAR0405,Garhwa,Black / regur,3,7.26,"rice,soybean,cotton,maize",24.1293,83.8429,8.48,346,66,143,1153,rice,2200
+GAR0406,Garhwa,Lateritic,0,3.75,"millets,cashew,pulses,groundnut",24.2657,83.8345,4.72,315,37,131,1262,millets,2500
+GAR0407,Garhwa,Alluvial,4,1.79,"maize,rice,wheat,sugarcane",24.2397,83.731,7.88,301,38,201,1330,rice,2200
+GAR0408,Garhwa,Alluvial,4,4.95,"wheat,maize,rice,sugarcane",24.2613,83.773,7.72,144,28,165,1230,rice,2200
+GAR0409,Garhwa,Alluvial,2,3.67,"wheat,rice,maize,sugarcane",24.1485,83.788,7.45,113,32,88,1388,wheat,2100
+GAR0410,Garhwa,Alluvial,2,2.67,"sugarcane,maize,wheat,rice",24.1933,83.7559,7.2,356,80,242,1072,wheat,2100
+GAR0411,Garhwa,Black / regur,1,3.79,"wheat,soybean,maize,cotton",24.2106,83.8031,7.43,303,65,155,1393,wheat,2100
+GAR0412,Garhwa,Lateritic,2,1.96,"groundnut,pulses,millets,cashew",24.2559,83.9078,4.79,211,45,124,1294,groundnut,5500
+GAR0413,Garhwa,Black / regur,2,4.05,"maize,cotton,soybean,wheat",24.1755,83.8249,7.23,327,46,170,1265,wheat,2100
+GAR0414,Garhwa,Sandy,1,7.1,"cotton,millets,pulses,groundnut",24.1268,83.8089,5.5,181,24,208,1332,cotton,6000
+GAR0415,Garhwa,Black / regur,2,4.87,"soybean,maize,cotton,wheat",24.1961,83.8564,8.49,373,26,211,1093,wheat,2100
+GAR0416,Garhwa,Loam,3,4.79,"maize,wheat,pulses,rice",24.2039,83.8447,6.09,132,69,86,998,rice,2200
+GAR0417,Garhwa,Loam,3,3.44,"rice,pulses,wheat,maize",24.086,83.8992,7.45,340,65,95,1346,rice,2200
+GAR0418,Garhwa,Lateritic,2,0.26,"pulses,cashew,groundnut,millets",24.1593,83.7474,4.78,222,34,253,1098,pulses,5000
+GAR0419,Garhwa,Sandy,1,2.12,"millets,cotton,groundnut,pulses",24.148,83.8112,6.79,259,47,139,924,millets,2500
+GAR0420,Garhwa,Lateritic,0,1.82,"pulses,millets,cashew,groundnut",24.1238,83.8671,5.45,303,28,233,1446,pulses,5000
+CHA0421,Chatra,Lateritic,1,0.63,"groundnut,millets,cashew,pulses",24.1366,84.9077,4.95,164,73,232,1319,groundnut,5500
+CHA0422,Chatra,Lateritic,0,1.6,"groundnut,pulses,cashew,millets",24.2316,84.8472,5.78,203,55,160,1343,groundnut,5500
+CHA0423,Chatra,Alluvial,3,1.5,"wheat,sugarcane,maize,rice",24.1429,84.9154,7.26,177,42,270,1307,rice,2200
+CHA0424,Chatra,Loam,2,4.23,"rice,wheat,pulses,maize",24.2266,84.8473,6.26,114,33,121,979,wheat,2100
+CHA0425,Chatra,Red / lateritic,2,1.66,"maize,millets,groundnut,pulses",24.2157,84.8502,5.55,133,42,266,1144,maize,1700
+CHA0426,Chatra,Black / regur,3,4.71,"maize,rice,cotton,soybean",24.1545,84.8363,7.85,215,31,159,979,rice,2200
+CHA0427,Chatra,Sandy,0,1.69,"cotton,pulses,groundnut,millets",24.2158,84.93,6.04,290,69,298,1309,cotton,6000
+CHA0428,Chatra,Loam,2,4.9,"wheat,pulses,rice,maize",24.1646,84.8661,7.31,201,21,130,1166,wheat,2100
+CHA0429,Chatra,Alluvial,2,3.78,"wheat,sugarcane,rice,maize",24.1115,84.839,7.48,396,35,66,1257,wheat,2100
+CHA0430,Chatra,Lateritic,2,0.91,"pulses,cashew,millets,groundnut",24.2575,84.7743,5.9,333,21,187,1124,pulses,5000
+CHA0431,Chatra,Alluvial,4,3.63,"sugarcane,rice,maize,wheat",24.2175,84.7798,6.56,217,43,113,1200,rice,2200
+CHA0432,Chatra,Sandy,1,2.43,"pulses,millets,cotton,groundnut",24.1964,84.7776,6.46,302,24,267,1159,pulses,5000
+CHA0433,Chatra,Alluvial,2,3.58,"wheat,maize,rice,sugarcane",24.142,84.846,7.19,181,51,88,1081,wheat,2100
+CHA0434,Chatra,Loam,3,0.5,"rice,maize,pulses,wheat",24.2391,84.8949,6.13,123,80,215,1331,rice,2200
+CHA0435,Chatra,Loam,1,4.14,"rice,wheat,maize,pulses",24.2147,84.8496,7.33,363,20,178,984,rice,2200
+CHA0436,Chatra,Loam,2,1.25,"wheat,pulses,rice,maize",24.2065,84.8738,7.04,119,34,58,1168,wheat,2100
+CHA0437,Chatra,Lateritic,1,3.34,"millets,pulses,cashew,groundnut",24.2088,84.9065,5.12,271,38,92,1098,millets,2500
+CHA0438,Chatra,Black / regur,3,3.48,"rice,soybean,maize,cotton",24.2984,84.8472,7.13,367,20,112,1092,rice,2200
+CHA0439,Chatra,Sandy,1,3.95,"millets,pulses,cotton,groundnut",24.1064,84.7955,6.13,102,62,174,910,millets,2500
+CHA0440,Chatra,Red / lateritic,2,0.89,"groundnut,millets,maize,pulses",24.2235,84.874,5.4,122,35,264,1243,groundnut,5500
+KOD0441,Koderma,Alluvial,2,4.51,"sugarcane,rice,wheat,maize",24.489,85.5782,7.04,156,65,172,1203,wheat,2100
+KOD0442,Koderma,Black / regur,1,2.64,"soybean,cotton,wheat,maize",24.5193,85.6001,7.83,323,34,77,925,soybean,4000
+KOD0443,Koderma,Red / lateritic,2,0.6,"pulses,groundnut,maize,millets",24.4184,85.5869,5.56,231,80,215,1184,pulses,5000
+KOD0444,Koderma,Lateritic,2,0.6,"cashew,millets,groundnut,pulses",24.4731,85.5167,4.72,221,63,58,1476,cashew,9000
+KOD0445,Koderma,Lateritic,1,1.59,"groundnut,cashew,pulses,millets",24.3812,85.5893,5.65,118,42,130,1044,groundnut,5500
+KOD0446,Koderma,Black / regur,3,0.67,"rice,wheat,maize,soybean",24.4202,85.649,8.01,266,43,110,1132,rice,2200
+KOD0447,Koderma,Black / regur,2,3.95,"maize,soybean,wheat,cotton",24.3981,85.5653,6.97,215,58,131,1379,wheat,2100
+KOD0448,Koderma,Black / regur,1,2.05,"maize,soybean,wheat,cotton",24.554,85.5244,6.85,369,61,199,1110,maize,1700
+KOD0449,Koderma,Alluvial,2,6.9,"wheat,sugarcane,rice,maize",24.4226,85.6036,7.95,149,30,283,1290,wheat,2100
+KOD0450,Koderma,Lateritic,2,2.71,"millets,cashew,groundnut,pulses",24.5175,85.641,5.41,364,71,117,1056,millets,2500
+KOD0451,Koderma,Black / regur,1,4.36,"maize,cotton,soybean,wheat",24.4886,85.5872,8.09,200,31,210,1144,maize,1700
+KOD0452,Koderma,Lateritic,2,3.98,"millets,cashew,groundnut,pulses",24.4376,85.688,5.73,190,26,297,1589,millets,2500
+KOD0453,Koderma,Lateritic,0,3.65,"cashew,pulses,millets,groundnut",24.4127,85.5832,5.26,307,51,136,1216,cashew,9000
+KOD0454,Koderma,Sandy,1,0.27,"cotton,pulses,groundnut,millets",24.4756,85.6707,5.67,121,40,284,1307,cotton,6000
+KOD0455,Koderma,Black / regur,2,3.91,"cotton,wheat,maize,soybean",24.4882,85.5519,7.93,241,63,168,1008,wheat,2100
+KOD0456,Koderma,Red / lateritic,0,4.51,"pulses,maize,groundnut,millets",24.5029,85.6477,5.13,325,55,61,1476,pulses,5000
+KOD0457,Koderma,Loam,2,3.99,"pulses,maize,wheat,rice",24.5633,85.5406,6.19,245,67,269,1169,wheat,2100
+KOD0458,Koderma,Alluvial,3,3.12,"rice,maize,wheat,sugarcane",24.535,85.5676,7.76,253,22,109,1264,rice,2200
+KOD0459,Koderma,Lateritic,2,1.5,"millets,pulses,cashew,groundnut",24.4991,85.6658,5.19,392,61,139,1489,millets,2500
+KOD0460,Koderma,Lateritic,0,4.55,"groundnut,pulses,cashew,millets",24.4256,85.5509,5.31,224,30,266,1096,groundnut,5500
+SAR0461,Saraikela-Kharsawan,Sandy,1,0.38,"millets,cotton,groundnut,pulses",22.6419,85.9416,6.15,325,48,200,1397,millets,2500
+SAR0462,Saraikela-Kharsawan,Loam,3,2.97,"maize,wheat,rice,pulses",22.7069,86.0269,6.7,367,73,245,1082,rice,2200
+SAR0463,Saraikela-Kharsawan,Red / lateritic,2,2.93,"millets,pulses,groundnut,maize",22.6539,86.0228,5.29,349,62,63,1064,millets,2500
+SAR0464,Saraikela-Kharsawan,Loam,2,5.14,"maize,pulses,wheat,rice",22.6278,85.9321,6.37,192,60,138,1044,wheat,2100
+SAR0465,Saraikela-Kharsawan,Lateritic,1,2.76,"millets,cashew,pulses,groundnut",22.6858,85.8633,4.92,197,59,299,1231,millets,2500
+SAR0466,Saraikela-Kharsawan,Black / regur,1,0.23,"cotton,maize,soybean,wheat",22.7085,85.9358,8.35,347,45,288,1094,cotton,6000
+SAR0467,Saraikela-Kharsawan,Red / lateritic,1,0.82,"maize,pulses,groundnut,millets",22.6815,86.0336,5.21,261,67,258,1304,maize,1700
+SAR0468,Saraikela-Kharsawan,Alluvial,2,0.37,"maize,rice,wheat,sugarcane",22.682,86.009,7.08,173,68,103,1122,wheat,2100
+SAR0469,Saraikela-Kharsawan,Loam,2,1.91,"pulses,wheat,rice,maize",22.6097,86.0158,6.44,233,24,107,1130,wheat,2100
+SAR0470,Saraikela-Kharsawan,Alluvial,3,2.59,"sugarcane,wheat,rice,maize",22.7233,86.0115,6.57,142,50,52,1211,rice,2200
+SAR0471,Saraikela-Kharsawan,Red / lateritic,2,0.4,"maize,pulses,millets,groundnut",22.6682,86.0375,6.14,382,69,93,1195,maize,1700
+SAR0472,Saraikela-Kharsawan,Black / regur,3,2.44,"maize,wheat,cotton,rice",22.7282,85.8792,8.37,254,53,242,1326,rice,2200
+SAR0473,Saraikela-Kharsawan,Sandy,1,1.19,"groundnut,millets,pulses,cotton",22.7713,85.9002,6.35,376,31,52,1289,groundnut,5500
+SAR0474,Saraikela-Kharsawan,Black / regur,3,4.34,"soybean,maize,cotton,wheat",22.7305,85.8978,8.12,254,40,252,1117,wheat,2100
+SAR0475,Saraikela-Kharsawan,Alluvial,3,0.63,"rice,wheat,sugarcane,maize",22.6006,85.9753,6.67,360,44,168,923,rice,2200
+SAR0476,Saraikela-Kharsawan,Red / lateritic,0,0.51,"groundnut,millets,maize,pulses",22.6503,85.967,5.83,194,41,241,1019,groundnut,5500
+SAR0477,Saraikela-Kharsawan,Black / regur,3,3.23,"rice,soybean,wheat,maize",22.6036,85.8603,8.21,231,65,260,1332,rice,2200
+SAR0478,Saraikela-Kharsawan,Sandy,2,7.66,"cotton,groundnut,millets,pulses",22.6985,85.9241,5.61,331,40,92,1120,cotton,6000
+SAR0479,Saraikela-Kharsawan,Black / regur,2,3.15,"cotton,maize,soybean,wheat",22.6547,85.9316,8.13,393,50,219,1185,wheat,2100
+SAR0480,Saraikela-Kharsawan,Black / regur,1,3.95,"maize,wheat,cotton,soybean",22.7427,86.025,6.75,111,68,227,993,maize,1700

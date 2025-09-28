@@ -1,0 +1,35 @@
+# link to test the api
+http://127.0.0.1:8000/docs#/default/recommend_crops_recommend__post
+
+# to start the api
+source venv/Scripts/activate
+uvicorn main:app --reload
+
+#sample data
+
+{
+  "lat": 23.8,
+  "lon": 86.8,
+  "area": 4.5,
+  "irrigation": 3,
+  "district": "jamtara",
+  "soil_type": "alluvial"
+}
+
+#output
+{
+  "recommendations": [
+    {
+      "crop": "rice",
+      "confidence": "0.84"
+    },
+    {
+      "crop": "wheat",
+      "confidence": "0.05"
+    },
+    {
+      "crop": "groundnut",
+      "confidence": "0.04"
+    }
+  ]
+}
